@@ -1,0 +1,494 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #121814;
+  --color-obsidian-deep: #0D130E;
+  --color-canopy: #193D2B;
+  --color-canopy-deep: #132D20;
+  --color-fern: #286746;
+  --color-fern-light: #348259;
+  --color-moss: #467C57;
+  --color-sage: #5A7E66;
+  --color-sage-light: #8BA894;
+  --color-lime: #D9E7B0;
+  --color-lime-glow: #F1F8DE;
+  --color-limestone: #FFFFFF;
+  --color-limestone-light: #FAFCFA;
+  --color-limestone-card: #F4F7F4;
+  --color-charcoal: #1E2620;
+  --color-border-dark: #D4DFD7;
+  --color-border-subtle: #E2EAE5;
+  
+  --font-serif: var(--font-instrument), "Instrument Serif", Georgia, serif;
+  --font-sans: var(--font-dmsans), "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sketch: var(--font-caveat), "Caveat", cursive;
+}
+
+:root {
+  --obsidian: #121814;
+  --canopy: #193D2B;
+  --fern: #286746;
+  --moss: #467C57;
+  --sage: #5A7E66;
+  --lime: #D9E7B0;
+  --limestone: #FFFFFF;
+  --charcoal: #1E2620;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  background-color: #FFFFFF;
+  color: #121814;
+}
+
+body {
+  font-family: var(--font-sans), "DM Sans", sans-serif;
+  background-color: #FFFFFF;
+  color: #121814;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Typography styles */
+h1, h2, h3, .font-display {
+  font-family: var(--font-serif), "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.font-sketch {
+  font-family: var(--font-sketch), "Caveat", cursive;
+}
+
+/* Light Architectural linework and grid styling */
+.arch-grid-mosaic {
+  background-image: 
+    linear-gradient(to right, rgba(25, 61, 43, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(25, 61, 43, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.arch-grid-columns {
+  background-image: 
+    linear-gradient(to right, rgba(40, 103, 70, 0.06) 1px, transparent 1px);
+  background-size: 25% 100%;
+}
+
+.arch-grid-light {
+  background-image: 
+    linear-gradient(to right, rgba(40, 103, 70, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(40, 103, 70, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Botanical Glow in Light Theme */
+.glow-botanical {
+  box-shadow: 0 10px 40px -10px rgba(40, 103, 70, 0.15);
+}
+
+.glow-fern {
+  box-shadow: 0 10px 35px -5px rgba(25, 61, 43, 0.18);
+}
+
+/* Topographic Contour line drawing animation */
+@keyframes drawContour {
+  0% {
+    stroke-dashoffset: 1400;
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.35;
+  }
+}
+
+.contour-path {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: drawContour 3.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.contour-path-delay-1 {
+  animation-delay: 0.25s;
+}
+
+.contour-path-delay-2 {
+  animation-delay: 0.5s;
+}
+
+.contour-path-delay-3 {
+  animation-delay: 0.75s;
+}
+
+/* Subtle image hover zoom */
+.project-card-image {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+.project-card:hover .project-card-image {
+  transform: scale(1.05);
+}
+
+/* Lenis Smooth Scroll Recommended Styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Image Slide-in Scroll Animations - Guaranteed Visibility */
+.slide-in-image,
+.slide-in-image-left,
+.slide-in-image-right,
+.slide-in-image-zoom {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.slide-in-image.is-in-view,
+.slide-in-image-left.is-in-view,
+.slide-in-image-right.is-in-view,
+.slide-in-image-zoom.is-in-view {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Stagger delay classes */
+.reveal-delay-1 {
+  transition-delay: 100ms;
+}
+.reveal-delay-2 {
+  transition-delay: 200ms;
+}
+.reveal-delay-3 {
+  transition-delay: 300ms;
+}
+.reveal-delay-4 {
+  transition-delay: 400ms;
+}
+
+/* Continuous micro-animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+@keyframes botanicalPulse {
+  0%, 100% {
+    opacity: 0.95;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+}
+
+.animate-botanical-pulse {
+  animation: botanicalPulse 4s ease-in-out infinite;
+}
+
+@keyframes shimmerEffect {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.shimmer-trigger:hover .shimmer-bar {
+  animation: shimmerEffect 1.2s ease-in-out forwards;
+}
+
+/* Custom interactive button focus */
+:focus-visible {
+  outline: 2px solid #286746;
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   INTERACTIVE CONTAINER HOVER & SCROLL ANIMATION SUITE
+   ========================================================================== */
+
+/* 1. Interactive Container Base & Hover Animation */
+.interactive-card {
+  position: relative;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              background-color 0.35s ease;
+  will-change: transform, box-shadow;
+  border-radius: 4px;
+}
+
+.interactive-card:hover {
+  transform: translateY(-8px) scale(1.008);
+  box-shadow: 0 24px 48px -12px rgba(25, 61, 43, 0.16),
+              0 8px 18px -4px rgba(25, 61, 43, 0.08),
+              0 0 0 1px rgba(40, 103, 70, 0.35) !important;
+  border-color: rgba(40, 103, 70, 0.45) !important;
+}
+
+/* Subtle architectural light sheen reflection on hover */
+.interactive-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+.interactive-card:hover::after {
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+/* Image inside interactive container */
+.interactive-card .card-image,
+.interactive-card img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+  will-change: transform;
+}
+
+.interactive-card:hover .card-image,
+.interactive-card:hover img {
+  transform: scale(1.05);
+}
+
+/* 2. Interactive Stat Box Hover */
+.stat-card-hover {
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s ease,
+              border-color 0.3s ease;
+  border-radius: 4px;
+}
+
+.stat-card-hover:hover {
+  transform: translateY(-5px);
+  background-color: #FFFFFF;
+  box-shadow: 0 16px 32px -8px rgba(25, 61, 43, 0.12),
+              0 0 0 1px rgba(40, 103, 70, 0.25);
+  border-color: rgba(40, 103, 70, 0.3);
+}
+
+/* 3. Universal Scroll Reveal Motion System */
+.scroll-reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-left {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-right {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* When JS is ready and element has not yet been revealed, offset and fade it */
+html.js-ready .scroll-reveal:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+html.js-ready .scroll-reveal-left:not(.is-revealed) {
+  opacity: 0;
+  transform: translateX(-32px);
+}
+
+html.js-ready .scroll-reveal-right:not(.is-revealed) {
+  opacity: 0;
+  transform: translateX(32px);
+}
+
+/* Once revealed, animate smoothly to natural position */
+html.js-ready .scroll-reveal.is-revealed,
+html.js-ready .scroll-reveal-left.is-revealed,
+html.js-ready .scroll-reveal-right.is-revealed {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Stagger delays */
+.delay-50  { transition-delay: 50ms; }
+.delay-75  { transition-delay: 75ms; }
+.delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-225 { transition-delay: 225ms; }
+.delay-250 { transition-delay: 250ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-350 { transition-delay: 350ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-450 { transition-delay: 450ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .contour-path {
+    stroke-dashoffset: 0 !important;
+  }
+  .slide-in-image,
+  .slide-in-image-left,
+  .slide-in-image-right,
+  .slide-in-image-zoom {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .animate-float-slow,
+  .animate-botanical-pulse {
+    animation: none !important;
+  }
+  html.js-ready .scroll-reveal:not(.is-revealed),
+  html.js-ready .scroll-reveal-left:not(.is-revealed),
+  html.js-ready .scroll-reveal-right:not(.is-revealed),
+  .scroll-reveal,
+  .scroll-reveal-left,
+  .scroll-reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .sg-loading-screen,
+  .sg-loading-logo {
+    animation: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* ==========================================================================
+   STAR GARDENS OFFICIAL LOGO LOADING SCREEN ANIMATION
+   Timeline (3.0s total):
+   0.0s - 0.2s: Opacity 0 on pure white #FFFFFF
+   0.2s - 1.6s: Smooth opacity 0 -> 1 with cubic-bezier(0.22, 1, 0.36, 1)
+   1.6s - 2.6s: Hold fully visible at opacity 1
+   2.6s - 3.0s: Smooth fade out opacity 1 -> 0 to reveal homepage
+   ========================================================================== */
+
+@keyframes sgLogoFade {
+  0% {
+    opacity: 0;
+  }
+  6.67% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  53.33% {
+    opacity: 1;
+  }
+  86.67% {
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes sgCurtainFade {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  86.67% {
+    opacity: 1;
+    visibility: visible;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.sg-loading-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #FFFFFF;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sgCurtainFade 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity, visibility;
+  pointer-events: all;
+  user-select: none;
+}
+
+.sg-loading-logo {
+  opacity: 0;
+  animation: sgLogoFade 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity;
+}
+

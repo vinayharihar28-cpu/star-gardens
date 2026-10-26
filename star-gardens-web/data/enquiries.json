@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ENQ-1793018015620-64",
+    "receivedAt": "2026-10-26T12:33:35.620Z",
+    "name": "Arjun Mehta",
+    "email": "arjun@example.com",
+    "phone": "+91 9876543210",
+    "category": "Corporate Office / Tech Park",
+    "location": "Bengaluru",
+    "service": "Turnkey Design & Build",
+    "description": "Testing enquiry submission.",
+    "status": "NEW_RECEIVED"
+  },
+  {
+    "id": "ENQ-1793012180987-8",
+    "receivedAt": "2026-10-26T10:56:20.987Z",
+    "name": "Arjun Singhania",
+    "email": "arjun@singhania-group.com",
+    "phone": "+91 98450 12345",
+    "category": "Corporate Office / Tech Park",
+    "location": "Bengaluru",
+    "service": "Turnkey Design & Build",
+    "description": "Planning 15,000 sq ft atrium biophilic landscaping and outdoor amphitheater greenery for our upcoming campus in Whitefield.",
+    "status": "NEW_RECEIVED"
+  }
+]

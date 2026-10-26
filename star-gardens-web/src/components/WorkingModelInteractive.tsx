@@ -158,7 +158,7 @@ export default function WorkingModelInteractive() {
         id={`panel-${current.id}`}
         role="tabpanel"
         aria-labelledby={`tab-${current.id}`}
-        className="interactive-card scroll-reveal mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white border border-[#D4DFD7] p-6 sm:p-10 rounded-sm shadow-xl text-[#121814]"
+        className="interactive-card mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white border border-[#D4DFD7] p-6 sm:p-10 rounded-sm shadow-xl text-[#121814]"
       >
         {/* Left: Text & Features */}
         <div className="lg:col-span-7 space-y-6">

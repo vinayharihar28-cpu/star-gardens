@@ -11,7 +11,7 @@ export default function HorizontalServicePanels() {
 
   return (
     <div 
-      className="w-full space-y-2.5"
+      className="w-full space-y-2.5 scroll-reveal"
       role="region"
       aria-label="Star Gardens Landscape Architectural Disciplines"
     >
@@ -34,7 +34,7 @@ export default function HorizontalServicePanels() {
                 setExpandedId(svc.id);
               }
             }}
-            className={`interactive-card scroll-reveal group relative overflow-hidden rounded-xs transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] border cursor-pointer select-none ${
+            className={`group relative overflow-hidden rounded-xs transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] border cursor-pointer select-none ${
               isExpanded
                 ? "bg-[#193D2B] border-[#193D2B] shadow-2xl text-white"
                 : "bg-white border-[#E5EBE6] hover:border-[#193D2B]/50 hover:bg-[#F8FAF7] text-[#121814]"
@@ -108,49 +108,49 @@ export default function HorizontalServicePanels() {
             {/* Expandable Content Area */}
             <div
               id={`service-panel-${svc.id}`}
-              className={`relative z-10 grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                isExpanded ? "grid-rows-[1fr] opacity-100 pb-8 px-5 sm:px-8" : "grid-rows-[0fr] opacity-0"
+              className={`relative z-10 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
+                isExpanded
+                  ? "max-h-[800px] opacity-100 pb-8 px-5 sm:px-8"
+                  : "max-h-0 opacity-0 pb-0 px-5 sm:px-8 pointer-events-none"
               }`}
             >
-              <div className="overflow-hidden">
-                <div className="pt-4 border-t border-white/20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                  {/* Left: Summary & Deliverables */}
-                  <div className="lg:col-span-8 space-y-4">
-                    <p className="font-sketch text-xl text-[#D9E7B0]">
-                      {svc.tagline}
-                    </p>
-                    <p className="text-sm sm:text-base text-white/90 max-w-2xl leading-relaxed">
-                      {svc.shortDesc}
-                    </p>
+              <div className="pt-4 border-t border-white/20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                {/* Left: Summary & Deliverables */}
+                <div className="lg:col-span-8 space-y-4">
+                  <p className="font-sketch text-xl text-[#D9E7B0]">
+                    {svc.tagline}
+                  </p>
+                  <p className="text-sm sm:text-base text-white/90 max-w-2xl leading-relaxed">
+                    {svc.shortDesc}
+                  </p>
 
-                    {/* Deliverable Badges */}
-                    <div className="pt-2 flex flex-wrap gap-2">
-                      {svc.deliverables.slice(0, 4).map((d, dIdx) => (
-                        <span
-                          key={dIdx}
-                          className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#132D20] border border-[#286746] text-[#D9E7B0] text-xs font-mono rounded-xs"
-                        >
-                          <Check className="w-3 h-3 text-[#D9E7B0]" />
-                          {d}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="pt-2 text-xs font-mono text-white/80">
-                      <strong>Engagement Model:</strong> {svc.workingModel}
-                    </div>
+                  {/* Deliverable Badges */}
+                  <div className="pt-2 flex flex-wrap gap-2">
+                    {svc.deliverables.slice(0, 4).map((d, dIdx) => (
+                      <span
+                        key={dIdx}
+                        className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#132D20] border border-[#286746] text-[#D9E7B0] text-xs font-mono rounded-xs"
+                      >
+                        <Check className="w-3 h-3 text-[#D9E7B0]" />
+                        {d}
+                      </span>
+                    ))}
                   </div>
 
-                  {/* Right: Direct Navigation CTA */}
-                  <div className="lg:col-span-4 flex lg:justify-end">
-                    <Link
-                      href={`/services/${svc.slug}`}
-                      className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-[#D9E7B0] text-[#101210] font-bold text-xs uppercase tracking-widest rounded-xs hover:bg-[#E8F5C4] transition-all transform active:scale-95 shadow-md"
-                    >
-                      <span>Explore Service Details</span>
-                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                    </Link>
+                  <div className="pt-2 text-xs font-mono text-white/80">
+                    <strong>Engagement Model:</strong> {svc.workingModel}
                   </div>
+                </div>
+
+                {/* Right: Direct Navigation CTA */}
+                <div className="lg:col-span-4 flex lg:justify-end">
+                  <Link
+                    href={`/services/${svc.slug}`}
+                    className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-[#D9E7B0] text-[#101210] font-bold text-xs uppercase tracking-widest rounded-xs hover:bg-[#E8F5C4] transition-all transform active:scale-95 shadow-md"
+                  >
+                    <span>Explore Service Details</span>
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                  </Link>
                 </div>
               </div>
             </div>

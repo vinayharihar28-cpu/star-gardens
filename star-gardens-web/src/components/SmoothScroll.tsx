@@ -4,6 +4,9 @@ import React, { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { usePathname } from "next/navigation";
 
+const REVEAL_SELECTOR =
+  ".scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .slide-in-image, [data-slide-in]";
+
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const lenisRef = useRef<Lenis | null>(null);
@@ -48,40 +51,42 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-revealed", "is-in-view");
+            (entry.target as HTMLElement).setAttribute?.("data-revealed", "true");
             revealObserver.unobserve(entry.target);
           }
         });
       },
       {
-        threshold: 0.08,
-        rootMargin: "0px 0px -40px 0px",
+        threshold: 0.05,
+        rootMargin: "50px 0px -20px 0px",
       }
     );
     observerRef.current = revealObserver;
 
+    // Helper: observe a single element if it hasn't been revealed yet
+    const observeSingleElement = (el: Element) => {
+      if (el.classList.contains("is-revealed") || el.getAttribute("data-revealed") === "true") return;
+
+      if (prefersReducedMotion) {
+        el.classList.add("is-revealed", "is-in-view");
+        el.setAttribute("data-revealed", "true");
+        return;
+      }
+
+      const rect = el.getBoundingClientRect();
+      const winHeight = window.innerHeight || 900;
+      // If already inside or above the viewport, reveal immediately
+      if (rect.top < winHeight - 20 && rect.bottom > 0) {
+        el.classList.add("is-revealed", "is-in-view");
+        el.setAttribute("data-revealed", "true");
+      } else {
+        revealObserver.observe(el);
+      }
+    };
+
     const observeElements = () => {
-      const targets = document.querySelectorAll(
-        ".scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .slide-in-image, [data-slide-in]"
-      );
-
-      const winHeight = typeof window !== "undefined" ? window.innerHeight : 900;
-
-      targets.forEach((el) => {
-        if (prefersReducedMotion) {
-          el.classList.add("is-revealed", "is-in-view");
-          return;
-        }
-
-        if (!el.classList.contains("is-revealed")) {
-          const rect = el.getBoundingClientRect();
-          // If already inside or above the viewport on initial render, reveal immediately
-          if (rect.top < winHeight - 30 && rect.bottom > 0) {
-            el.classList.add("is-revealed", "is-in-view");
-          } else {
-            revealObserver.observe(el);
-          }
-        }
-      });
+      const targets = document.querySelectorAll(REVEAL_SELECTOR);
+      targets.forEach(observeSingleElement);
     };
 
     // Run initial scan and follow-up ticks for images/fonts rendering
@@ -89,11 +94,39 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     const timer = setTimeout(observeElements, 150);
     const timer2 = setTimeout(observeElements, 400);
 
+    // MutationObserver: automatically catch any new scroll-reveal elements
+    // that React adds to the DOM after the initial scan (e.g. due to state
+    // changes, conditional rendering, or route transitions).
+    const mutationObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        // Check added nodes
+        for (const node of Array.from(mutation.addedNodes)) {
+          if (node.nodeType !== Node.ELEMENT_NODE) continue;
+          const el = node as Element;
+          // Check if the added node itself is a reveal target
+          if (el.matches && el.matches(REVEAL_SELECTOR)) {
+            observeSingleElement(el);
+          }
+          // Check children of the added node
+          const children = el.querySelectorAll?.(REVEAL_SELECTOR);
+          if (children) {
+            children.forEach(observeSingleElement);
+          }
+        }
+      }
+    });
+
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
     return () => {
       clearTimeout(timer);
       clearTimeout(timer2);
       if (rafId) cancelAnimationFrame(rafId);
       revealObserver.disconnect();
+      mutationObserver.disconnect();
       observerRef.current = null;
       if (lenisRef.current) {
         lenisRef.current.destroy();
@@ -110,9 +143,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     const timer = setTimeout(() => {
       const observer = observerRef.current;
-      const targets = document.querySelectorAll(
-        ".scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .slide-in-image, [data-slide-in]"
-      );
+      const targets = document.querySelectorAll(REVEAL_SELECTOR);
       const winHeight = typeof window !== "undefined" ? window.innerHeight : 900;
       const prefersReducedMotion =
         typeof window !== "undefined" &&
@@ -121,12 +152,14 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       targets.forEach((el) => {
         if (prefersReducedMotion) {
           el.classList.add("is-revealed", "is-in-view");
+          (el as HTMLElement).setAttribute?.("data-revealed", "true");
           return;
         }
-        if (!el.classList.contains("is-revealed")) {
+        if (!el.classList.contains("is-revealed") && el.getAttribute("data-revealed") !== "true") {
           const rect = el.getBoundingClientRect();
-          if (rect.top < winHeight - 30 && rect.bottom > 0) {
+          if (rect.top < winHeight - 20 && rect.bottom > 0) {
             el.classList.add("is-revealed", "is-in-view");
+            (el as HTMLElement).setAttribute?.("data-revealed", "true");
           } else if (observer) {
             observer.observe(el);
           }

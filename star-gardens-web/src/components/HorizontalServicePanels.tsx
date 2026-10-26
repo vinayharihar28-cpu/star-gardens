@@ -34,29 +34,27 @@ export default function HorizontalServicePanels() {
                 setExpandedId(svc.id);
               }
             }}
-            className={`interactive-card scroll-reveal group relative overflow-hidden rounded-xs transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] border cursor-pointer select-none ${
+            className={`interactive-card scroll-reveal group relative overflow-hidden rounded-xs transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] border cursor-pointer select-none ${
               isExpanded
                 ? "bg-[#193D2B] border-[#193D2B] shadow-2xl text-white"
                 : "bg-white border-[#E5EBE6] hover:border-[#193D2B]/50 hover:bg-[#F8FAF7] text-[#121814]"
             }`}
-            style={{
-              transitionDelay: `${idx * 60}ms`,
-            }}
           >
             {/* Background Photographic Reveal when Expanded */}
             <div
-              className={`absolute inset-0 z-0 transition-all duration-1000 ease-out ${
-                isExpanded ? "opacity-35 scale-100" : "opacity-0 scale-105 pointer-events-none"
+              className={`absolute inset-0 z-0 transition-opacity duration-500 ease-out ${
+                isExpanded ? "opacity-75" : "opacity-0 pointer-events-none"
               }`}
             >
               <Image
                 src={svc.heroImage}
                 alt={svc.title}
                 fill
-                className="object-cover"
+                priority={true}
+                className="object-cover object-center"
                 sizes="(max-width: 1200px) 100vw, 1200px"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#193D2B] via-[#193D2B]/90 to-[#193D2B]/70" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#12281C]/95 via-[#12281C]/75 to-[#12281C]/30" />
             </div>
 
             {/* Panel Bar Header (Always Visible) */}

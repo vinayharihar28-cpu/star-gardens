@@ -179,7 +179,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Plant Rental & Subscriptions',
     tagline: 'Flexible greenery without capital expenditure or operational headaches.',
     shortDesc: 'Short-term event rentals (1–2 days) for summits and exhibitions, alongside 2 to 3-year corporate plant subscriptions with complete AMC included.',
-    heroImage: '/images/rental/exhibition-event-plant-rental-display.jpg',
+    heroImage: '/images/rental/corporate-plant-rental-acclimatized-fig.jpg',
     sectorTag: 'Specialized',
     workingModel: 'Short-term Event Rental (1 to 2 days) | Long-term Corporate Subscription (2 to 3 years with AMC).',
     deliverables: [
@@ -253,7 +253,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Corporate Workshops & Greening Events',
     tagline: 'Hands-on horticultural experiences that educate, engage, and connect teams.',
     shortDesc: 'Guided botanical workshops for corporate teams—kokedama moss ball creation, micro-terrariums, and desktop potting—bringing colleagues together.',
-    heroImage: '/images/workshops/corporate-planting-workshop-main.jpg',
+    heroImage: '/images/workshops/hands-on-kokedama-creation-workshop.jpg',
     sectorTag: 'Impact',
     workingModel: 'On-site 2 to 3-hour guided sessions at corporate offices, offsites, or our nursery locations.',
     deliverables: [

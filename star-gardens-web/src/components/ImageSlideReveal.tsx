@@ -84,7 +84,7 @@ export default function ImageSlideReveal({
   return (
     <div
       ref={elementRef}
-      className={`relative overflow-hidden ${className}`}
+      className={`relative ${isRevealed ? '' : 'overflow-hidden'} ${className}`}
       style={{
         opacity: isRevealed ? 1 : 0,
         transform: isRevealed ? "none" : getInitialTransform(),

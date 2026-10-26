@@ -254,7 +254,8 @@ html.lenis, html.lenis body {
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.35s ease,
-              background-color 0.35s ease;
+              background-color 0.35s ease,
+              opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, box-shadow;
   border-radius: 4px;
 }
@@ -280,7 +281,7 @@ html.lenis, html.lenis body {
   transform: translateX(-100%);
   transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
   pointer-events: none;
-  z-index: 10;
+  z-index: 5;
   border-radius: inherit;
 }
 
@@ -366,6 +367,25 @@ html.js-ready .scroll-reveal-left.is-revealed,
 html.js-ready .scroll-reveal-right.is-revealed {
   opacity: 1;
   transform: translate(0, 0);
+}
+
+/* Combined: elements that are both interactive-card AND scroll-reveal.
+   The transition shorthand is NOT additive — only the last-declared one wins.
+   Merge all needed properties into a single transition to prevent conflicts. */
+.interactive-card.scroll-reveal,
+.interactive-card.scroll-reveal-left,
+.interactive-card.scroll-reveal-right {
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              background-color 0.35s ease;
+}
+
+html.js-ready .interactive-card.scroll-reveal:not(.is-revealed),
+html.js-ready .interactive-card.scroll-reveal-left:not(.is-revealed),
+html.js-ready .interactive-card.scroll-reveal-right:not(.is-revealed) {
+  opacity: 0 !important;
 }
 
 /* Stagger delays */

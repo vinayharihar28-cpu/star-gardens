@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Check, Compass, ShieldCheck, Sparkles, Building2 } from "lucide-react";
 import CommercialStructuresStack from "@/components/CommercialStructuresStack";
+import ElasticReelServices from "@/components/ElasticReelServices";
 import ContourSvg from "@/components/ContourSvg";
 import { servicesData } from "@/data/services";
 
@@ -52,75 +53,25 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services Grid - Mobile First Rectangular Frames with Content Below */}
+      {/* Interactive Elastic Reel Gallery */}
       <section className="py-14 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {servicesData.map((svc, idx) => (
-            <div
-              key={svc.id}
-              className={`interactive-card scroll-reveal ${idx % 2 === 1 ? 'delay-150' : 'delay-75'} bg-white border border-[#E5EBE6] rounded-sm overflow-hidden flex flex-col justify-between group shadow-sm`}
-            >
-              <div>
-                {/* Rectangular Image Screen on Top */}
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <Image
-                    src={svc.heroImage}
-                    alt={svc.title}
-                    fill
-                    className="object-cover project-card-image transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
-                  <div className="absolute top-3 left-3 bg-white/95 border border-[#D4DFD7] text-[#193D2B] text-[10px] font-mono uppercase px-2.5 py-1 rounded-xs backdrop-blur-xs font-semibold shadow-2xs">
-                    {svc.sectorTag}
-                  </div>
-                </div>
-
-                {/* Content Placed Cleanly Right Below the Image */}
-                <div className="p-5 sm:p-8 space-y-3 sm:space-y-4">
-                  <span className="text-xs font-mono text-[#193D2B] font-semibold">
-                    [ SERVICE 0{idx + 1} ]
-                  </span>
-                  <h3 className="font-serif text-2xl sm:text-3xl text-[#121814] group-hover:text-[#193D2B] transition-colors leading-snug">
-                    <Link href={`/services/${svc.slug}`}>
-                      {svc.title}
-                    </Link>
-                  </h3>
-                  <p className="font-serif italic text-base sm:text-lg text-[#193D2B]">
-                    "{svc.tagline}"
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#475E50] leading-relaxed pt-1">
-                    {svc.shortDesc}
-                  </p>
-
-                  <div className="pt-3 sm:pt-4 border-t border-[#E5EBE6] space-y-2">
-                    <span className="text-[11px] font-mono uppercase text-[#193D2B] font-semibold block">
-                      Key Deliverables:
-                    </span>
-                    {svc.deliverables.slice(0, 3).map((item, dIdx) => (
-                      <div key={dIdx} className="flex items-center gap-2 text-xs text-[#475E50]">
-                        <Check className="w-3.5 h-3.5 text-[#193D2B] shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-5 sm:p-8 pt-0 flex flex-wrap items-center justify-between gap-3 border-t border-[#E5EBE6] mt-4">
-                <span className="text-[11px] font-mono text-[#718579] truncate max-w-[180px] sm:max-w-[200px]">
-                  {svc.workingModel.slice(0, 32)}...
-                </span>
-                <Link
-                  href={`/services/${svc.slug}`}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#193D2B] text-white text-xs font-bold uppercase tracking-wider rounded-xs hover:bg-[#286746] transition-colors shadow-2xs"
-                >
-                  <span>Explore Scope</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
+        <div className="space-y-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-[#E5EBE6]">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B]">
+                [ INTERACTIVE DISCIPLINE REEL ]
+              </span>
+              <h2 className="font-serif text-3xl sm:text-5xl text-[#121814] font-normal mt-1">
+                Eight disciplines. One unified ecosystem.
+              </h2>
             </div>
-          ))}
+            <p className="text-xs sm:text-sm text-[#5A7E66] max-w-md">
+              Click or tap any discipline slice to expand full architectural scope, deliverables, and commercial models.
+            </p>
+          </div>
+
+          {/* Elastic Reel Interactive Gallery Component */}
+          <ElasticReelServices />
         </div>
       </section>
 

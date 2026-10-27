@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Lock, ArrowUpRight, Phone, Sparkles } from "lucide-react";
 import CrmModal from "./CrmModal";
@@ -37,12 +38,12 @@ export default function Navigation() {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md border-b border-[#E5EBE6] text-[#121814] py-3.5 shadow-sm"
-            : "bg-white/80 backdrop-blur-sm border-b border-[#E5EBE6]/60 text-[#121814] py-5"
+            ? "bg-white/95 backdrop-blur-md border-b border-[#E5EBE6] text-[#121814] py-3 shadow-sm"
+            : "bg-white/85 backdrop-blur-sm border-b border-[#E5EBE6]/60 text-[#121814] py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Brand Wordmark */}
+          {/* Brand Logo */}
           <Link 
             href="/" 
             onClick={(e) => {
@@ -53,15 +54,17 @@ export default function Navigation() {
                 window.location.href = "/";
               }
             }}
-            className="group flex flex-col tracking-tight"
+            className="group flex items-center gap-3 tracking-tight"
             title="Star Gardens — Home (Click to replay brand reveal)"
           >
-            <span className="font-serif text-2xl sm:text-3xl font-normal leading-none tracking-normal text-[#121814] group-hover:text-[#193D2B] transition-colors">
-              Star Gardens
-            </span>
-            <span className="font-serif italic text-xs text-[#286746] tracking-wide mt-0.5">
-              Landscape Architecture & Horticulture
-            </span>
+            <Image
+              src="/images/logo/logo.png"
+              alt="Star Gardens - Landscape Architecture & Design Studio"
+              width={220}
+              height={44}
+              className="h-9 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -122,7 +125,17 @@ export default function Navigation() {
       {/* Mobile Slide-down Drawer */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-30 bg-white/98 backdrop-blur-xl pt-24 pb-8 px-6 flex flex-col justify-between md:hidden animate-in fade-in duration-200">
-          <nav className="flex flex-col space-y-5 text-xl font-serif">
+          <div>
+            <div className="pb-4 mb-4 border-b border-[#E5EBE6]">
+              <Image
+                src="/images/logo/logo.png"
+                alt="Star Gardens"
+                width={180}
+                height={36}
+                className="h-8 w-auto object-contain"
+              />
+            </div>
+            <nav className="flex flex-col space-y-5 text-xl font-serif">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -139,6 +152,7 @@ export default function Navigation() {
               );
             })}
           </nav>
+          </div>
 
           <div className="space-y-4 pt-6 border-t border-[#E5EBE6]">
             <div className="flex items-center justify-between text-xs font-mono text-[#475E50]">

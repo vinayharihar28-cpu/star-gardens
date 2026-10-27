@@ -105,9 +105,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     const hasIntroScreen =
       typeof document !== "undefined" &&
-      !!document.getElementById("sg-loading-screen") &&
-      sessionStorage.getItem("sg_welcome_viewed") !== "true" &&
-      sessionStorage.getItem("sg_intro_completed") !== "true";
+      !!document.getElementById("sg-loading-screen");
 
     if (hasIntroScreen) {
       onIntroCompleteHandler = () => {

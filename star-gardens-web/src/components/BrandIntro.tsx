@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 interface GreetingItem {
   script: string;
@@ -34,13 +35,11 @@ export default function BrandIntro({ onComplete }: BrandIntroProps) {
   }, [onComplete]);
 
   useEffect(() => {
-    // 1. Reduced motion or repeat visit check
+    // 1. Reduced motion check & session cleanup (allow intro on every refresh)
     try {
-      if (
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-        sessionStorage.getItem("sg_welcome_viewed") === "true" ||
-        sessionStorage.getItem("sg_intro_completed") === "true"
-      ) {
+      sessionStorage.removeItem("sg_welcome_viewed");
+      sessionStorage.removeItem("sg_intro_completed");
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         setShowIntro(false);
         setUnmounted(true);
         if (typeof window !== "undefined") {
@@ -50,7 +49,7 @@ export default function BrandIntro({ onComplete }: BrandIntroProps) {
         return;
       }
     } catch {
-      // Storage fallback
+      // Fallback
     }
 
     // 2. Fast, rhythmic greeting progression with smooth cross-fade
@@ -70,10 +69,6 @@ export default function BrandIntro({ onComplete }: BrandIntroProps) {
     const totalGreetingDuration = (GREETINGS.length - 1) * STEP_MS + 420;
     const fadeTimer = setTimeout(() => {
       setIsFadingOut(true);
-      try {
-        sessionStorage.setItem("sg_welcome_viewed", "true");
-        sessionStorage.setItem("sg_intro_completed", "true");
-      } catch {}
       if (typeof window !== "undefined") {
         window.dispatchEvent(new CustomEvent("sg:intro-complete"));
       }
@@ -130,8 +125,20 @@ export default function BrandIntro({ onComplete }: BrandIntroProps) {
         />
       </svg>
 
-      {/* Main focus: one large greeting in fixed center with smooth cross-fade */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 h-36 flex items-center justify-center">
+      {/* Main focus: Star Gardens Brand Emblem & Multilingual Welcome Greetings */}
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 flex flex-col items-center justify-center">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 border border-[#D4DFD7] p-2 shadow-sm mb-6 animate-in fade-in zoom-in-95 duration-500">
+          <Image
+            src="/images/logo/logo-mark.png"
+            alt="Star Gardens"
+            width={80}
+            height={80}
+            className="w-full h-full object-contain"
+            priority
+          />
+        </div>
+
+        <div className="relative w-full h-32 sm:h-36 flex items-center justify-center">
         {GREETINGS.map((item, idx) => {
           const isActive = idx === currentIdx;
           const isPast = idx < currentIdx;
@@ -160,6 +167,7 @@ export default function BrandIntro({ onComplete }: BrandIntroProps) {
             </h1>
           );
         })}
+        </div>
       </div>
     </div>
   );

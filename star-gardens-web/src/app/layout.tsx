@@ -45,6 +45,11 @@ export const metadata: Metadata = {
     locale: "en_IN",
     type: "website",
   },
+  icons: {
+    icon: "/images/logo/logo-mark.png",
+    shortcut: "/images/logo/logo-mark.png",
+    apple: "/images/logo/logo-mark.png",
+  },
 };
 
 export default function RootLayout({

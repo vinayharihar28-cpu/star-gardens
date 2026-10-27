@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Phone, Mail, MapPin, Lock, MessageCircle } from "lucide-react";
 import { studioFacts } from "@/data/nurseries";
 import CrmModal from "./CrmModal";
@@ -20,11 +21,15 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-[#E5EBE6]">
             {/* Col 1: Studio Identity (2 cols on large) */}
             <div className="lg:col-span-2 space-y-4">
-              <Link href="/" className="inline-block group">
-                <span className="font-serif text-3xl sm:text-4xl text-[#121814] group-hover:text-[#193D2B] transition-colors">
-                  Star Gardens
-                </span>
-                <span className="block font-sketch text-sm text-[#193D2B] font-medium mt-1">
+              <Link href="/" className="inline-block group" title="Star Gardens — Home">
+                <Image
+                  src="/images/logo/logo.png"
+                  alt="Star Gardens - Landscape Architecture & Design Studio"
+                  width={240}
+                  height={48}
+                  className="h-11 sm:h-12 w-auto object-contain mb-2 transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+                <span className="block font-sketch text-sm text-[#193D2B] font-medium">
                   Landscape Architecture & Design Studio
                 </span>
               </Link>

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { X, Lock, ExternalLink, MessageCircle, Mail, ShieldCheck } from "lucide-react";
 import { studioFacts } from "@/data/nurseries";
 
@@ -35,16 +36,22 @@ export default function CrmModal({ isOpen, onClose }: CrmModalProps) {
           <X className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xs bg-[#F8FAF7] border border-[#D4DFD7] text-[#193D2B] flex items-center justify-center">
-            <Lock className="w-5 h-5" />
+        <div className="flex items-center gap-3.5 mb-5 pb-4 border-b border-[#E5EBE6]">
+          <div className="w-12 h-12 rounded-full overflow-hidden bg-[#F8FAF7] border border-[#D4DFD7] p-1 flex items-center justify-center shrink-0 shadow-2xs">
+            <Image
+              src="/images/logo/logo-mark.png"
+              alt="Star Gardens Emblem"
+              width={48}
+              height={48}
+              className="w-full h-full object-contain"
+            />
           </div>
           <div>
-            <h3 id="crm-modal-title" className="font-serif text-2xl text-[#121814] font-normal">
+            <h3 id="crm-modal-title" className="font-serif text-2xl text-[#121814] font-normal leading-tight">
               Client CRM Portal
             </h3>
             <p className="text-[10px] font-mono uppercase tracking-widest text-[#718579]">
-              [ ENTERPRISE LANDSCAPE MANAGEMENT ]
+              [ STAR GARDENS ENTERPRISE SERVICING ]
             </p>
           </div>
         </div>

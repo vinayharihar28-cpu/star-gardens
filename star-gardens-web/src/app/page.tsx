@@ -22,7 +22,6 @@ import {
 } from "lucide-react";
 import BrandIntro from "@/components/BrandIntro";
 import ContourSvg from "@/components/ContourSvg";
-import ElasticReelServices from "@/components/ElasticReelServices";
 import EnquiryForm from "@/components/EnquiryForm";
 import HeroSection from "@/components/HeroSection";
 import ArchitecturalSketchSection from "@/components/ArchitecturalSketchSection";
@@ -186,37 +185,7 @@ export default function HomePage() {
       {/* 5. ARCHITECTURAL LINE ART TRANSITION (UNBOXED PARCHMENT BLEND) */}
       <ArchitecturalSketchSection />
 
-      {/* 6. LAND DESIGN STUDIO HORIZONTAL SERVICE PANELS */}
-      <section id="services-panels" className="py-20 sm:py-28 bg-white border-b border-[#E5EBE6]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-            <div className="space-y-2 max-w-xl scroll-reveal">
-              <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#193D2B] font-bold">
-                [ SERVICE DISCIPLINES ]
-              </div>
-              <h2 className="font-serif text-3xl sm:text-5xl text-[#121814] font-normal">
-                Eight disciplines. One landscape practice.
-              </h2>
-              <p className="text-sm sm:text-base text-[#475E50] leading-relaxed">
-                Hover, tap, or navigate any service band below to reveal the architectural scope, plant deliverables, and real project vistas.
-              </p>
-            </div>
-
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#193D2B] hover:text-[#286746] border-b border-[#193D2B] pb-1 transition-colors self-start font-semibold scroll-reveal delay-100"
-            >
-              <span>View All Services Detail</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          {/* The Elastic Reel-Style Interactive Gallery */}
-          <ElasticReelServices />
-        </div>
-      </section>
-
-      {/* 7. SELECTED WORK (EDITORIAL ARCHITECTURAL PORTFOLIO) */}
+      {/* 6. SELECTED WORK (EDITORIAL ARCHITECTURAL PORTFOLIO) */}
       <section id="selected-work" className="py-20 sm:py-28 bg-[#F8FAF7] border-b border-[#E5EBE6]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">

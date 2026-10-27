@@ -167,25 +167,14 @@ export default function CommercialStructuresStack() {
               key={item.id}
               className="w-full max-w-5xl mx-auto"
             >
-              <div className="bg-white border border-[#D4DFD7] rounded-2xl sm:rounded-3xl shadow-xl shadow-[#193D2B]/10 overflow-hidden transition-all duration-300 hover:border-[#193D2B]/60">
-                {/* Card Top Pill Bar */}
-                <div className="px-6 sm:px-8 py-3.5 bg-[#F8FAF7] border-b border-[#E5EBE6] flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 rounded-full bg-[#193D2B] text-white flex items-center justify-center font-mono text-xs font-bold shadow-2xs">
-                      {item.number}
-                    </span>
-                    <span className="text-[11px] font-mono uppercase tracking-widest text-[#193D2B] font-bold">
-                      [ {item.categoryTag} ]
-                    </span>
-                  </div>
-
-                  <span className="text-xs font-mono text-[#5A7E66] bg-white border border-[#D4DFD7] px-3 py-1 rounded-xs">
-                    {item.commercialModel.split("·")[0].trim()}
-                  </span>
+              <div className="p-6 sm:p-8 md:p-9 transition-colors duration-300">
+                {/* Top Left Single Dot */}
+                <div className="flex items-center mb-4 sm:mb-5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#193D2B]" />
                 </div>
 
                 {/* Card Main Body */}
-                <div className="p-5 sm:p-7 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                   {/* Left Column: Visual Lead */}
                   <div className="lg:col-span-5 flex flex-col justify-between space-y-3.5">
                     <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-[#E5EBE6] shadow-sm group">

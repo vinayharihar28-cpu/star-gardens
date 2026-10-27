@@ -76,7 +76,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Interactive Working Model Matrix */}
-      <section className="py-20 sm:py-28 bg-[#F8FAF7] border-y border-[#E5EBE6]">
+      <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-14 space-y-3 scroll-reveal">
             <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B]">

@@ -158,36 +158,58 @@ export default function WorkingModelInteractive() {
         id={`panel-${current.id}`}
         role="tabpanel"
         aria-labelledby={`tab-${current.id}`}
-        className="interactive-card mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white border border-[#D4DFD7] p-6 sm:p-10 rounded-sm shadow-xl text-[#121814]"
+        className="interactive-card mt-6 sm:mt-8 flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-center bg-white border border-[#D4DFD7] p-5 sm:p-10 rounded-sm shadow-xl text-[#121814]"
       >
-        {/* Left: Text & Features */}
-        <div className="lg:col-span-7 space-y-6">
+        {/* Rectangular Photographic Frame - On mobile placed on top */}
+        <div className="w-full lg:col-span-5 relative order-first lg:order-last">
+          <div className="relative aspect-[16/10] sm:aspect-[16/11] rounded-xs overflow-hidden border border-[#D4DFD7] shadow-lg group">
+            <Image
+              src={current.image}
+              alt={current.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 1024px) 100vw, 40vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 text-white">
+              <span className="text-[10px] font-mono uppercase tracking-widest bg-white/95 text-[#193D2B] font-bold px-2 py-0.5 rounded-xs backdrop-blur-xs shadow-sm">
+                STAR GARDENS PRACTICE
+              </span>
+              <p className="text-xs font-mono mt-1 text-white/95">
+                Verified delivery backed by 70 acres of nursery cultivation
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Details - Placed Right Below the Image on Mobile */}
+        <div className="w-full lg:col-span-7 space-y-5 sm:space-y-6">
           <div>
             <span className="font-mono text-xs uppercase tracking-widest text-[#193D2B] font-bold">
               [ ENGAGEMENT FRAMEWORK ]
             </span>
-            <h3 className="font-serif text-3xl sm:text-4xl text-[#121814] mt-1 font-normal">
+            <h3 className="font-serif text-2xl sm:text-4xl text-[#121814] mt-1 font-normal">
               {current.title}
             </h3>
-            <p className="font-sketch text-lg text-[#286746] mt-0.5">
+            <p className="font-sketch text-base sm:text-lg text-[#286746] mt-0.5">
               {current.subtitle}
             </p>
           </div>
 
-          <p className="text-sm sm:text-base text-[#334A3C] leading-relaxed">
+          <p className="text-xs sm:text-base text-[#334A3C] leading-relaxed">
             {current.description}
           </p>
 
           {/* Deliverable Chips */}
           <div>
-            <h4 className="text-[11px] font-mono uppercase tracking-wider text-[#193D2B] font-bold mb-2.5">
+            <h4 className="text-[11px] font-mono uppercase tracking-wider text-[#193D2B] font-bold mb-2">
               Core Deliverables:
             </h4>
             <div className="flex flex-wrap gap-2">
               {current.deliverables.map((item, idx) => (
                 <span
                   key={idx}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F8FAF7] border border-[#D4DFD7] text-xs font-mono text-[#193D2B] rounded-xs font-medium"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F8FAF7] border border-[#D4DFD7] text-xs font-mono text-[#193D2B] rounded-xs font-medium"
                 >
                   <Check className="w-3 h-3 text-[#286746]" />
                   {item}
@@ -200,7 +222,7 @@ export default function WorkingModelInteractive() {
           <ul className="space-y-2 pt-2 border-t border-[#E5EBE6] text-xs sm:text-sm text-[#475E50]">
             {current.detailPoints.map((point, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#286746] mt-2 shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#286746] mt-1.5 shrink-0" />
                 <span>{point}</span>
               </li>
             ))}
@@ -214,28 +236,6 @@ export default function WorkingModelInteractive() {
               <span>{current.actionText}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
-          </div>
-        </div>
-
-        {/* Right: Architectural Photographic Framing */}
-        <div className="lg:col-span-5 relative">
-          <div className="relative aspect-[4/3] sm:aspect-[16/11] rounded-xs overflow-hidden border border-[#D4DFD7] shadow-lg group">
-            <Image
-              src={current.image}
-              alt={current.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 1024px) 100vw, 40vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="text-[10px] font-mono uppercase tracking-widest bg-white/95 text-[#193D2B] font-bold px-2 py-0.5 rounded-xs backdrop-blur-xs shadow-sm">
-                STAR GARDENS PRACTICE
-              </span>
-              <p className="text-xs font-mono mt-1 text-white/95">
-                Verified delivery backed by 70 acres of nursery cultivation
-              </p>
-            </div>
           </div>
         </div>
       </div>

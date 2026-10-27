@@ -112,10 +112,6 @@ export default function ArchitecturalSketchSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 gap-6">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-white/90 border border-[#D4DFD7] rounded-xs text-[11px] font-mono tracking-widest text-[#193D2B] shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#193D2B] animate-pulse" />
-              <span>THE LIVING BLUEPRINT · FROM SKETCH TO SOIL</span>
-            </div>
             <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#121814] font-normal tracking-tight leading-[1.05]">
               Before we plant, we <span className="italic text-[#1E5E3A]">draft</span>.
             </h2>
@@ -159,9 +155,9 @@ export default function ArchitecturalSketchSection() {
             </div>
           </div>
 
-          {/* Panoramic Artwork Canvas with Smooth Mask Wipe */}
+          {/* Rectangular Artwork Canvas with Smooth Mask Wipe */}
           <div 
-            className="relative aspect-[3/1] min-h-[260px] sm:min-h-[380px] w-full overflow-hidden select-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            className="relative aspect-[16/10] sm:aspect-[21/9] lg:aspect-[2.8/1] min-h-[260px] sm:min-h-[360px] w-full overflow-hidden select-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] bg-white/40 rounded-xs border border-[#E5EBE6]"
             style={{
               clipPath: isRevealed ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
               opacity: isRevealed ? 1 : 0.2,
@@ -172,7 +168,7 @@ export default function ArchitecturalSketchSection() {
               alt="Star Gardens original architectural concept sketch showing modern cantilevered pavilion, waterfall weir, reflection pool and mature botanical canopy"
               fill
               priority
-              className="object-contain object-center scale-100 hover:scale-[1.01] transition-transform duration-1000 ease-out"
+              className="object-contain object-center scale-100 hover:scale-[1.01] transition-transform duration-1000 ease-out p-1.5 sm:p-0"
               sizes="(max-width: 1280px) 100vw, 1280px"
             />
 
@@ -205,7 +201,7 @@ export default function ArchitecturalSketchSection() {
 
                       {/* Hotspot Pin */}
                       <button
-                        className={`relative w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-mono text-[11px] font-bold transition-all transform shadow-md ${
+                        className={`relative w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-mono text-[10px] sm:text-[11px] font-bold transition-all transform shadow-md ${
                           isSelected
                             ? "bg-[#193D2B] text-white border-2 border-white scale-110 shadow-lg"
                             : "bg-white text-[#193D2B] border border-[#286746] hover:bg-[#193D2B] hover:text-white hover:scale-105"
@@ -221,15 +217,36 @@ export default function ArchitecturalSketchSection() {
             )}
           </div>
 
-          {/* 3. INSPECTION DETAIL TELEMETRY BOX */}
-          <div className="mt-6 pt-5 border-t border-[#E5EBE6] grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-            <div className="md:col-span-8 flex items-start gap-4">
-              <span className="w-8 h-8 rounded-full bg-[#193D2B] text-white flex items-center justify-center font-mono text-xs font-bold shrink-0 shadow-2xs">
+          {/* Mobile Hotspot Quick-Selection Strip */}
+          <div className="flex items-center gap-2 overflow-x-auto pt-3 pb-1 scrollbar-none sm:hidden">
+            {HOTSPOTS.map((hotspot) => {
+              const isSelected = activeHotspotId === hotspot.id;
+              return (
+                <button
+                  key={hotspot.id}
+                  onClick={() => setActiveHotspotId(hotspot.id)}
+                  className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xs text-xs font-mono transition-all ${
+                    isSelected
+                      ? "bg-[#193D2B] text-white font-bold shadow-2xs"
+                      : "bg-white border border-[#D4DFD7] text-[#475E50]"
+                  }`}
+                >
+                  <span className="font-bold">{hotspot.number}</span>
+                  <span className="truncate max-w-[140px]">{hotspot.title}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* 3. INSPECTION DETAIL TELEMETRY BOX (Placed Cleanly Right Below) */}
+          <div className="mt-4 sm:mt-6 pt-4 sm:pt-5 border-t border-[#E5EBE6] grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-start md:items-center">
+            <div className="md:col-span-8 flex items-start gap-3 sm:gap-4">
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#193D2B] text-white flex items-center justify-center font-mono text-xs font-bold shrink-0 shadow-2xs mt-0.5">
                 {activeHotspot.number}
               </span>
               <div className="space-y-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-serif text-xl sm:text-2xl text-[#121814]">
+                  <h3 className="font-serif text-lg sm:text-2xl text-[#121814]">
                     {activeHotspot.title}
                   </h3>
                   <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-white border border-[#D4DFD7] text-[#193D2B] rounded-xs font-semibold">

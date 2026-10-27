@@ -22,10 +22,6 @@ export default function InsightsPage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-[#D4DFD7] text-[#193D2B] text-xs font-mono uppercase tracking-widest rounded-xs shadow-2xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#193D2B] animate-pulse" />
-              Horticultural & Landscape Knowledge · Studio Insights
-            </div>
             <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl text-[#121814] font-normal leading-[1.1] tracking-tight">
               Insights from the <span className="italic text-[#193D2B]">field</span> and studio.
             </h1>
@@ -33,12 +29,31 @@ export default function InsightsPage() {
               Practical guides on workspace biophilia, vertical garden engineering, plant AMC scope, and financial decision-making for facility managers and property owners.
             </p>
           </div>
+          {/* Rectangular Insights Hero Screen */}
+          <div className="mt-8 sm:mt-12 scroll-reveal">
+            <div className="relative aspect-[16/10] sm:aspect-[21/9] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-xl">
+              <Image
+                src="/images/pages/insights-hero.jpg"
+                alt="Star Gardens botanical research and landscape architecture study library"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 right-3 text-white">
+                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-2.5 py-1 rounded-xs backdrop-blur-xs shadow-2xs">
+                  Studio Research & Horticultural Insights · Soil Telemetry & Biophilic Guidelines
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Articles Grid */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Articles Grid - Rectangular Images with Content Right Below */}
+      <section className="py-14 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {insightsData.map((art, idx) => (
             <article
               key={art.slug}
@@ -59,8 +74,8 @@ export default function InsightsPage() {
                   </div>
                 </Link>
 
-                <div className="p-6 sm:p-8 space-y-4">
-                  <div className="flex items-center gap-4 text-[11px] font-mono text-[#718579]">
+                <div className="p-5 sm:p-8 space-y-3 sm:space-y-4">
+                  <div className="flex items-center gap-3 sm:gap-4 text-[11px] font-mono text-[#718579]">
                     <span>{art.publishedDate}</span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
@@ -75,7 +90,7 @@ export default function InsightsPage() {
                     </Link>
                   </h3>
 
-                  <p className="font-serif italic text-base text-[#193D2B]">
+                  <p className="font-serif italic text-base sm:text-lg text-[#193D2B]">
                     "{art.subtitle}"
                   </p>
 
@@ -85,7 +100,7 @@ export default function InsightsPage() {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 pt-0 border-t border-[#E5EBE6] mt-4">
+              <div className="p-5 sm:p-8 pt-0 border-t border-[#E5EBE6] mt-4">
                 <Link
                   href={`/insights/${art.slug}`}
                   className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#193D2B] text-white text-xs font-bold uppercase tracking-wider rounded-xs hover:bg-[#286746] transition-colors shadow-2xs"

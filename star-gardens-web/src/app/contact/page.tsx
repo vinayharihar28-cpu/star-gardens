@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Phone, Mail, MessageCircle, MapPin, Clock, ShieldCheck, HelpCircle } from "lucide-react";
 import EnquiryForm from "@/components/EnquiryForm";
@@ -41,31 +42,47 @@ export default function ContactPage() {
   return (
     <div className="pt-24 pb-20 bg-white text-[#121814]">
       {/* Header */}
-      <section className="relative py-20 sm:py-28 border-b border-[#E5EBE6] bg-[#F8FAF7] overflow-hidden">
+      <section className="relative py-14 sm:py-24 border-b border-[#E5EBE6] bg-[#F8FAF7] overflow-hidden">
         <div className="absolute inset-0 pointer-events-none opacity-20">
           <ContourSvg className="w-full h-full" />
         </div>
         <div className="absolute inset-0 arch-grid-mosaic pointer-events-none opacity-30" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-[#D4DFD7] text-[#193D2B] text-xs font-mono uppercase tracking-widest rounded-xs shadow-2xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#193D2B] animate-pulse" />
-              Direct Practice Inquiries · Bengaluru HQ · Est. 2009
-            </div>
-            <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl text-[#121814] font-normal leading-[1.1] tracking-tight">
+          <div className="max-w-3xl space-y-5 sm:space-y-6">
+            <h1 className="font-serif text-3xl sm:text-6xl lg:text-7xl text-[#121814] font-normal leading-[1.1] tracking-tight">
               Discuss your site with our <span className="italic text-[#193D2B]">studio</span> architects.
             </h1>
-            <p className="text-base sm:text-xl text-[#475E50] font-light leading-relaxed">
+            <p className="text-sm sm:text-xl text-[#475E50] font-light leading-relaxed">
               We welcome preliminary site inquiries, architectural plan reviews, and consultations for residential developments, corporate campuses, vertical walls, and long-term maintenance.
             </p>
+          </div>
+
+          {/* Rectangular Studio Hero Screen - Mobile-first rectangular image with details below */}
+          <div className="mt-8 sm:mt-12 scroll-reveal">
+            <div className="relative aspect-[16/10] sm:aspect-[21/9] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-xl">
+              <Image
+                src="/images/pages/contact-hero.jpg"
+                alt="Star Gardens landscape architecture consultation studio and architectural planning desk"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 right-3 text-white">
+                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-2.5 py-1 rounded-xs backdrop-blur-xs shadow-2xs">
+                  Bengaluru Studio Consultation Desk · Material & Spatial Planning
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Main Contact Grid: Info + Enquiry Form */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      {/* Main Contact Grid: Info + Enquiry Form - Stacked Cleanly on Mobile */}
+      <section className="py-14 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Left Column: Coordinates */}
           <div className="lg:col-span-5 space-y-8 scroll-reveal-left">
             <div className="space-y-4">
@@ -75,13 +92,13 @@ export default function ContactPage() {
               <h2 className="font-serif text-3xl sm:text-4xl text-[#121814]">
                 Studio Leadership
               </h2>
-              <div className="interactive-card scroll-reveal delay-100 p-6 sm:p-8 bg-white border border-[#E5EBE6] rounded-sm space-y-6 shadow-md">
+              <div className="interactive-card scroll-reveal delay-100 p-5 sm:p-8 bg-white border border-[#E5EBE6] rounded-sm space-y-6 shadow-md">
                 <div>
                   <span className="text-[10px] font-mono uppercase text-[#718579] block">[ STUDIO DIRECTOR & FOUNDER ]</span>
-                  <p className="font-serif text-3xl text-[#121814] font-semibold mt-1">{studioFacts.contactPerson}</p>
+                  <p className="font-serif text-2xl sm:text-3xl text-[#121814] font-semibold mt-1">{studioFacts.contactPerson}</p>
                 </div>
 
-                <div className="space-y-4 pt-2 text-sm">
+                <div className="space-y-3 pt-2 text-sm">
                   <a
                     href={`tel:${studioFacts.phone.replace(/[\s-]/g, "")}`}
                     className="flex items-center gap-3 text-sm text-[#121814] hover:text-[#193D2B] transition-colors p-3 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs"
@@ -102,9 +119,9 @@ export default function ContactPage() {
                     <div className="w-9 h-9 rounded-full bg-[#193D2B] text-white flex items-center justify-center shrink-0 shadow-2xs">
                       <Mail className="w-4 h-4" />
                     </div>
-                    <div>
+                    <div className="overflow-hidden">
                       <span className="text-[10px] font-mono uppercase text-[#718579] block">Inquiry Email</span>
-                      <span className="font-mono text-[#193D2B] font-medium">{studioFacts.email}</span>
+                      <span className="font-mono text-[#193D2B] font-medium text-xs sm:text-sm truncate block">{studioFacts.email}</span>
                     </div>
                   </a>
 
@@ -136,7 +153,7 @@ export default function ContactPage() {
               <h3 className="font-serif text-2xl text-[#121814]">
                 Regional Service Locations
               </h3>
-              <div className="grid grid-cols-2 gap-3 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <div className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs space-y-1 shadow-2xs">
                   <span className="font-mono font-bold text-[#193D2B] block">BENGALURU (HQ)</span>
                   <p className="text-[#475E50] text-[11px] leading-relaxed">Same-day site audits, full dispatch & holding depot</p>

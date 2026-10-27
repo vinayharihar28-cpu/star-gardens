@@ -62,15 +62,6 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl space-y-5">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="px-3 py-1 bg-white border border-[#D4DFD7] text-[#193D2B] text-xs font-mono uppercase tracking-wider rounded-xs backdrop-blur-xs font-semibold shadow-2xs">
-                {project.sector}
-              </span>
-              <span className="text-xs font-mono text-[#718579]">
-                Intervention: {project.intervention}
-              </span>
-            </div>
-
             <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl text-[#121814] font-normal leading-[1.08]">
               {project.title}
             </h1>
@@ -103,8 +94,8 @@ export default async function ProjectDetailPage({ params }: Props) {
       </section>
 
       {/* Hero Featured Photography */}
-      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative aspect-[16/9] rounded-sm overflow-hidden border border-[#E5EBE6] shadow-xl">
+      <section className="py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-sm overflow-hidden border border-[#E5EBE6] shadow-xl">
           <Image
             src={project.featuredImage}
             alt={project.title}

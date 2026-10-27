@@ -246,6 +246,22 @@ html.lenis {
   outline-offset: 3px;
 }
 
+/* Service Hold Progress Animation */
+@keyframes serviceHoldProgress {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.animate-service-hold {
+  transform-origin: left;
+  animation: serviceHoldProgress 4.8s linear forwards;
+}
+
+
 /* ==========================================================================
    INTERACTIVE CONTAINER HOVER & SCROLL ANIMATION SUITE
    ========================================================================== */

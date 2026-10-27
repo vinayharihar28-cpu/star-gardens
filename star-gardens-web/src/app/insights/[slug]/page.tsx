@@ -78,7 +78,7 @@ export default async function InsightDetailPage({ params }: Props) {
         </div>
 
         {/* Featured Image */}
-        <div className="relative aspect-[16/9] rounded-sm overflow-hidden border border-[#E5EBE6] shadow-xl mb-12">
+        <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-sm overflow-hidden border border-[#E5EBE6] shadow-xl mb-8 sm:mb-12">
           <Image
             src={article.image}
             alt={article.title}

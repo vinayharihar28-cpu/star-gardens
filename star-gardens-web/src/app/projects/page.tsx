@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import ProjectFilters from "@/components/ProjectFilters";
@@ -14,30 +15,46 @@ export default function ProjectsPage() {
   return (
     <div className="pt-24 pb-20 bg-white text-[#121814]">
       {/* Header */}
-      <section className="relative py-20 sm:py-28 border-b border-[#E5EBE6] bg-[#F8FAF7] overflow-hidden">
+      <section className="relative py-14 sm:py-24 border-b border-[#E5EBE6] bg-[#F8FAF7] overflow-hidden">
         <div className="absolute inset-0 pointer-events-none opacity-20">
           <ContourSvg className="w-full h-full" />
         </div>
         <div className="absolute inset-0 arch-grid-mosaic pointer-events-none opacity-30" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-[#D4DFD7] text-[#193D2B] text-xs font-mono uppercase tracking-widest rounded-xs shadow-2xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#193D2B] animate-pulse" />
-              Selected Works · 2021 — 2024 · Realized Case Studies
-            </div>
-            <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl text-[#121814] font-normal leading-[1.1] tracking-tight">
+          <div className="max-w-3xl space-y-5 sm:space-y-6">
+            <h1 className="font-serif text-3xl sm:text-6xl lg:text-7xl text-[#121814] font-normal leading-[1.1] tracking-tight">
               Landscape case studies, <span className="italic text-[#193D2B]">designed</span> to endure.
             </h1>
-            <p className="text-base sm:text-xl text-[#475E50] font-light leading-relaxed">
+            <p className="text-sm sm:text-xl text-[#475E50] font-light leading-relaxed">
               Explore realized projects across corporate headquarters, co-working atriums, modular living walls, and acoustic water gardens. Every intervention is presented with verified specifications and architectural photography.
             </p>
+          </div>
+
+          {/* Rectangular Projects Showcase Hero Screen */}
+          <div className="mt-8 sm:mt-12 scroll-reveal">
+            <div className="relative aspect-[16/10] sm:aspect-[21/9] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-xl">
+              <Image
+                src="/images/pages/projects-hero.jpg"
+                alt="Star Gardens realized luxury landscape architecture case study with cantilevered bridge and reflection koi pond"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 right-3 text-white">
+                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-2.5 py-1 rounded-xs backdrop-blur-xs shadow-2xs">
+                  Selected Architectural Works · Realized Case Studies & Site Interventions
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Projects Filter and Grid */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-14 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
         <ProjectFilters projects={projectsData} />
       </section>
 

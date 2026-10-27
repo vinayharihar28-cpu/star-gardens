@@ -572,21 +572,25 @@ export default function HomePage() {
       {/* 11. WORKSHOPS & CSR GREENING */}
       <section className="py-20 sm:py-28 bg-[#F8FAF7] border-b border-[#E5EBE6]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left: Image Duo */}
-            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left: Rectangular Image on Mobile, Duo on Desktop */}
+            <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
               <ImageSlideReveal direction="left" delay={0} className="rounded-sm">
-                <div className="interactive-card relative aspect-[3/4] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-lg">
+                <div className="interactive-card relative aspect-[16/10] sm:aspect-[3/4] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-lg">
                   <Image
                     src="/images/workshops/corporate-planting-workshop-main.jpg"
                     alt="Corporate team planting workshop by Star Gardens"
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent sm:hidden" />
+                  <div className="absolute bottom-2.5 left-3 text-[10px] font-mono uppercase text-white bg-black/60 px-2 py-0.5 rounded-xs backdrop-blur-xs sm:hidden">
+                    Hands-On Horticultural Workshops
+                  </div>
                 </div>
               </ImageSlideReveal>
-              <ImageSlideReveal direction="right" delay={150} className="mt-6 rounded-sm">
+              <ImageSlideReveal direction="right" delay={150} className="hidden sm:block sm:mt-6 rounded-sm">
                 <div className="interactive-card relative aspect-[3/4] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-lg">
                   <Image
                     src="/images/workshops/hands-on-kokedama-creation-workshop.jpg"
@@ -599,8 +603,8 @@ export default function HomePage() {
               </ImageSlideReveal>
             </div>
 
-            {/* Right: Content */}
-            <div className="lg:col-span-7 space-y-6 scroll-reveal delay-100">
+            {/* Right: Content Placed Cleanly Right Below on Mobile */}
+            <div className="lg:col-span-7 space-y-5 sm:space-y-6 scroll-reveal delay-100">
               <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B] font-bold">
                 [ COMMUNITY & ENGAGEMENT ]
               </span>

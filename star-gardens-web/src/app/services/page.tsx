@@ -23,10 +23,6 @@ export default function ServicesPage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-[#D4DFD7] text-[#193D2B] text-xs font-mono uppercase tracking-widest rounded-xs shadow-2xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#193D2B] animate-pulse" />
-              Capabilities & Delivery Systems · Eight Disciplines
-            </div>
             <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl text-[#121814] font-normal leading-[1.1] tracking-tight">
               Architecture, cultivation, <span className="italic text-[#193D2B]">installation</span>, care.
             </h1>
@@ -34,18 +30,38 @@ export default function ServicesPage() {
               We design and execute landscapes across eight specialized disciplines. Choose turnkey delivery end to end, or bring us in for specific architectural advisory, vertical bio-walls, plant rental, or dedicated AMC.
             </p>
           </div>
+          {/* Rectangular Services Hero Screen */}
+          <div className="mt-8 sm:mt-12 scroll-reveal">
+            <div className="relative aspect-[16/10] sm:aspect-[21/9] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-xl">
+              <Image
+                src="/images/pages/services-hero.jpg"
+                alt="Star Gardens multi-discipline corporate campus landscape design, living wall and water reflection pond"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
+              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 right-3 text-white">
+                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-2.5 py-1 rounded-xs backdrop-blur-xs shadow-2xs">
+                  Integrated Landscape Disciplines · Architecture, Living Bio-Walls & Horticulture
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Services Grid - Mobile First Rectangular Frames with Content Below */}
+      <section className="py-14 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {servicesData.map((svc, idx) => (
             <div
               key={svc.id}
               className={`interactive-card scroll-reveal ${idx % 2 === 1 ? 'delay-150' : 'delay-75'} bg-white border border-[#E5EBE6] rounded-sm overflow-hidden flex flex-col justify-between group shadow-sm`}
             >
               <div>
+                {/* Rectangular Image Screen on Top */}
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
                     src={svc.heroImage}
@@ -60,23 +76,24 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                <div className="p-6 sm:p-8 space-y-4">
+                {/* Content Placed Cleanly Right Below the Image */}
+                <div className="p-5 sm:p-8 space-y-3 sm:space-y-4">
                   <span className="text-xs font-mono text-[#193D2B] font-semibold">
                     [ SERVICE 0{idx + 1} ]
                   </span>
-                  <h3 className="font-serif text-2xl sm:text-3xl text-[#121814] group-hover:text-[#193D2B] transition-colors">
+                  <h3 className="font-serif text-2xl sm:text-3xl text-[#121814] group-hover:text-[#193D2B] transition-colors leading-snug">
                     <Link href={`/services/${svc.slug}`}>
                       {svc.title}
                     </Link>
                   </h3>
-                  <p className="font-serif italic text-base text-[#193D2B]">
+                  <p className="font-serif italic text-base sm:text-lg text-[#193D2B]">
                     "{svc.tagline}"
                   </p>
                   <p className="text-xs sm:text-sm text-[#475E50] leading-relaxed pt-1">
                     {svc.shortDesc}
                   </p>
 
-                  <div className="pt-4 border-t border-[#E5EBE6] space-y-2">
+                  <div className="pt-3 sm:pt-4 border-t border-[#E5EBE6] space-y-2">
                     <span className="text-[11px] font-mono uppercase text-[#193D2B] font-semibold block">
                       Key Deliverables:
                     </span>
@@ -90,8 +107,8 @@ export default function ServicesPage() {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 pt-0 flex items-center justify-between border-t border-[#E5EBE6] mt-4">
-                <span className="text-[11px] font-mono text-[#718579] truncate max-w-[200px]">
+              <div className="p-5 sm:p-8 pt-0 flex flex-wrap items-center justify-between gap-3 border-t border-[#E5EBE6] mt-4">
+                <span className="text-[11px] font-mono text-[#718579] truncate max-w-[180px] sm:max-w-[200px]">
                   {svc.workingModel.slice(0, 32)}...
                 </span>
                 <Link

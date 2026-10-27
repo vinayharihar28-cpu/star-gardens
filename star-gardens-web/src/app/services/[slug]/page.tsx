@@ -57,42 +57,43 @@ export default async function ServiceDetailPage({ params }: Props) {
         <div className="absolute inset-0 arch-grid-mosaic pointer-events-none opacity-30" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#D4DFD7] text-[#193D2B] text-xs font-mono uppercase tracking-widest rounded-xs font-semibold shadow-2xs">
-                {service.sectorTag}
-              </div>
-              <h1 className="font-serif text-4xl sm:text-6xl text-[#121814] font-normal leading-[1.1]">
-                {service.title}
-              </h1>
-              <p className="font-serif italic text-xl sm:text-2xl text-[#193D2B]">
-                "{service.tagline}"
-              </p>
-              <p className="text-base sm:text-lg text-[#475E50] leading-relaxed pt-1">
-                {service.shortDesc}
-              </p>
-              <div className="p-4 bg-white border border-[#D4DFD7] rounded-xs text-xs text-[#475E50] shadow-2xs">
-                <strong className="text-[#193D2B]">Commercial Model:</strong> {service.workingModel}
+          <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Rectangular Image Screen - Placed on Top on Mobile */}
+            <div className="w-full lg:col-span-5 relative order-first lg:order-last">
+              <div className="relative aspect-[16/10] sm:aspect-[4/3] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-xl">
+                <Image
+                  src={service.heroImage}
+                  alt={service.title}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               </div>
             </div>
 
-            <div className="lg:col-span-5 relative aspect-[4/3] rounded-sm overflow-hidden border border-[#E5EBE6] shadow-xl">
-              <Image
-                src={service.heroImage}
-                alt={service.title}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            {/* Service Details - Cleanly Positioned Below Image on Mobile */}
+            <div className="w-full lg:col-span-7 space-y-4 sm:space-y-5">
+              <h1 className="font-serif text-3xl sm:text-6xl text-[#121814] font-normal leading-[1.1]">
+                {service.title}
+              </h1>
+              <p className="font-serif italic text-lg sm:text-2xl text-[#193D2B]">
+                "{service.tagline}"
+              </p>
+              <p className="text-sm sm:text-lg text-[#475E50] leading-relaxed pt-1">
+                {service.shortDesc}
+              </p>
+              <div className="p-3.5 sm:p-4 bg-white border border-[#D4DFD7] rounded-xs text-xs text-[#475E50] shadow-2xs">
+                <strong className="text-[#193D2B]">Commercial Model:</strong> {service.workingModel}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Deliverables & Features */}
-      <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-14 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Scope & Technical Features */}
           <div className="lg:col-span-7 space-y-12">

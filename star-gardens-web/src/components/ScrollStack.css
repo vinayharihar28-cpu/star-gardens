@@ -1,0 +1,33 @@
+/* ScrollStack GSAP & Hardware Accelerated Styling */
+
+.scroll-stack-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.scroll-stack-stage {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.scroll-stack-item-outer {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.scroll-stack-card {
+  position: relative;
+  width: 100%;
+  max-width: 64rem; /* max-w-5xl */
+  transform-origin: center top;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Ensure smooth shadows and transitions on card hover */
+.scroll-stack-card > div {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}

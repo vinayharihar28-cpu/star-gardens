@@ -35,12 +35,14 @@
   --charcoal: #1E2620;
 }
 
+@import "lenis/dist/lenis.css";
+
 * {
   box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Scroll behavior is driven with 60fps/120fps momentum by Lenis */
   scroll-padding-top: 80px;
   background-color: #FFFFFF;
   color: #121814;

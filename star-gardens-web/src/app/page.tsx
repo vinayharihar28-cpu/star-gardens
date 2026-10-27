@@ -23,7 +23,6 @@ import {
 import BrandIntro from "@/components/BrandIntro";
 import ContourSvg from "@/components/ContourSvg";
 import ElasticReelServices from "@/components/ElasticReelServices";
-import WorkingModelInteractive from "@/components/WorkingModelInteractive";
 import EnquiryForm from "@/components/EnquiryForm";
 import HeroSection from "@/components/HeroSection";
 import ArchitecturalSketchSection from "@/components/ArchitecturalSketchSection";
@@ -439,28 +438,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. WORKING OPERATIONAL MODEL */}
-      <section className="py-20 sm:py-28 bg-white border-b border-[#E5EBE6]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-12 space-y-3 scroll-reveal">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B] font-bold">
-              [ OPERATIONAL PROCESS ]
-            </span>
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#121814] font-normal">
-              How a Star Gardens project runs.
-            </h2>
-            <p className="text-sm sm:text-base text-[#475E50]">
-              Select any engagement model to review the exact deliverables, horticultural protocols, and operational workflows we deliver.
-            </p>
-          </div>
-
-          <div className="scroll-reveal delay-150">
-            <WorkingModelInteractive />
-          </div>
-        </div>
-      </section>
-
-      {/* 9. NURSERY & GROWING STORY */}
+      {/* 8. NURSERY & GROWING STORY */}
       <section className="py-20 sm:py-28 bg-[#F8FAF7] border-b border-[#E5EBE6]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">

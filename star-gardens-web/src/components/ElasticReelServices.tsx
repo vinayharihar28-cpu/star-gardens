@@ -24,6 +24,79 @@ export default function ElasticReelServices() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const sidePanelRef = useRef<HTMLDivElement>(null);
+  const hoveredIdRef = useRef(hoveredId);
+  const accumulatedDeltaRef = useRef(0);
+  const decayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const lastStepTimeRef = useRef(0);
+
+  useEffect(() => {
+    hoveredIdRef.current = hoveredId;
+  }, [hoveredId]);
+
+  // Scroll upon Elastic Reel (laptop 2-finger trackpad & mouse wheel):
+  // Seamlessly completes each discipline image before releasing to natural page scroll
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      // Don't intercept if detail side panel modal is open
+      if (selectedService) return;
+
+      // Ignore purely horizontal trackpad gestures
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX) * 0.4 && Math.abs(e.deltaX) > 12) return;
+
+      const isDown = e.deltaY > 0;
+      const isUp = e.deltaY < 0;
+      const currId = hoveredIdRef.current || servicesData[0].id;
+      const currentIndex = servicesData.findIndex((s) => s.id === currId);
+      const totalServices = servicesData.length;
+
+      const shouldIntercept =
+        (isDown && currentIndex < totalServices - 1) ||
+        (isUp && currentIndex > 0);
+
+      if (shouldIntercept) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        accumulatedDeltaRef.current += e.deltaY;
+
+        if (decayTimerRef.current) clearTimeout(decayTimerRef.current);
+        decayTimerRef.current = setTimeout(() => {
+          accumulatedDeltaRef.current = 0;
+        }, 260);
+
+        const now = Date.now();
+        const THRESHOLD = 42;
+        const COOLDOWN = 270;
+
+        if (accumulatedDeltaRef.current >= THRESHOLD) {
+          if (now - lastStepTimeRef.current > COOLDOWN) {
+            lastStepTimeRef.current = now;
+            accumulatedDeltaRef.current = 0;
+            const nextIdx = Math.min(currentIndex + 1, totalServices - 1);
+            setHoveredId(servicesData[nextIdx].id);
+          }
+        } else if (accumulatedDeltaRef.current <= -THRESHOLD) {
+          if (now - lastStepTimeRef.current > COOLDOWN) {
+            lastStepTimeRef.current = now;
+            accumulatedDeltaRef.current = 0;
+            const prevIdx = Math.max(currentIndex - 1, 0);
+            setHoveredId(servicesData[prevIdx].id);
+          }
+        }
+      } else {
+        accumulatedDeltaRef.current = 0;
+      }
+    };
+
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      if (decayTimerRef.current) clearTimeout(decayTimerRef.current);
+    };
+  }, [selectedService]);
 
   // Close side panel when Escape key is pressed
   useEffect(() => {
@@ -132,34 +205,20 @@ export default function ElasticReelServices() {
 
               {/* Minimalist Floating Label - Non-Intrusive, Preserving Pure Image */}
               <div className="absolute inset-0 z-10 p-4 sm:p-5 flex flex-col justify-between pointer-events-none">
-                {/* Index Pill */}
-                <div className="flex items-center justify-between">
-                  <span
-                    className={`font-mono text-xs sm:text-sm font-bold tracking-widest px-2.5 py-1 rounded-full backdrop-blur-md transition-all duration-500 ${
-                      isHovered
-                        ? "bg-[#193D2B]/90 text-[#D9E7B0] border border-[#286746] shadow-sm"
-                        : "bg-black/40 text-white/90 border border-white/20"
-                    }`}
-                  >
-                    {indexNum}
-                  </span>
-
-                  {/* Click to Expand Prompt appears softly on hover */}
+                {/* Subtle Hover Action Indicator */}
+                <div className="flex items-center justify-end">
                   {isHovered && (
-                    <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 text-[#193D2B] text-[11px] font-mono uppercase tracking-wider backdrop-blur-md shadow-md animate-fade-in-smooth">
-                      <span>Click to view details</span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 text-[#193D2B] text-[11px] font-mono uppercase tracking-wider backdrop-blur-md shadow-md animate-fade-in-smooth">
+                      <span>View Scope</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
                     </span>
                   )}
                 </div>
 
-                {/* Bottom Slice Identifier */}
+                {/* Bottom Slice Identifier - Clean & Minimal */}
                 <div className="flex items-end justify-between">
                   {isHovered ? (
-                    <div className="animate-fade-in-smooth bg-black/60 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/20 text-white">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#D9E7B0] block">
-                        {svc.sectorTag}
-                      </span>
+                    <div className="animate-fade-in-smooth bg-black/60 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/20 text-white">
                       <span className="font-serif text-lg sm:text-xl font-normal leading-tight text-white block">
                         {svc.title}
                       </span>
@@ -182,30 +241,6 @@ export default function ElasticReelServices() {
             </div>
           );
         })}
-      </div>
-
-      {/* Control Strip & Quick Selector Pills */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 text-xs font-mono text-[#5A7E66]">
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-          <span className="text-[#193D2B] font-bold shrink-0 hidden md:inline">
-            DISCIPLINES:
-          </span>
-          {servicesData.map((s, i) => (
-            <button
-              key={s.id}
-              onClick={() => handleCardClick(s)}
-              onMouseEnter={() => setHoveredId(s.id)}
-              className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-mono bg-[#FAF8F5] hover:bg-[#193D2B] border border-[#D4DFD7] hover:border-[#193D2B] text-[#475E50] hover:text-white transition-all duration-300 shadow-2xs"
-            >
-              <span className="font-bold">0{i + 1}</span>
-              <span className="truncate max-w-[120px]">{SHORT_TITLES[s.id] || s.title}</span>
-            </button>
-          ))}
-        </div>
-
-        <div className="text-[11px] text-[#718579] shrink-0 text-right">
-          Hover to expand image · Click any card for full scope & details
-        </div>
       </div>
 
       {/* ========================================================================= */}
@@ -231,11 +266,11 @@ export default function ElasticReelServices() {
             {/* Drawer Header with Close Button */}
             <div className="sticky top-0 z-30 flex items-center justify-between p-5 sm:p-6 bg-[#FAF9F5]/95 backdrop-blur-md border-b border-[#E5EBE6]">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-xs font-bold text-[#193D2B] px-2.5 py-1 rounded-full bg-[#EAF0EB] border border-[#D4DFD7]">
-                  DISCIPLINE {activeIndex !== -1 ? `0${activeIndex + 1}` : "01"} / 08
-                </span>
-                <span className="font-mono text-xs text-[#718579] uppercase">
+                <span className="font-mono text-xs font-bold text-[#193D2B] px-3 py-1 rounded-full bg-[#EAF0EB] border border-[#D4DFD7] uppercase tracking-wider">
                   {selectedService.sectorTag}
+                </span>
+                <span className="font-serif text-sm text-[#475E50] hidden sm:inline">
+                  {selectedService.title}
                 </span>
               </div>
 

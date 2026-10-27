@@ -3,6 +3,12 @@
 import React, { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { usePathname } from "next/navigation";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const REVEAL_SELECTOR =
   ".scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .slide-in-image, [data-slide-in]";
@@ -23,26 +29,32 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     // Initialize smooth scrolling only if user has not requested reduced motion
-    let rafId: number;
+    let rafId: number | null = null;
     if (!prefersReducedMotion) {
       const lenis = new Lenis({
-        duration: 0.65,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -8 * t)),
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: "vertical",
         gestureOrientation: "vertical",
         smoothWheel: true,
-        wheelMultiplier: 1.35,
-        touchMultiplier: 1.8,
+        wheelMultiplier: 1.0,
+        touchMultiplier: 1.5,
         infinite: false,
       });
 
       lenisRef.current = lenis;
-
-      function raf(time: number) {
-        lenis.raf(time);
-        rafId = requestAnimationFrame(raf);
+      if (typeof window !== "undefined") {
+        (window as any).__lenis = lenis;
       }
-      rafId = requestAnimationFrame(raf);
+
+      // Synchronize Lenis with GSAP ScrollTrigger
+      lenis.on("scroll", ScrollTrigger.update);
+
+      function rafLoop(time: number) {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(rafLoop);
+      }
+      rafId = requestAnimationFrame(rafLoop);
     }
 
     // Global intersection observer for scroll-triggered reveals
@@ -159,7 +171,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       if (onIntroCompleteHandler) {
         window.removeEventListener("sg:intro-complete", onIntroCompleteHandler);
       }
-      if (rafId) cancelAnimationFrame(rafId);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
       revealObserver.disconnect();
       mutationObserver.disconnect();
       observerRef.current = null;
@@ -170,11 +184,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     };
   }, []);
 
-  // When pathname changes, scroll to top and observe newly mounted route elements
+  // When pathname changes, scroll to top, refresh ScrollTrigger, and observe newly mounted route elements
   useEffect(() => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });
     }
+    ScrollTrigger.refresh();
 
     const timer = setTimeout(() => {
       const observer = observerRef.current;

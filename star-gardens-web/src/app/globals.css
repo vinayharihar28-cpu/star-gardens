@@ -140,11 +140,13 @@ h1, h2, h3, .font-display {
 }
 
 /* Lenis Smooth Scroll Recommended Styles */
-html.lenis, html.lenis body {
-  height: auto;
+html.lenis,
+html.lenis body {
+  height: auto !important;
+  scroll-behavior: auto !important;
 }
 
-.lenis.lenis-smooth {
+html.lenis {
   scroll-behavior: auto !important;
 }
 
@@ -367,7 +369,7 @@ html.js-ready .scroll-reveal.is-revealed,
 html.js-ready .scroll-reveal-left.is-revealed,
 html.js-ready .scroll-reveal-right.is-revealed {
   opacity: 1 !important;
-  transform: translate(0, 0) !important;
+  transform: translate(0, 0);
 }
 
 /* Combined: elements that are both interactive-card AND scroll-reveal.
@@ -383,10 +385,19 @@ html.js-ready .scroll-reveal-right.is-revealed {
               background-color 0.35s ease;
 }
 
-html.js-ready .interactive-card.scroll-reveal:not(.is-revealed):not([data-revealed="true"]),
-html.js-ready .interactive-card.scroll-reveal-left:not(.is-revealed):not([data-revealed="true"]),
+html.js-ready .interactive-card.scroll-reveal:not(.is-revealed):not([data-revealed="true"]) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+html.js-ready .interactive-card.scroll-reveal-left:not(.is-revealed):not([data-revealed="true"]) {
+  opacity: 0;
+  transform: translateX(-32px);
+}
+
 html.js-ready .interactive-card.scroll-reveal-right:not(.is-revealed):not([data-revealed="true"]) {
   opacity: 0;
+  transform: translateX(32px);
 }
 
 /* Stagger delays */

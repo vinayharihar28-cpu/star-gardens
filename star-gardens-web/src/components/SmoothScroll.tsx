@@ -57,8 +57,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         });
       },
       {
-        threshold: 0.05,
-        rootMargin: "50px 0px -20px 0px",
+        threshold: 0.02,
+        rootMargin: "0px 0px -10px 0px",
       }
     );
     observerRef.current = revealObserver;
@@ -75,7 +75,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
       const rect = el.getBoundingClientRect();
       const winHeight = window.innerHeight || 900;
-      // If already inside or above the viewport, reveal immediately
+      // If already inside or above the viewport, reveal smoothly
       if (rect.top < winHeight - 20 && rect.bottom > 0) {
         el.classList.add("is-revealed", "is-in-view");
         el.setAttribute("data-revealed", "true");
@@ -89,10 +89,42 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       targets.forEach(observeSingleElement);
     };
 
-    // Run initial scan and follow-up ticks for images/fonts rendering
-    observeElements();
-    const timer = setTimeout(observeElements, 150);
-    const timer2 = setTimeout(observeElements, 400);
+    // Check if the initial loading screen is active on first visit
+    let introTimer: NodeJS.Timeout | null = null;
+    let onIntroCompleteHandler: (() => void) | null = null;
+
+    const triggerInitialReveals = () => {
+      // Double requestAnimationFrame guarantees that the browser paints
+      // the initial unrevealed state (opacity: 0, translateY) so the CSS transition visibly runs!
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          observeElements();
+        });
+      });
+    };
+
+    const hasIntroScreen =
+      typeof document !== "undefined" &&
+      !!document.getElementById("sg-loading-screen") &&
+      sessionStorage.getItem("sg_intro_completed") !== "true";
+
+    if (hasIntroScreen) {
+      onIntroCompleteHandler = () => {
+        if (onIntroCompleteHandler) {
+          window.removeEventListener("sg:intro-complete", onIntroCompleteHandler);
+          onIntroCompleteHandler = null;
+        }
+        triggerInitialReveals();
+      };
+      window.addEventListener("sg:intro-complete", onIntroCompleteHandler);
+      // Fallback timeout in case event is missed or intro finishes early
+      introTimer = setTimeout(triggerInitialReveals, 3200);
+    } else {
+      triggerInitialReveals();
+    }
+
+    const timer = setTimeout(observeElements, 250);
+    const timer2 = setTimeout(observeElements, 600);
 
     // MutationObserver: automatically catch any new scroll-reveal elements
     // that React adds to the DOM after the initial scan (e.g. due to state
@@ -124,6 +156,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     return () => {
       clearTimeout(timer);
       clearTimeout(timer2);
+      if (introTimer) clearTimeout(introTimer);
+      if (onIntroCompleteHandler) {
+        window.removeEventListener("sg:intro-complete", onIntroCompleteHandler);
+      }
       if (rafId) cancelAnimationFrame(rafId);
       revealObserver.disconnect();
       mutationObserver.disconnect();
@@ -149,21 +185,23 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         typeof window !== "undefined" &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      targets.forEach((el) => {
-        if (prefersReducedMotion) {
-          el.classList.add("is-revealed", "is-in-view");
-          (el as HTMLElement).setAttribute?.("data-revealed", "true");
-          return;
-        }
-        if (!el.classList.contains("is-revealed") && el.getAttribute("data-revealed") !== "true") {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < winHeight - 20 && rect.bottom > 0) {
+      requestAnimationFrame(() => {
+        targets.forEach((el) => {
+          if (prefersReducedMotion) {
             el.classList.add("is-revealed", "is-in-view");
             (el as HTMLElement).setAttribute?.("data-revealed", "true");
-          } else if (observer) {
-            observer.observe(el);
+            return;
           }
-        }
+          if (!el.classList.contains("is-revealed") && el.getAttribute("data-revealed") !== "true") {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < winHeight - 20 && rect.bottom > 0) {
+              el.classList.add("is-revealed", "is-in-view");
+              (el as HTMLElement).setAttribute?.("data-revealed", "true");
+            } else if (observer) {
+              observer.observe(el);
+            }
+          }
+        });
       });
     }, 120);
 

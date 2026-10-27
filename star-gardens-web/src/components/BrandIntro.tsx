@@ -22,6 +22,9 @@ export default function BrandIntro({ onComplete }: BrandIntroProps) {
         sessionStorage.setItem("sg_intro_completed", "true");
       } catch (e) {}
       setShowIntro(false);
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("sg:intro-complete"));
+      }
       // Allow the CSS fade-out transition to finish before unmounting
       setTimeout(() => {
         setUnmounted(true);

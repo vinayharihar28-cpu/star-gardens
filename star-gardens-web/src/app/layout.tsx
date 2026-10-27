@@ -55,7 +55,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${dmSans.variable} ${caveat.variable} h-full antialiased`}
+      className={`${instrumentSerif.variable} ${dmSans.variable} ${caveat.variable} min-h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-[#121814] font-sans selection:bg-[#286746] selection:text-white">
         <SmoothScroll>

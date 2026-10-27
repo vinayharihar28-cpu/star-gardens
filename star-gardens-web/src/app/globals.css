@@ -326,41 +326,41 @@ html.lenis {
 .scroll-reveal {
   opacity: 1;
   transform: none;
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .scroll-reveal-left {
   opacity: 1;
   transform: none;
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .scroll-reveal-right {
   opacity: 1;
   transform: none;
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 /* When JS is ready and element has not yet been revealed, offset and fade it */
 html.js-ready .scroll-reveal:not(.is-revealed):not([data-revealed="true"]) {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(24px);
 }
 
 html.js-ready .scroll-reveal-left:not(.is-revealed):not([data-revealed="true"]) {
   opacity: 0;
-  transform: translateX(-32px);
+  transform: translateX(-24px);
 }
 
 html.js-ready .scroll-reveal-right:not(.is-revealed):not([data-revealed="true"]) {
   opacity: 0;
-  transform: translateX(32px);
+  transform: translateX(24px);
 }
 
 /* Once revealed, animate smoothly to natural position */
@@ -378,11 +378,11 @@ html.js-ready .scroll-reveal-right.is-revealed {
 .interactive-card.scroll-reveal,
 .interactive-card.scroll-reveal-left,
 .interactive-card.scroll-reveal-right {
-  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.35s ease,
-              background-color 0.35s ease;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              background-color 0.25s ease;
 }
 
 html.js-ready .interactive-card.scroll-reveal:not(.is-revealed):not([data-revealed="true"]) {
@@ -447,9 +447,7 @@ html.js-ready .interactive-card.scroll-reveal-right:not(.is-revealed):not([data-
     transform: none !important;
     transition: none !important;
   }
-  .sg-loading-screen,
-  .sg-loading-logo {
-    animation: none !important;
+  .sg-welcome-screen {
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
@@ -457,70 +455,30 @@ html.js-ready .interactive-card.scroll-reveal-right:not(.is-revealed):not([data-
 }
 
 /* ==========================================================================
-   STAR GARDENS OFFICIAL LOGO LOADING SCREEN ANIMATION
-   Timeline (3.0s total):
-   0.0s - 0.2s: Opacity 0 on pure white #FFFFFF
-   0.2s - 1.6s: Smooth opacity 0 -> 1 with cubic-bezier(0.22, 1, 0.36, 1)
-   1.6s - 2.6s: Hold fully visible at opacity 1
-   2.6s - 3.0s: Smooth fade out opacity 1 -> 0 to reveal homepage
+   STAR GARDENS REFINED MULTILINGUAL WELCOME SCREEN
+   Background: #FAF9F5 (Warm White)
+   Accents: #244D36 (Deep Botanical Green) with subtle botanical variations
    ========================================================================== */
 
-@keyframes sgLogoFade {
-  0% {
-    opacity: 0;
-  }
-  6.67% {
-    opacity: 0;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  53.33% {
-    opacity: 1;
-  }
-  86.67% {
-    opacity: 1;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes sgCurtainFade {
-  0% {
-    opacity: 1;
-    visibility: visible;
-  }
-  86.67% {
-    opacity: 1;
-    visibility: visible;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
-
-.sg-loading-screen {
+.sg-welcome-screen {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #FFFFFF;
+  background-color: #FAF9F5;
   z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: sgCurtainFade 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  will-change: opacity, visibility;
+  will-change: opacity;
   pointer-events: all;
   user-select: none;
 }
 
-.sg-loading-logo {
-  opacity: 0;
-  animation: sgLogoFade 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  will-change: opacity;
+.sg-greeting-text {
+  font-family: var(--font-sans), "Nirmala UI", "Noto Sans", "Kohinoor Devanagari", "Mukta", sans-serif;
+  font-feature-settings: "kern" 1;
+  letter-spacing: normal;
+  will-change: transform, opacity;
 }
 

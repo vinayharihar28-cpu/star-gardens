@@ -2,82 +2,165 @@
 
 import React, { useState, useEffect, useRef } from "react";
 
+interface GreetingItem {
+  script: string;
+  lang: string;
+  color: string;
+}
+
+const GREETINGS: GreetingItem[] = [
+  { script: "ನಮಸ್ಕಾರ", lang: "Kannada", color: "#244D36" },
+  { script: "नमस्ते", lang: "Hindi", color: "#1D4330" },
+  { script: "வணக்கம்", lang: "Tamil", color: "#2B533E" },
+  { script: "నమస్కారం", lang: "Telugu", color: "#365A42" },
+  { script: "നമസ്കാരം", lang: "Malayalam", color: "#204832" },
+  { script: "নমস্কার", lang: "Bengali", color: "#284E39" },
+  { script: "नमस्कार", lang: "Marathi", color: "#244D36" },
+];
+
 interface BrandIntroProps {
   onComplete?: () => void;
 }
 
 export default function BrandIntro({ onComplete }: BrandIntroProps) {
-  // Start as true so server and client initial render match (both render the div).
   const [showIntro, setShowIntro] = useState<boolean>(true);
-  // Track whether the intro has fully completed (for unmounting after transition).
   const [unmounted, setUnmounted] = useState<boolean>(false);
+  const [currentIdx, setCurrentIdx] = useState<number>(0);
+  const [isFadingOut, setIsFadingOut] = useState<boolean>(false);
+
   const onCompleteRef = useRef(onComplete);
-  onCompleteRef.current = onComplete;
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
-    if (!showIntro) return;
+    // 1. Reduced motion or repeat visit check
+    try {
+      if (
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        sessionStorage.getItem("sg_welcome_viewed") === "true" ||
+        sessionStorage.getItem("sg_intro_completed") === "true"
+      ) {
+        setShowIntro(false);
+        setUnmounted(true);
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("sg:intro-complete"));
+        }
+        if (onCompleteRef.current) onCompleteRef.current();
+        return;
+      }
+    } catch {
+      // Storage fallback
+    }
 
-    const dismiss = () => {
+    // 2. Fast, rhythmic greeting progression with smooth cross-fade
+    // 340ms per greeting = rapid, elegant editorial pacing
+    const STEP_MS = 340;
+    const timers: NodeJS.Timeout[] = [];
+
+    for (let i = 1; i < GREETINGS.length; i++) {
+      const t = setTimeout(() => {
+        setCurrentIdx(i);
+      }, i * STEP_MS);
+      timers.push(t);
+    }
+
+    // 3. Final smooth cross-fade out after the last greeting (Marathi)
+    // Hold last greeting for 420ms, then cross-fade out the whole screen
+    const totalGreetingDuration = (GREETINGS.length - 1) * STEP_MS + 420;
+    const fadeTimer = setTimeout(() => {
+      setIsFadingOut(true);
       try {
+        sessionStorage.setItem("sg_welcome_viewed", "true");
         sessionStorage.setItem("sg_intro_completed", "true");
-      } catch (e) {}
-      setShowIntro(false);
+      } catch {}
       if (typeof window !== "undefined") {
         window.dispatchEvent(new CustomEvent("sg:intro-complete"));
       }
-      // Allow the CSS fade-out transition to finish before unmounting
-      setTimeout(() => {
-        setUnmounted(true);
-        if (onCompleteRef.current) onCompleteRef.current();
-      }, 400);
+    }, totalGreetingDuration);
+
+    // 4. Complete unmount after cross-fade out transition completes
+    const cleanupTimer = setTimeout(() => {
+      setShowIntro(false);
+      setUnmounted(true);
+      if (onCompleteRef.current) onCompleteRef.current();
+    }, totalGreetingDuration + 620);
+
+    return () => {
+      timers.forEach(clearTimeout);
+      clearTimeout(fadeTimer);
+      clearTimeout(cleanupTimer);
     };
+  }, []);
 
-    try {
-      // Respect reduced motion
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        dismiss();
-        return;
-      }
-
-      // Check if already viewed in this session – dismiss immediately
-      if (sessionStorage.getItem("sg_intro_completed") === "true") {
-        dismiss();
-        return;
-      }
-    } catch (e) {
-      // If storage is blocked, continue with timer
-    }
-
-    // Single controlled timeline: 3.0 seconds total
-    // 0.0s - 0.2s: 0 opacity
-    // 0.2s - 1.6s: fade in 0 -> 1 with cubic-bezier(0.22, 1, 0.36, 1)
-    // 1.6s - 2.6s: hold fully visible at opacity 1
-    // 2.6s - 3.0s: smooth fade out of logo and white screen
-    // 3.0s: unmount and reveal homepage completely
-    const timer = setTimeout(dismiss, 3000);
-
-    return () => clearTimeout(timer);
-  }, [showIntro]);
-
-  // After the transition completes, remove from the DOM entirely
-  if (unmounted) return null;
+  if (unmounted || !showIntro) return null;
 
   return (
     <div
       id="sg-loading-screen"
-      className="sg-loading-screen"
       role="status"
       aria-live="polite"
-      aria-label="Star Gardens is loading"
+      aria-label="Star Gardens welcome introduction"
+      className="sg-welcome-screen"
       style={{
-        opacity: showIntro ? undefined : 0,
-        pointerEvents: showIntro ? undefined : "none",
-        transition: "opacity 0.35s ease-out",
+        backgroundColor: "#FAF9F5",
+        opacity: isFadingOut ? 0 : 1,
+        pointerEvents: isFadingOut ? "none" : "all",
+        transition: "opacity 600ms cubic-bezier(0.22, 1, 0.36, 1)",
       }}
     >
-      <span className="sg-loading-logo font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-[#121814] select-none text-center px-6">
-        Star Gardens
-      </span>
+      {/* Subtle fine architectural contour line art */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.035]"
+        viewBox="0 0 1200 800"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M-50,280 C320,180 620,440 1250,260"
+          stroke="#244D36"
+          strokeWidth="1.2"
+          strokeDasharray="5 7"
+        />
+        <path
+          d="M-50,560 C380,420 720,640 1250,480"
+          stroke="#244D36"
+          strokeWidth="1.2"
+        />
+      </svg>
+
+      {/* Main focus: one large greeting in fixed center with smooth cross-fade */}
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 h-36 flex items-center justify-center">
+        {GREETINGS.map((item, idx) => {
+          const isActive = idx === currentIdx;
+          const isPast = idx < currentIdx;
+
+          // Smooth vertical scroll translation during cross-fade:
+          // Inactive past: translated upward (-16px) & opacity 0
+          // Active: translated to center (0px) & opacity 1
+          // Inactive future: translated downward (16px) & opacity 0
+          const translateY = isActive ? "0px" : isPast ? "-18px" : "18px";
+          const opacity = isActive ? (isFadingOut ? 0 : 1) : 0;
+
+          return (
+            <h1
+              key={item.lang}
+              className="sg-greeting-text absolute inset-0 flex items-center justify-center text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-center select-none"
+              style={{
+                color: item.color,
+                opacity,
+                transform: `translateY(${translateY})`,
+                transition: "transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms cubic-bezier(0.22, 1, 0.36, 1), color 240ms ease",
+                pointerEvents: isActive ? "auto" : "none",
+                visibility: Math.abs(idx - currentIdx) <= 1 ? "visible" : "hidden",
+              }}
+            >
+              {item.script}
+            </h1>
+          );
+        })}
+      </div>
     </div>
   );
 }

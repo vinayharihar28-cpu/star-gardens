@@ -26,13 +26,13 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     let rafId: number;
     if (!prefersReducedMotion) {
       const lenis = new Lenis({
-        duration: 1.15,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        duration: 0.65,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -8 * t)),
         orientation: "vertical",
         gestureOrientation: "vertical",
         smoothWheel: true,
-        wheelMultiplier: 0.95,
-        touchMultiplier: 1.5,
+        wheelMultiplier: 1.35,
+        touchMultiplier: 1.8,
         infinite: false,
       });
 
@@ -106,6 +106,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     const hasIntroScreen =
       typeof document !== "undefined" &&
       !!document.getElementById("sg-loading-screen") &&
+      sessionStorage.getItem("sg_welcome_viewed") !== "true" &&
       sessionStorage.getItem("sg_intro_completed") !== "true";
 
     if (hasIntroScreen) {
@@ -117,7 +118,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         triggerInitialReveals();
       };
       window.addEventListener("sg:intro-complete", onIntroCompleteHandler);
-      // Fallback timeout in case event is missed or intro finishes early
+      // Fallback timeout matching the fast multilingual welcome sequence
       introTimer = setTimeout(triggerInitialReveals, 3200);
     } else {
       triggerInitialReveals();

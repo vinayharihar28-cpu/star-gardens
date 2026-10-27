@@ -155,10 +155,11 @@ export default function WorkingModelInteractive() {
 
       {/* Tab Content Panel */}
       <div
+        key={current.id}
         id={`panel-${current.id}`}
         role="tabpanel"
         aria-labelledby={`tab-${current.id}`}
-        className="interactive-card mt-6 sm:mt-8 flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-center bg-white border border-[#D4DFD7] p-5 sm:p-10 rounded-sm shadow-xl text-[#121814]"
+        className="interactive-card animate-fade-in-smooth mt-6 sm:mt-8 flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-center bg-white border border-[#D4DFD7] p-5 sm:p-10 rounded-sm shadow-xl text-[#121814]"
       >
         {/* Rectangular Photographic Frame - On mobile placed on top */}
         <div className="w-full lg:col-span-5 relative order-first lg:order-last">

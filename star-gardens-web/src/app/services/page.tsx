@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Check, Compass, ShieldCheck, Sparkles, Building2 } from "lucide-react";
-import WorkingModelInteractive from "@/components/WorkingModelInteractive";
+import CommercialStructuresStack from "@/components/CommercialStructuresStack";
 import ContourSvg from "@/components/ContourSvg";
 import { servicesData } from "@/data/services";
 
@@ -139,8 +139,8 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="scroll-reveal delay-150">
-            <WorkingModelInteractive />
+          <div>
+            <CommercialStructuresStack />
           </div>
         </div>
       </section>

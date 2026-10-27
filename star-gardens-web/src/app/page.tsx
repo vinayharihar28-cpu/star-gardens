@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import BrandIntro from "@/components/BrandIntro";
 import ContourSvg from "@/components/ContourSvg";
-import HorizontalServicePanels from "@/components/HorizontalServicePanels";
+import ElasticReelServices from "@/components/ElasticReelServices";
 import WorkingModelInteractive from "@/components/WorkingModelInteractive";
 import EnquiryForm from "@/components/EnquiryForm";
 import HeroSection from "@/components/HeroSection";
@@ -212,8 +212,8 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* The Land Design Studio-inspired Horizontal Panels */}
-          <HorizontalServicePanels />
+          {/* The Elastic Reel-Style Interactive Gallery */}
+          <ElasticReelServices />
         </div>
       </section>
 

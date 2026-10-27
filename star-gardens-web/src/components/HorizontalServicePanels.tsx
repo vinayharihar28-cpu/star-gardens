@@ -206,7 +206,7 @@ export default function HorizontalServicePanels() {
             {/* Expandable Content Area - CSS Grid provides exact intrinsic height animation with zero jumpscare */}
             <div
               id={`service-panel-${svc.id}`}
-              className={`relative z-10 grid transition-[grid-template-rows,opacity] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+              className={`relative z-10 grid transition-[grid-template-rows,opacity] duration-800 ease-[cubic-bezier(0.2,0.9,0.3,1)] ${
                 isExpanded
                   ? "grid-rows-[1fr] opacity-100"
                   : "grid-rows-[0fr] opacity-0 pointer-events-none"

@@ -128,6 +128,10 @@ export default function HeroSection() {
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
         <a
           href="#carousel-showcase"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById("carousel-showcase")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
           className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md border border-[#D4DFD7] text-[#193D2B] flex items-center justify-center hover:bg-white hover:border-[#193D2B] hover:scale-105 active:scale-95 transition-all shadow-md group"
           aria-label="Scroll down to visual carousel showcase"
         >

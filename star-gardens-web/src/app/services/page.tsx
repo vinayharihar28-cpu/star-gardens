@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Check, Compass, ShieldCheck, Sparkles, Building2 } from "lucide-react";
 import CommercialStructuresStack from "@/components/CommercialStructuresStack";
+import CommercialStackLineArtBg from "@/components/CommercialStackLineArtBg";
 import ElasticReelServices from "@/components/ElasticReelServices";
 import ContourSvg from "@/components/ContourSvg";
 import { servicesData } from "@/data/services";
@@ -76,8 +77,11 @@ export default function ServicesPage() {
       </section>
 
       {/* Interactive Working Model Matrix */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 sm:py-28 bg-[#FAFBF9] overflow-hidden border-t border-b border-[#E5EBE6]">
+        {/* Architectural Botanical Line Art Background Design */}
+        <CommercialStackLineArtBg />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-14 space-y-3 scroll-reveal">
             <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B]">
               COMMERCIAL STRUCTURES

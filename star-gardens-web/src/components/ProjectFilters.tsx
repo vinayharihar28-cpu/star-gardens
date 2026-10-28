@@ -13,7 +13,7 @@ interface ProjectFiltersProps {
 export default function ProjectFilters({ projects }: ProjectFiltersProps) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
 
-  const categories = ["All", "Corporate", "Residential", "Hospitality", "Vertical Gardens", "Water Features"];
+  const categories = ["All", "Corporate", "Residential", "Vertical Gardens", "Water Features"];
 
   const filtered = activeCategory === "All"
     ? projects
@@ -79,39 +79,35 @@ export default function ProjectFilters({ projects }: ProjectFiltersProps) {
             <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between text-xs text-[#718579] font-mono mb-2">
-                  <span className="flex items-center gap-1">
-                    <Building className="w-3.5 h-3.5 text-[#193D2B]" />
+                  <span className="flex items-center gap-1 font-semibold text-[#193D2B]">
+                    <Building className="w-3.5 h-3.5" />
                     {proj.client}
                   </span>
                   <span>{proj.year}</span>
                 </div>
 
-                <h3 className="font-serif text-2xl text-[#121814] group-hover:text-[#193D2B] transition-colors leading-snug">
+                <h3 className="font-serif text-xl sm:text-2xl text-[#121814] group-hover:text-[#193D2B] transition-colors leading-snug">
                   <Link href={`/projects/${proj.slug}`}>
                     {proj.title}
                   </Link>
                 </h3>
 
-                <p className="flex items-center gap-1.5 text-xs font-mono text-[#718579] mt-1.5">
+                <p className="flex items-center gap-1.5 text-xs font-mono text-[#718579] mt-2">
                   <MapPin className="w-3 h-3 text-[#193D2B] shrink-0" />
-                  <span>{proj.location}</span>
-                </p>
-
-                <p className="text-xs sm:text-sm text-[#475E50] mt-3 line-clamp-2 leading-relaxed">
-                  {proj.summary}
+                  <span className="truncate">{proj.location}</span>
                 </p>
               </div>
 
-              <div className="pt-5 mt-4 border-t border-[#E5EBE6] flex items-center justify-between">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#718579]">
-                  Case Study
+              <div className="pt-4 mt-4 border-t border-[#E5EBE6] flex items-center justify-between">
+                <span className="text-xs font-mono font-semibold text-[#193D2B]">
+                  {proj.metrics[0]?.value}
                 </span>
                 <Link
                   href={`/projects/${proj.slug}`}
-                  className="inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#193D2B] border border-[#D4DFD7] group-hover:text-white group-hover:bg-[#193D2B] px-3 py-1 rounded-full transition-all font-semibold"
-                  aria-label={`View case study: ${proj.title}`}
+                  className="inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#193D2B] border border-[#D4DFD7] group-hover:text-white group-hover:bg-[#193D2B] px-3.5 py-1.5 rounded-full transition-all font-semibold"
+                  aria-label={`View project: ${proj.title}`}
                 >
-                  <span>Intervention</span>
+                  <span>View</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

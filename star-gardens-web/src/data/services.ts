@@ -19,7 +19,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Corporate Landscaping & Workspace Biophilia',
     tagline: 'High-performance botanical systems engineered for modern workplaces.',
     shortDesc: 'End-to-end design, execution, and long-term care for tech parks, corporate campuses, and agile co-working spaces.',
-    heroImage: '/images/corporate/wsp-floor-greenery-vista.jpg',
+    heroImage: '/images/services_real/workspace-biophilia.jpg',
     sectorTag: 'Corporate',
     workingModel: 'Available as Capex (Design & Build), Long-term Corporate Rental (2–3 years), or Pure Maintenance (AMC).',
     deliverables: [
@@ -60,7 +60,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Residential Landscapes & Private Estates',
     tagline: 'Living sanctuaries tailored to private villas, terraces, and residential enclaves.',
     shortDesc: 'Thoughtfully planned outdoor spaces, private courtyards, swimming pool surrounds, and terrace gardens designed for calm and enduring beauty.',
-    heroImage: '/images/residential/residential-villa-rain-curtain-courtyard.jpg',
+    heroImage: '/images/services_real/private-estates-villas.jpg',
     sectorTag: 'Residential',
     workingModel: 'Comprehensive architectural consultation, grading, softscape/hardscape installation, and seasonal estate maintenance.',
     deliverables: [
@@ -101,7 +101,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Hospitality Landscapes & Managed Farmland',
     tagline: 'Destination environments that immerse guests in nature.',
     shortDesc: 'Immersive landscape architecture for luxury resorts, boutique retreats, managed agricultural farmland communities, and vacation villas.',
-    heroImage: '/images/hospitality/resort-koi-pond-and-deck-landscape.jpg',
+    heroImage: '/images/services_real/hospitality-farmland.jpg',
     sectorTag: 'Hospitality',
     workingModel: 'Master site planning, phase-wise landscape rollouts, agricultural integration, and horticultural training for estate staff.',
     deliverables: [
@@ -138,7 +138,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Engineered Vertical Gardens & Bio-Walls',
     tagline: 'Living green architecture for structural facades and high-traffic interiors.',
     shortDesc: 'Patented modular living wall systems with integrated automated fertigation, zero soil subsidence, and guaranteed 98%+ plant retention.',
-    heroImage: '/images/vertical-gardens/interior-reception-living-wall-lush.jpg',
+    heroImage: '/images/services_real/vertical-bio-walls.jpg',
     sectorTag: 'Specialized',
     workingModel: 'Turnkey structural mounting, plumbing integration, nursery-grown pre-vegetated cassettes, and comprehensive maintenance contracts.',
     deliverables: [
@@ -179,7 +179,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Plant Rental & Subscriptions',
     tagline: 'Flexible greenery without capital expenditure or operational headaches.',
     shortDesc: 'Short-term event rentals (1–2 days) for summits and exhibitions, alongside 2 to 3-year corporate plant subscriptions with complete AMC included.',
-    heroImage: '/images/rental/corporate-plant-rental-acclimatized-fig.jpg',
+    heroImage: '/images/services_real/plant-rental-opex.jpg',
     sectorTag: 'Specialized',
     workingModel: 'Short-term Event Rental (1 to 2 days) | Long-term Corporate Subscription (2 to 3 years with AMC).',
     deliverables: [
@@ -216,7 +216,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Annual Maintenance Contracts (AMC)',
     tagline: 'Guaranteed plant health, meticulous servicing, and operational peace of mind.',
     shortDesc: 'Dedicated horticultural care for corporate offices, residential communities, and retail campuses. Serving 175+ active clients across Bengaluru and South India.',
-    heroImage: '/images/amc/team-member-horticulture-watering.jpg',
+    heroImage: '/images/services_real/annual-plant-amc.jpg',
     sectorTag: 'Specialized',
     workingModel: 'Scheduled weekly or bi-weekly visits by trained, uniformed Star Gardens horticultural personnel.',
     deliverables: [
@@ -253,7 +253,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Corporate Workshops & Greening Events',
     tagline: 'Hands-on horticultural experiences that educate, engage, and connect teams.',
     shortDesc: 'Guided botanical workshops for corporate teams—kokedama moss ball creation, micro-terrariums, and desktop potting—bringing colleagues together.',
-    heroImage: '/images/workshops/hands-on-kokedama-creation-workshop.jpg',
+    heroImage: '/images/services_real/corporate-workshops.jpg',
     sectorTag: 'Impact',
     workingModel: 'On-site 2 to 3-hour guided sessions at corporate offices, offsites, or our nursery locations.',
     deliverables: [
@@ -286,7 +286,7 @@ export const servicesData: ServiceItem[] = [
     title: 'CSR Plantation Drives & Community Greening',
     tagline: 'Generous ecological impact backed by 70 acres of nursery cultivation.',
     shortDesc: 'Corporate social responsibility greening drives and community tree-planting activities offered at no cost to partner organizations.',
-    heroImage: '/images/corporate/the-hive-coworking-landscape.jpg',
+    heroImage: '/images/services_real/csr-greening-drives.jpg',
     sectorTag: 'Impact',
     workingModel: 'Collaborative non-profit CSR partnerships using native saplings directly supplied from our production nurseries.',
     deliverables: [

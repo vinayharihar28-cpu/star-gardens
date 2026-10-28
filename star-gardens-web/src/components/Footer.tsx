@@ -65,6 +65,11 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/corporate" className="hover:text-[#193D2B] transition-colors font-semibold text-[#193D2B]">
+                    Corporate Works
+                  </Link>
+                </li>
+                <li>
                   <Link href="/projects" className="hover:text-[#193D2B] transition-colors">
                     Case Studies
                   </Link>

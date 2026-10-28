@@ -22,12 +22,12 @@ export default function ProjectsPage() {
         <div className="absolute inset-0 arch-grid-mosaic pointer-events-none opacity-30" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-5 sm:space-y-6">
-            <h1 className="font-serif text-3xl sm:text-6xl lg:text-7xl text-[#121814] font-normal leading-[1.1] tracking-tight">
-              Landscape case studies, <span className="italic text-[#193D2B]">designed</span> to endure.
+          <div className="max-w-2xl space-y-3">
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#121814] font-normal tracking-tight">
+              Selected Projects
             </h1>
-            <p className="text-sm sm:text-xl text-[#475E50] font-light leading-relaxed">
-              Realized interventions across corporate campuses, atriums, and living bio-walls.
+            <p className="text-sm sm:text-base text-[#475E50] font-light">
+              Realized landscapes across corporate campuses, workspaces, and residences.
             </p>
           </div>
 
@@ -44,8 +44,8 @@ export default function ProjectsPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 right-3 text-white">
-                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-3 py-1.5 rounded-full backdrop-blur-xs shadow-2xs">
-                  Selected Architectural Works · Realized Case Studies & Site Interventions
+                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-3.5 py-1.5 rounded-full backdrop-blur-xs shadow-2xs">
+                  Realized Works
                 </span>
               </div>
             </div>

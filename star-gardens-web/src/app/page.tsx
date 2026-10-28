@@ -40,38 +40,6 @@ const CLIENT_CAMPUSES = [
   { name: "Embassy Group", location: "Central Business District" },
 ];
 
-const OPERATIONAL_PILLARS = [
-  {
-    num: "01",
-    title: "Design Intelligence",
-    tagline: "Biological Engineering",
-    description: "Calculating lux levels, slab weight limits, and hydraulics before installation.",
-  },
-  {
-    num: "02",
-    title: "Direct Cultivation",
-    tagline: "70 Acres Farmland",
-    description: "Thousands of acclimatized specimen plants grown on our own farms, ready for dispatch.",
-  },
-  {
-    num: "03",
-    title: "End-to-End Delivery",
-    tagline: "Unified Accountability",
-    description: "One studio handles concept sketches, execution, and ongoing AMC care with zero subcontracting.",
-  },
-  {
-    num: "04",
-    title: "100% Replacement SLA",
-    tagline: "Living Health Warranty",
-    description: "Declining specimens under AMC are replaced immediately at zero extra cost.",
-  },
-  {
-    num: "05",
-    title: "Direct Studio Access",
-    tagline: "Founder Leadership",
-    description: "Direct collaboration with studio leadership and senior horticulturists.",
-  },
-];
 
 const FAQS = [
   {
@@ -97,11 +65,16 @@ const FAQS = [
 ];
 
 export default function HomePage() {
-  const featuredProjects = projectsData.slice(0, 4);
+  const featuredProjects = [
+    projectsData.find((p) => p.slug === "swiss-re-embassy-golf-links") || projectsData[0],
+    projectsData.find((p) => p.slug === "abb-peenya-campus") || projectsData[1],
+    projectsData.find((p) => p.slug === "ola-head-office-koramangala") || projectsData[2],
+    projectsData.find((p) => p.slug === "wsp-manyata-tech-park") || projectsData[3],
+  ];
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   return (
-    <div className="flex flex-col bg-white text-[#121814]">
+    <div className="flex flex-col bg-white text-[#121814] snap-y snap-proximity">
       {/* 1. STAR GARDENS OFFICIAL LOGO LOADING SCREEN (EXACT 3.0S OPACITY REVEAL) */}
       <BrandIntro />
 
@@ -111,21 +84,10 @@ export default function HomePage() {
       {/* 3. 3D GRADIENT CAROUSEL PERSPECTIVE SHOWCASE (RIGHT BELOW HERO) */}
       <section 
         id="carousel-showcase" 
-        className="relative w-full bg-white overflow-hidden py-8 sm:py-14 border-b border-[#E5EBE6]"
+        className="relative w-full h-[100dvh] h-screen bg-white overflow-hidden flex flex-col items-center justify-center border-b border-[#E5EBE6] scroll-mt-0 snap-start"
         aria-label="Star Gardens 3D Perspective Landscape Carousel Showcase"
       >
         <GradientCarousel3D />
-
-        {/* Minimal Scroll Cue to Campuses Strip */}
-        <div className="relative pt-6 sm:pt-8 flex justify-center z-20">
-          <a
-            href="#campuses-strip"
-            className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md border border-[#D4DFD7] text-[#193D2B] flex items-center justify-center hover:bg-white hover:border-[#193D2B] hover:scale-105 active:scale-95 transition-all shadow-sm group"
-            aria-label="Scroll down to delivered campuses and credentials"
-          >
-            <ChevronDown className="w-5 h-5 text-[#193D2B] group-hover:translate-y-0.5 transition-transform" />
-          </a>
-        </div>
       </section>
 
       {/* 4. ENTERPRISE CAMPUS CREDENTIALS STRIP */}
@@ -150,7 +112,222 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. MOSAIC CREDIBILITY AND SCALE STRIP */}
+
+      {/* 5. ARCHITECTURAL LINE ART TRANSITION (UNBOXED PARCHMENT BLEND) */}
+      <ArchitecturalSketchSection />
+
+      {/* 6. SELECTED WORK (EDITORIAL ARCHITECTURAL PORTFOLIO) */}
+      <section id="selected-work" className="py-20 sm:py-28 bg-[#F8FAF7] border-b border-[#E5EBE6]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+            <div className="space-y-1 max-w-xl scroll-reveal">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B] font-bold">
+                LATEST PROJECTS
+              </span>
+              <h2 className="font-serif text-3xl sm:text-5xl text-[#121814] font-normal">
+                Recent Works
+              </h2>
+            </div>
+
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#193D2B] hover:text-[#286746] border-b border-[#193D2B] pb-1 transition-colors self-start font-semibold"
+            >
+              <span>View All Projects</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {/* Editorial Asymmetric Case Study Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Primary Feature: Swiss Re (Span 7) */}
+            <ImageSlideReveal direction="up" delay={0} className="lg:col-span-7 flex flex-col h-full rounded-2xl">
+              <div className="interactive-card flex flex-col group bg-white border border-[#E5EBE6] rounded-2xl overflow-hidden shadow-sm h-full">
+                <Link href={`/projects/${featuredProjects[0].slug}`} className="relative aspect-[16/10] overflow-hidden block">
+                  <Image
+                    src={featuredProjects[0].featuredImage}
+                    alt={featuredProjects[0].title}
+                    fill
+                    className="object-cover project-card-image transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3.5 py-1 bg-white/95 border border-[#D4DFD7] backdrop-blur-xs text-[#193D2B] text-xs font-mono uppercase tracking-wider rounded-full font-semibold shadow-2xs">
+                      {featuredProjects[0].sector}
+                    </span>
+                  </div>
+                </Link>
+                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between text-xs font-mono text-[#718579] mb-2">
+                      <span className="font-semibold text-[#193D2B]">{featuredProjects[0].client}</span>
+                      <span>{featuredProjects[0].location}</span>
+                    </div>
+                    <h3 className="font-serif text-2xl sm:text-3xl text-[#121814] group-hover:text-[#193D2B] transition-colors leading-snug">
+                      <Link href={`/projects/${featuredProjects[0].slug}`}>
+                        {featuredProjects[0].title}
+                      </Link>
+                    </h3>
+                  </div>
+                  <div className="pt-5 mt-4 border-t border-[#E5EBE6] flex items-center justify-between">
+                    <span className="text-xs font-mono font-semibold text-[#193D2B]">
+                      {featuredProjects[0].metrics[0].value}
+                    </span>
+                    <Link
+                      href={`/projects/${featuredProjects[0].slug}`}
+                      className="group/link inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#193D2B] hover:text-white hover:bg-[#193D2B] border border-[#D4DFD7] px-3.5 py-1.5 rounded-full transition-all font-semibold"
+                    >
+                      <span>View</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </ImageSlideReveal>
+
+            {/* Secondary Feature (Span 5) */}
+            <ImageSlideReveal direction="up" delay={150} className="lg:col-span-5 flex flex-col h-full rounded-2xl">
+              <div className="interactive-card flex flex-col group bg-white border border-[#E5EBE6] rounded-2xl overflow-hidden shadow-sm h-full">
+                <Link href={`/projects/${featuredProjects[1].slug}`} className="relative aspect-[16/11] overflow-hidden block">
+                  <Image
+                    src={featuredProjects[1].featuredImage}
+                    alt={featuredProjects[1].title}
+                    fill
+                    className="object-cover project-card-image transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3.5 py-1 bg-white/95 border border-[#D4DFD7] backdrop-blur-xs text-[#193D2B] text-xs font-mono uppercase tracking-wider rounded-full font-semibold shadow-2xs">
+                      {featuredProjects[1].sector}
+                    </span>
+                  </div>
+                </Link>
+                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between text-xs font-mono text-[#718579] mb-2">
+                      <span className="font-semibold text-[#193D2B]">{featuredProjects[1].client}</span>
+                      <span>{featuredProjects[1].location}</span>
+                    </div>
+                    <h3 className="font-serif text-2xl sm:text-3xl text-[#121814] group-hover:text-[#193D2B] transition-colors leading-snug">
+                      <Link href={`/projects/${featuredProjects[1].slug}`}>
+                        {featuredProjects[1].title}
+                      </Link>
+                    </h3>
+                  </div>
+                  <div className="pt-5 mt-4 border-t border-[#E5EBE6] flex items-center justify-between">
+                    <span className="text-xs font-mono font-semibold text-[#193D2B]">
+                      {featuredProjects[1].metrics[0].value}
+                    </span>
+                    <Link
+                      href={`/projects/${featuredProjects[1].slug}`}
+                      className="group/link inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#193D2B] hover:text-white hover:bg-[#193D2B] border border-[#D4DFD7] px-3.5 py-1.5 rounded-full transition-all font-semibold"
+                    >
+                      <span>View</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </ImageSlideReveal>
+
+            {/* Row 2: Feature 3 (Span 6) */}
+            <ImageSlideReveal direction="up" delay={100} className="lg:col-span-6 flex flex-col h-full rounded-2xl">
+              <div className="interactive-card flex flex-col group bg-white border border-[#E5EBE6] rounded-2xl overflow-hidden shadow-sm h-full">
+                <Link href={`/projects/${featuredProjects[2].slug}`} className="relative aspect-[16/10] overflow-hidden block">
+                  <Image
+                    src={featuredProjects[2].featuredImage}
+                    alt={featuredProjects[2].title}
+                    fill
+                    className="object-cover project-card-image transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3.5 py-1 bg-white/95 border border-[#D4DFD7] backdrop-blur-xs text-[#193D2B] text-xs font-mono uppercase tracking-wider rounded-full font-semibold shadow-2xs">
+                      {featuredProjects[2].sector}
+                    </span>
+                  </div>
+                </Link>
+                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between text-xs font-mono text-[#718579] mb-2">
+                      <span className="font-semibold text-[#193D2B]">{featuredProjects[2].client}</span>
+                      <span>{featuredProjects[2].location}</span>
+                    </div>
+                    <h3 className="font-serif text-2xl text-[#121814] group-hover:text-[#193D2B] transition-colors leading-snug">
+                      <Link href={`/projects/${featuredProjects[2].slug}`}>
+                        {featuredProjects[2].title}
+                      </Link>
+                    </h3>
+                  </div>
+                  <div className="pt-5 mt-4 border-t border-[#E5EBE6] flex items-center justify-between">
+                    <span className="text-xs font-mono font-semibold text-[#193D2B]">
+                      {featuredProjects[2].metrics[0].value}
+                    </span>
+                    <Link
+                      href={`/projects/${featuredProjects[2].slug}`}
+                      className="group/link inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#193D2B] hover:text-white hover:bg-[#193D2B] border border-[#D4DFD7] px-3.5 py-1.5 rounded-full transition-all font-semibold"
+                    >
+                      <span>View</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </ImageSlideReveal>
+
+            {/* Row 2: Feature 4 (Span 6) */}
+            <ImageSlideReveal direction="up" delay={250} className="lg:col-span-6 flex flex-col h-full rounded-2xl">
+              <div className="interactive-card flex flex-col group bg-white border border-[#E5EBE6] rounded-2xl overflow-hidden shadow-sm h-full">
+                <Link href={`/projects/${featuredProjects[3].slug}`} className="relative aspect-[16/10] overflow-hidden block">
+                  <Image
+                    src={featuredProjects[3].featuredImage}
+                    alt={featuredProjects[3].title}
+                    fill
+                    className="object-cover project-card-image transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3.5 py-1 bg-white/95 border border-[#D4DFD7] backdrop-blur-xs text-[#193D2B] text-xs font-mono uppercase tracking-wider rounded-full font-semibold shadow-2xs">
+                      {featuredProjects[3].sector}
+                    </span>
+                  </div>
+                </Link>
+                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between text-xs font-mono text-[#718579] mb-2">
+                      <span className="font-semibold text-[#193D2B]">{featuredProjects[3].client}</span>
+                      <span>{featuredProjects[3].location}</span>
+                    </div>
+                    <h3 className="font-serif text-2xl text-[#121814] group-hover:text-[#193D2B] transition-colors leading-snug">
+                      <Link href={`/projects/${featuredProjects[3].slug}`}>
+                        {featuredProjects[3].title}
+                      </Link>
+                    </h3>
+                  </div>
+                  <div className="pt-5 mt-4 border-t border-[#E5EBE6] flex items-center justify-between">
+                    <span className="text-xs font-mono font-semibold text-[#193D2B]">
+                      {featuredProjects[3].metrics[0].value}
+                    </span>
+                    <Link
+                      href={`/projects/${featuredProjects[3].slug}`}
+                      className="group/link inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#193D2B] hover:text-white hover:bg-[#193D2B] border border-[#D4DFD7] px-3.5 py-1.5 rounded-full transition-all font-semibold"
+                    >
+                      <span>View</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </ImageSlideReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* CULTIVATION ADVANTAGE & SCALE CREDIBILITY STRIP */}
       <section className="bg-white border-b border-[#E5EBE6] py-14 sm:py-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -199,231 +376,6 @@ export default function HomePage() {
               <span>Our Story</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. ARCHITECTURAL LINE ART TRANSITION (UNBOXED PARCHMENT BLEND) */}
-      <ArchitecturalSketchSection />
-
-      {/* 6. SELECTED WORK (EDITORIAL ARCHITECTURAL PORTFOLIO) */}
-      <section id="selected-work" className="py-20 sm:py-28 bg-[#F8FAF7] border-b border-[#E5EBE6]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-            <div className="space-y-2 max-w-xl scroll-reveal">
-              <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B] font-bold">
-                ARCHITECTURAL PORTFOLIO
-              </span>
-              <h2 className="font-serif text-3xl sm:text-5xl text-[#121814] font-normal">
-                Interventions shaped with intention.
-              </h2>
-              <p className="text-sm sm:text-base text-[#475E50]">
-                Delivered landscapes across corporate campuses, living walls, and atriums.
-              </p>
-            </div>
-
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#193D2B] hover:text-[#286746] border-b border-[#193D2B] pb-1 transition-colors self-start font-semibold"
-            >
-              <span>View All Case Studies</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          {/* Editorial Asymmetric Case Study Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Primary Feature: Swiss Re (Span 7) */}
-            <ImageSlideReveal direction="up" delay={0} className="lg:col-span-7 flex flex-col h-full rounded-2xl">
-              <div className="interactive-card flex flex-col group bg-white border border-[#E5EBE6] rounded-2xl overflow-hidden shadow-sm h-full">
-                <Link href={`/projects/${featuredProjects[0].slug}`} className="relative aspect-[16/10] overflow-hidden block">
-                  <Image
-                    src={featuredProjects[0].featuredImage}
-                    alt={featuredProjects[0].title}
-                    fill
-                    className="object-cover project-card-image transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3.5 py-1 bg-white/95 border border-[#D4DFD7] backdrop-blur-xs text-[#193D2B] text-xs font-mono uppercase tracking-wider rounded-full font-semibold shadow-2xs">
-                      {featuredProjects[0].sector}
-                    </span>
-                  </div>
-                </Link>
-                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between text-xs font-mono text-[#718579] mb-2">
-                      <span>Client: {featuredProjects[0].client}</span>
-                      <span>{featuredProjects[0].location}</span>
-                    </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl text-[#121814] group-hover:text-[#193D2B] transition-colors leading-snug">
-                      <Link href={`/projects/${featuredProjects[0].slug}`}>
-                        {featuredProjects[0].title}
-                      </Link>
-                    </h3>
-                    <p className="text-sm text-[#475E50] mt-3 leading-relaxed">
-                      {featuredProjects[0].summary}
-                    </p>
-                  </div>
-                  <div className="pt-6 mt-6 border-t border-[#E5EBE6] flex items-center justify-between">
-                    <div className="flex gap-4 text-xs font-mono text-[#193D2B] font-medium">
-                      <span>380m Linear Planters</span>
-                      <span>•</span>
-                      <span>Weekly AMC</span>
-                    </div>
-                    <Link
-                      href={`/projects/${featuredProjects[0].slug}`}
-                      className="group/link inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#193D2B] hover:text-white hover:bg-[#193D2B] border border-[#D4DFD7] px-3.5 py-1.5 rounded-full transition-all font-semibold"
-                    >
-                      <span>Read Study</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </ImageSlideReveal>
-
-            {/* Secondary Feature: 2gethr Richmond Rd (Span 5) */}
-            <ImageSlideReveal direction="up" delay={150} className="lg:col-span-5 flex flex-col h-full rounded-2xl">
-              <div className="interactive-card flex flex-col group bg-white border border-[#E5EBE6] rounded-2xl overflow-hidden shadow-sm h-full">
-                <Link href={`/projects/${featuredProjects[1].slug}`} className="relative aspect-[16/11] overflow-hidden block">
-                  <Image
-                    src={featuredProjects[1].featuredImage}
-                    alt={featuredProjects[1].title}
-                    fill
-                    className="object-cover project-card-image transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3.5 py-1 bg-white/95 border border-[#D4DFD7] backdrop-blur-xs text-[#193D2B] text-xs font-mono uppercase tracking-wider rounded-full font-semibold shadow-2xs">
-                      {featuredProjects[1].sector}
-                    </span>
-                  </div>
-                </Link>
-                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between text-xs font-mono text-[#718579] mb-2">
-                      <span>Client: {featuredProjects[1].client}</span>
-                      <span>{featuredProjects[1].location}</span>
-                    </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl text-[#121814] group-hover:text-[#193D2B] transition-colors leading-snug">
-                      <Link href={`/projects/${featuredProjects[1].slug}`}>
-                        {featuredProjects[1].title}
-                      </Link>
-                    </h3>
-                    <p className="text-sm text-[#475E50] mt-3 leading-relaxed">
-                      {featuredProjects[1].summary}
-                    </p>
-                  </div>
-                  <div className="pt-6 mt-6 border-t border-[#E5EBE6] flex items-center justify-between">
-                    <span className="text-xs font-mono text-[#193D2B] font-medium">Terraced Entrance Steps</span>
-                    <Link
-                      href={`/projects/${featuredProjects[1].slug}`}
-                      className="group/link inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#193D2B] hover:text-white hover:bg-[#193D2B] border border-[#D4DFD7] px-3.5 py-1.5 rounded-full transition-all font-semibold"
-                    >
-                      <span>Read Study</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </ImageSlideReveal>
-
-            {/* Row 2: WSP Manyata Tech Park (Span 6) */}
-            <ImageSlideReveal direction="up" delay={100} className="lg:col-span-6 flex flex-col h-full rounded-2xl">
-              <div className="interactive-card flex flex-col group bg-white border border-[#E5EBE6] rounded-2xl overflow-hidden shadow-sm h-full">
-                <Link href={`/projects/${featuredProjects[2].slug}`} className="relative aspect-[16/10] overflow-hidden block">
-                  <Image
-                    src={featuredProjects[2].featuredImage}
-                    alt={featuredProjects[2].title}
-                    fill
-                    className="object-cover project-card-image transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3.5 py-1 bg-white/95 border border-[#D4DFD7] backdrop-blur-xs text-[#193D2B] text-xs font-mono uppercase tracking-wider rounded-full font-semibold shadow-2xs">
-                      {featuredProjects[2].sector}
-                    </span>
-                  </div>
-                </Link>
-                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between text-xs font-mono text-[#718579] mb-2">
-                      <span>Client: {featuredProjects[2].client}</span>
-                      <span>{featuredProjects[2].location}</span>
-                    </div>
-                    <h3 className="font-serif text-2xl text-[#121814] group-hover:text-[#193D2B] transition-colors">
-                      <Link href={`/projects/${featuredProjects[2].slug}`}>
-                        {featuredProjects[2].title}
-                      </Link>
-                    </h3>
-                    <p className="text-sm text-[#475E50] mt-2 leading-relaxed">
-                      {featuredProjects[2].summary}
-                    </p>
-                  </div>
-                  <div className="pt-4 mt-4 border-t border-[#E5EBE6] flex items-center justify-between">
-                    <span className="text-xs font-mono text-[#193D2B] font-medium">140+ Custom Curved Boxes</span>
-                    <Link
-                      href={`/projects/${featuredProjects[2].slug}`}
-                      className="group/link inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#193D2B] hover:text-white hover:bg-[#193D2B] border border-[#D4DFD7] px-3 py-1 rounded-full transition-all font-semibold"
-                    >
-                      <span>View Details</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </ImageSlideReveal>
-
-            {/* Row 2: Living Walls ABB & WSP (Span 6) */}
-            <ImageSlideReveal direction="up" delay={250} className="lg:col-span-6 flex flex-col h-full rounded-2xl">
-              <div className="interactive-card flex flex-col group bg-white border border-[#E5EBE6] rounded-2xl overflow-hidden shadow-sm h-full">
-                <Link href={`/projects/${featuredProjects[3].slug}`} className="relative aspect-[16/10] overflow-hidden block">
-                  <Image
-                    src={featuredProjects[3].featuredImage}
-                    alt={featuredProjects[3].title}
-                    fill
-                    className="object-cover project-card-image transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3.5 py-1 bg-white/95 border border-[#D4DFD7] backdrop-blur-xs text-[#193D2B] text-xs font-mono uppercase tracking-wider rounded-full font-semibold shadow-2xs">
-                      {featuredProjects[3].sector}
-                    </span>
-                  </div>
-                </Link>
-                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between text-xs font-mono text-[#718579] mb-2">
-                      <span>Clients: {featuredProjects[3].client}</span>
-                      <span>Bengaluru Campuses</span>
-                    </div>
-                    <h3 className="font-serif text-2xl text-[#121814] group-hover:text-[#193D2B] transition-colors">
-                      <Link href={`/projects/${featuredProjects[3].slug}`}>
-                        {featuredProjects[3].title}
-                      </Link>
-                    </h3>
-                    <p className="text-sm text-[#475E50] mt-2 leading-relaxed">
-                      {featuredProjects[3].summary}
-                    </p>
-                  </div>
-                  <div className="pt-4 mt-4 border-t border-[#E5EBE6] flex items-center justify-between">
-                    <span className="text-xs font-mono text-[#193D2B] font-medium">1,850 sq.ft Modular Cells</span>
-                    <Link
-                      href={`/projects/${featuredProjects[3].slug}`}
-                      className="group/link inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#193D2B] hover:text-white hover:bg-[#193D2B] border border-[#D4DFD7] px-3 py-1 rounded-full transition-all font-semibold"
-                    >
-                      <span>View Details</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </ImageSlideReveal>
           </div>
         </div>
       </section>
@@ -497,48 +449,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 10. WHY CLIENTS CHOOSE US: 5 OPERATIONAL PILLARS */}
+      {/* 10. WORKSHOPS & CSR GREENING */}
       <section className="py-20 sm:py-28 bg-white border-b border-[#E5EBE6]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-14 space-y-3 scroll-reveal">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B] font-bold">
-              OPERATIONAL PILLARS
-            </span>
-            <h2 className="font-serif text-3xl sm:text-5xl text-[#121814] font-normal">
-              Why clients choose us.
-            </h2>
-            <p className="text-sm sm:text-base text-[#475E50]">
-              Five operational standards that protect budgets and guarantee living plant health.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {OPERATIONAL_PILLARS.map((p, idx) => {
-              const delays = ["delay-75", "delay-150", "delay-225", "delay-300", "delay-375"];
-              return (
-                <div 
-                  key={idx} 
-                  className={`interactive-card scroll-reveal ${delays[idx % delays.length]} p-6 sm:p-8 bg-[#F8FAF7] border border-[#E5EBE6] rounded-2xl space-y-3 shadow-2xs`}
-                >
-                  <div className="flex items-center justify-between border-b border-[#E5EBE6] pb-3">
-                    <span className="font-mono text-xs font-bold text-[#193D2B]">{p.num}</span>
-                    <span className="text-[10px] font-mono uppercase text-[#718579]">{p.tagline}</span>
-                  </div>
-                  <h3 className="font-serif text-2xl text-[#121814]">
-                    {p.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#475E50] leading-relaxed">
-                    {p.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 11. WORKSHOPS & CSR GREENING */}
-      <section className="py-20 sm:py-28 bg-[#F8FAF7] border-b border-[#E5EBE6]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left: Rectangular Image on Mobile, Duo on Desktop */}

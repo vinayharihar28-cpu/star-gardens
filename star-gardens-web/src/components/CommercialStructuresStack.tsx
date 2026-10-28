@@ -30,7 +30,7 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     title: "Design Consultation & Masterplanning",
     tagline: "From Brief to Architectural Masterplan",
     commercialModel: "Fixed Study Fee / Architectural Retainer",
-    image: "/images/corporate/2gethr-richmond-road-courtyard-palms.jpg",
+    image: "/images/services_real/stack-consultation.jpg",
     summary:
       "Site feasibility, solar studies, slab load compliance, and native species specification with transparent costing.",
     highlights: [
@@ -51,7 +51,7 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     title: "Turnkey Design & Build Execution",
     tagline: "Turnkey Execution Backed by 70-Acre Cultivation",
     commercialModel: "Capital Expenditure (CapEx) · Milestone Progress Billing",
-    image: "/images/vertical-gardens/interior-double-height-vertical-garden.jpg",
+    image: "/images/services_real/stack-turnkey.jpg",
     summary:
       "One studio manages concept to handover. Acclimatized specimens dispatch directly from our own farms.",
     highlights: [
@@ -72,7 +72,7 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     title: "Annual Maintenance Contracts (AMC)",
     tagline: "Guaranteed Plant Health with 100% Free Replacements",
     commercialModel: "Comprehensive Service Retainer · Monthly or Quarterly Billing",
-    image: "/images/amc/gardener-servicing-office-planters.jpg",
+    image: "/images/services_real/stack-amc.jpg",
     summary:
       "Scheduled visits by trained gardeners for soil moisture, pruning, and zero-cost specimen replacements.",
     highlights: [
@@ -93,7 +93,7 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     title: "Corporate Plant Rental & Subscriptions",
     tagline: "Full Workplace Biophilia Under Predictable OpEx",
     commercialModel: "Operating Expense (OpEx) · 2 to 3-Year Subscription with Full AMC",
-    image: "/images/rental/seminar-stage-floral-and-palm-backdrop.jpg",
+    image: "/images/services_real/stack-rental.jpg",
     summary:
       "Tax-efficient subscriptions covering designer planters, acclimatized specimens, and weekly maintenance.",
     highlights: [
@@ -114,7 +114,7 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     title: "Corporate Workshops & Team Greening",
     tagline: "Tactile Horticultural Sessions for Teams",
     commercialModel: "Experiential Package · On-site 2-Hour Facilitated Events",
-    image: "/images/workshops/hands-on-kokedama-creation-workshop.jpg",
+    image: "/images/services_real/stack-workshops.jpg",
     summary:
       "Guided masterclasses in Japanese Kokedama crafting and terrariums with all materials provided.",
     highlights: [
@@ -135,7 +135,7 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     title: "CSR Plantation Drives & Stewardship",
     tagline: "Complimentary Native Saplings for Greening Mandates",
     commercialModel: "Collaborative Partnership · Direct Nursery Donation",
-    image: "/images/nursery/punganur-andhra-pradesh-nursery.jpg",
+    image: "/images/services_real/stack-csr.jpg",
     summary:
       "Acclimatized Western Ghats and Deccan native saplings supplied at zero plant cost with technical guidance.",
     highlights: [

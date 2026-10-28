@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Lock, ArrowUpRight, Phone, Sparkles } from "lucide-react";
+import { Menu, X, Lock, ArrowUpRight, Phone } from "lucide-react";
 import CrmModal from "./CrmModal";
 
 export default function Navigation() {
@@ -28,6 +28,7 @@ export default function Navigation() {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
+    { label: "Corporate", href: "/corporate" },
     { label: "Services", href: "/services" },
     { label: "Projects", href: "/projects" },
     { label: "Insights", href: "/insights" },
@@ -67,7 +68,7 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs font-mono uppercase tracking-widest">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-7 text-xs font-mono uppercase tracking-widest">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
               return (
@@ -96,10 +97,10 @@ export default function Navigation() {
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4">
             <button
               onClick={() => setCrmModalOpen(true)}
-              className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 text-[11px] font-mono uppercase tracking-widest text-[#475E50] hover:text-[#193D2B] border border-[#D4DFD7] hover:border-[#193D2B] rounded-full transition-all bg-white/80 hover:bg-[#F8FAF7]"
+              className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 text-[11px] font-mono uppercase tracking-widest text-[#475E50] hover:text-[#193D2B] border border-[#D4DFD7] hover:border-[#193D2B] rounded-full transition-all bg-white/80 hover:bg-[#F8FAF7] cursor-pointer"
               aria-label="Open client login modal"
             >
               <Lock className="w-3 h-3 text-[#286746] transition-transform group-hover:scale-110" />
@@ -140,30 +141,30 @@ export default function Navigation() {
                 className="h-8 w-auto object-contain"
               />
             </div>
-            <nav className="flex flex-col space-y-5 text-xl font-serif">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    setMobileMenuOpen(false);
-                    if (link.href === "/" && pathname === "/") {
-                      e.preventDefault();
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }
-                  }}
-                  className={`flex items-center justify-between py-2 border-b border-[#E5EBE6] transition-colors ${
-                    isActive ? "text-[#193D2B] font-bold" : "text-[#121814] hover:text-[#193D2B]"
-                  }`}
-                >
-                  <span>{link.label}</span>
-                  <ArrowUpRight className="w-4 h-4 opacity-60" />
-                </Link>
-              );
-            })}
-          </nav>
+            <nav className="flex flex-col space-y-4 text-lg font-serif">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => {
+                      setMobileMenuOpen(false);
+                      if (link.href === "/" && pathname === "/") {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }}
+                    className={`flex items-center justify-between py-2 border-b border-[#E5EBE6] transition-colors ${
+                      isActive ? "text-[#193D2B] font-bold" : "text-[#121814] hover:text-[#193D2B]"
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <ArrowUpRight className="w-4 h-4 opacity-60" />
+                  </Link>
+                );
+              })}
+            </nav>
           </div>
 
           <div className="space-y-4 pt-6 border-t border-[#E5EBE6]">
@@ -181,7 +182,7 @@ export default function Navigation() {
                   setMobileMenuOpen(false);
                   setCrmModalOpen(true);
                 }}
-                className="flex items-center justify-center gap-2 py-3 border border-[#D4DFD7] text-[#121814] text-xs font-mono uppercase tracking-wider rounded-full hover:bg-[#F8FAF7] transition-colors"
+                className="flex items-center justify-center gap-2 py-3 border border-[#D4DFD7] text-[#121814] text-xs font-mono uppercase tracking-wider rounded-full hover:bg-[#F8FAF7] transition-colors cursor-pointer"
               >
                 <Lock className="w-3.5 h-3.5 text-[#286746]" />
                 Client Portal
@@ -189,16 +190,18 @@ export default function Navigation() {
 
               <Link
                 href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-center gap-1 py-3 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-wider rounded-full text-center hover:bg-[#286746] transition-colors shadow-sm"
               >
-                Enquire
+                <span>Discuss Project</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
         </div>
       )}
 
-      {/* Client CRM Modal */}
+      {/* CRM Client Login Modal */}
       <CrmModal isOpen={crmModalOpen} onClose={() => setCrmModalOpen(false)} />
     </>
   );

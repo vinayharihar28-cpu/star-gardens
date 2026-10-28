@@ -60,7 +60,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Rectangular Image Screen - Placed on Top on Mobile */}
             <div className="w-full lg:col-span-5 relative order-first lg:order-last">
-              <div className="relative aspect-[16/10] sm:aspect-[4/3] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-xl">
+              <div className="relative aspect-[16/10] sm:aspect-[4/3] rounded-3xl overflow-hidden border border-[#D4DFD7] shadow-xl">
                 <Image
                   src={service.heroImage}
                   alt={service.title}
@@ -84,7 +84,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               <p className="text-sm sm:text-lg text-[#475E50] leading-relaxed pt-1">
                 {service.shortDesc}
               </p>
-              <div className="p-3.5 sm:p-4 bg-white border border-[#D4DFD7] rounded-xs text-xs text-[#475E50] shadow-2xs">
+              <div className="p-3.5 sm:p-4 bg-white border border-[#D4DFD7] rounded-xl text-xs text-[#475E50] shadow-2xs">
                 <strong className="text-[#193D2B]">Commercial Model:</strong> {service.workingModel}
               </div>
             </div>
@@ -100,7 +100,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             {/* Key Deliverables */}
             <div className="space-y-4">
               <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B]">
-                [ SCOPE OF WORK ]
+                SCOPE OF WORK
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl text-[#121814]">
                 Included Deliverables & Scope
@@ -109,7 +109,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 {service.deliverables.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs flex items-start gap-2.5 text-xs sm:text-sm text-[#475E50] shadow-2xs"
+                    className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xl flex items-start gap-2.5 text-xs sm:text-sm text-[#475E50] shadow-2xs"
                   >
                     <Check className="w-4 h-4 text-[#193D2B] shrink-0 mt-0.5" />
                     <span>{item}</span>
@@ -121,14 +121,14 @@ export default async function ServiceDetailPage({ params }: Props) {
             {/* Key Features */}
             <div className="space-y-6">
               <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B]">
-                [ QUALITY ASSURANCE ]
+                QUALITY ASSURANCE
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl text-[#121814]">
                 Technical & Horticultural Standards
               </h2>
               <div className="space-y-4">
                 {service.keyFeatures.map((feat, idx) => (
-                  <div key={idx} className="p-6 bg-[#F8FAF7] border border-[#E5EBE6] rounded-sm space-y-2 shadow-2xs">
+                  <div key={idx} className="p-6 bg-[#F8FAF7] border border-[#E5EBE6] rounded-2xl space-y-2 shadow-2xs">
                     <h3 className="font-serif text-xl sm:text-2xl text-[#121814]">
                       {feat.title}
                     </h3>
@@ -149,7 +149,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 </h2>
                 <div className="space-y-4">
                   {service.faqs.map((faq, idx) => (
-                    <div key={idx} className="p-6 bg-[#F8FAF7] border border-[#E5EBE6] rounded-sm space-y-2 shadow-2xs">
+                    <div key={idx} className="p-6 bg-[#F8FAF7] border border-[#E5EBE6] rounded-2xl space-y-2 shadow-2xs">
                       <h4 className="font-serif text-lg text-[#121814] font-semibold">
                         {faq.question}
                       </h4>
@@ -168,8 +168,8 @@ export default async function ServiceDetailPage({ params }: Props) {
             <div className="sticky top-28 space-y-6">
               <EnquiryForm defaultCategory={service.title} />
 
-              <div className="p-6 bg-[#193D2B] border border-[#286746] rounded-sm space-y-3 shadow-xl text-white">
-                <span className="text-[11px] font-mono uppercase text-[#E8F5C4]">[ DIRECT STUDIO ACCESS ]</span>
+              <div className="p-6 bg-[#193D2B] border border-[#286746] rounded-2xl space-y-3 shadow-xl text-white">
+                <span className="text-[11px] font-mono uppercase text-[#E8F5C4]">DIRECT STUDIO ACCESS</span>
                 <h4 className="font-serif text-2xl text-white">Prefer to talk directly?</h4>
                 <p className="text-xs text-[#D4DFD7] leading-relaxed">
                   Connect with Studio Director Abhishek Suhas to review drawings, schedule site surveys, or confirm availability.
@@ -177,7 +177,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 <div className="pt-2 flex flex-col sm:flex-row gap-3">
                   <a
                     href="tel:+919743030555"
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white text-[#193D2B] text-xs font-bold uppercase tracking-wider rounded-xs hover:bg-[#F8FAF7] transition-colors shadow-sm"
+                    className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white text-[#193D2B] text-xs font-bold uppercase tracking-wider rounded-full hover:bg-[#F8FAF7] transition-colors shadow-sm"
                   >
                     <Phone className="w-3.5 h-3.5" />
                     <span>+91 97430 30555</span>
@@ -188,7 +188,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#25D366] text-white text-xs font-bold uppercase tracking-wider rounded-xs hover:bg-[#1fb355] transition-colors shadow-sm"
+                    className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#25D366] text-white text-xs font-bold uppercase tracking-wider rounded-full hover:bg-[#1fb355] transition-colors shadow-sm"
                   >
                     <MessageCircle className="w-3.5 h-3.5" />
                     <span>WhatsApp</span>

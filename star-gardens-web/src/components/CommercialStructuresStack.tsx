@@ -28,20 +28,20 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     number: "01",
     categoryTag: "ADVISORY & PLANNING",
     title: "Design Consultation & Masterplanning",
-    tagline: "From Brief to Architectural Landscape Masterplan",
+    tagline: "From Brief to Architectural Masterplan",
     commercialModel: "Fixed Study Fee / Architectural Retainer",
     image: "/images/corporate/2gethr-richmond-road-courtyard-palms.jpg",
     summary:
-      "We walk the site, calculate solar trajectory, slab load compliance, human movement corridors, and soil microbiology. You receive comprehensive concept drawings, botanical palettes, and clear transparent cost estimates.",
+      "Site feasibility, solar studies, slab load compliance, and native species specification with transparent costing.",
     highlights: [
       "Light lux & microclimate study",
       "Structural slab weight coordination",
-      "Rainwater harvesting & hydraulic layouts",
-      "Native species specification schedule"
+      "Rainwater harvesting layouts",
+      "Native species specification"
     ],
-    bestFor: "Developers, principal architects & villa owners planning ground-up interventions.",
+    bestFor: "Developers, principal architects, and villa owners.",
     href: "/contact",
-    ctaText: "Schedule Design Consultation",
+    ctaText: "Schedule Consultation",
     icon: Compass,
   },
   {
@@ -49,20 +49,20 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     number: "02",
     categoryTag: "CAPEX · END-TO-END",
     title: "Turnkey Design & Build Execution",
-    tagline: "We Plan It, Cultivate It, and Build It — Zero Subcontractor Finger-Pointing",
+    tagline: "Turnkey Execution Backed by 70-Acre Cultivation",
     commercialModel: "Capital Expenditure (CapEx) · Milestone Progress Billing",
     image: "/images/vertical-gardens/interior-double-height-vertical-garden.jpg",
     summary:
-      "One unified studio takes complete accountability. Because we own 70 acres of production nurseries, mature trees and acclimatized plants arrive directly from our farms to your site without supplier delays.",
+      "One studio manages concept to handover. Acclimatized specimens dispatch directly from our own farms.",
     highlights: [
-      "Direct 70-acre nursery stock supply",
-      "Sub-irrigation liners & waterproof warranties",
-      "Modular living bio-walls & cascading weirs",
-      "Turnkey general contracting accountability"
+      "Direct 70-acre nursery supply",
+      "Sub-irrigation liners & warranties",
+      "Modular living bio-walls & weirs",
+      "Single-point studio accountability"
     ],
-    bestFor: "Corporate campuses, hospitality resorts, high-end residential communities.",
+    bestFor: "Corporate campuses and hospitality developments.",
     href: "/services",
-    ctaText: "Explore Turnkey Capabilities",
+    ctaText: "Explore Turnkey",
     icon: Sparkles,
   },
   {
@@ -70,20 +70,20 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     number: "03",
     categoryTag: "MAINTENANCE & HEALTH SLA",
     title: "Annual Maintenance Contracts (AMC)",
-    tagline: "175+ Enterprise Clients · Guaranteed Plant Health with 100% Free Replacements",
+    tagline: "Guaranteed Plant Health with 100% Free Replacements",
     commercialModel: "Comprehensive Service Retainer · Monthly or Quarterly Billing",
     image: "/images/amc/gardener-servicing-office-planters.jpg",
     summary:
-      "A landscape is a living entity that evolves with every season. Our AMC covers scheduled visits by uniformed, background-verified technicians who monitor soil moisture, prune foliage, and swap distressed plants at zero extra cost.",
+      "Scheduled visits by trained gardeners for soil moisture, pruning, and zero-cost specimen replacements.",
     highlights: [
-      "100% free plant replacement guarantee",
-      "We restore existing landscapes built by others",
-      "Dedicated account manager & service logs",
-      "Weekly moisture, EC, and pest management"
+      "100% free plant replacement SLA",
+      "Restoration of existing landscapes",
+      "Dedicated account coordinator",
+      "Weekly moisture & pest monitoring"
     ],
-    bestFor: "Corporate facilities, co-working operators, residential RWAs, commercial atriums.",
+    bestFor: "Corporate facilities, co-working operators, and campuses.",
     href: "/services/plant-amc",
-    ctaText: "Review AMC Coverage Details",
+    ctaText: "Review AMC Coverage",
     icon: ShieldCheck,
   },
   {
@@ -91,18 +91,18 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     number: "04",
     categoryTag: "OPEX · SUBSCRIPTIONS",
     title: "Corporate Plant Rental & Subscriptions",
-    tagline: "Full Workplace Biophilia Without Capital Expenditure or Depreciation",
+    tagline: "Full Workplace Biophilia Under Predictable OpEx",
     commercialModel: "Operating Expense (OpEx) · 2 to 3-Year Subscription with Full AMC",
     image: "/images/rental/seminar-stage-floral-and-palm-backdrop.jpg",
     summary:
-      "Shift greenery investments into tax-efficient OpEx. Short-term rentals furnish summits and expos (1–2 days), while long-term corporate subscriptions outfit multi-floor headquarters with designer planters and total maintenance.",
+      "Tax-efficient subscriptions covering designer planters, acclimatized specimens, and weekly maintenance.",
     highlights: [
-      "Zero Capex outlay — predictable monthly fee",
-      "Designer double-walled sub-irrigation planters",
-      "100% plant health risk retained by Star Gardens",
-      "48-hour staging capacity for large exhibitions"
+      "Zero CapEx outlay — fixed monthly fee",
+      "Designer sub-irrigation planters",
+      "Zero plant health risk for client",
+      "Short-term summit staging capacity"
     ],
-    bestFor: "Tech campuses, corporate headquarters, conferences, and high-growth offices.",
+    bestFor: "Headquarters, tech offices, and conferences.",
     href: "/services/plant-rental",
     ctaText: "Explore Rental Programs",
     icon: Calendar,
@@ -112,20 +112,20 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     number: "05",
     categoryTag: "WELLNESS & ENGAGEMENT",
     title: "Corporate Workshops & Team Greening",
-    tagline: "Tactile Horticultural Sessions That Connect Teams and Reduce Stress",
-    commercialModel: "Experiential Package · On-site 2 to 3-Hour Facilitated Events",
+    tagline: "Tactile Horticultural Sessions for Teams",
+    commercialModel: "Experiential Package · On-site 2-Hour Facilitated Events",
     image: "/images/workshops/hands-on-kokedama-creation-workshop.jpg",
     summary:
-      "Engage your colleagues with hands-on planting masterclasses. Participants mix custom soil blends, craft Japanese Kokedama moss balls, and take their living botanical creation home to their work desk.",
+      "Guided masterclasses in Japanese Kokedama crafting and terrariums with all materials provided.",
     highlights: [
-      "Japanese Kokedama moss ball craftsmanship",
-      "Low-light indoor plant care masterclass",
-      "Full protective floor sheets — zero office mess",
-      "Each participant takes home their own living plant"
+      "Japanese Kokedama craftsmanship",
+      "Low-light plant propagation guide",
+      "Protective floor sheets provided",
+      "Living take-home plant for each attendee"
     ],
-    bestFor: "Corporate HR, culture teams, employee wellness offsites, leadership retreats.",
+    bestFor: "Corporate HR, wellness offsites, and team retreats.",
     href: "/services/events-and-workshops",
-    ctaText: "Book Corporate Workshop",
+    ctaText: "Book Workshop",
     icon: Users,
   },
   {
@@ -133,20 +133,20 @@ const COMMERCIAL_STRUCTURES: CommercialCardData[] = [
     number: "06",
     categoryTag: "ECOLOGICAL IMPACT",
     title: "CSR Plantation Drives & Stewardship",
-    tagline: "Authentic Urban Greening Drives Offered at Zero Plant Cost",
-    commercialModel: "Collaborative Social Partnership · Direct Nursery Donation",
+    tagline: "Complimentary Native Saplings for Greening Mandates",
+    commercialModel: "Collaborative Partnership · Direct Nursery Donation",
     image: "/images/nursery/punganur-andhra-pradesh-nursery.jpg",
     summary:
-      "As generational growers since 2009, ecological stewardship is intrinsic to our ethos. We supply acclimatized Western Ghats and Deccan native saplings and technical planting guidance to verified social drives at no charge.",
+      "Acclimatized Western Ghats and Deccan native saplings supplied at zero plant cost with technical guidance.",
     highlights: [
-      "Direct nursery supply from 70-acre farms",
-      "Western Ghats & Deccan native shade tree palettes",
-      "Employee volunteer coordination & pit preparation",
-      "Long-term sapling survival rate tracking"
+      "Direct nursery stock from 70-acre farms",
+      "Western Ghats & Deccan shade tree palettes",
+      "Volunteer coordination & planting advice",
+      "Sapling survival rate monitoring"
     ],
-    bestFor: "Enterprise ESG committees, non-profit institutions, community greening drives.",
+    bestFor: "Enterprise ESG committees and sustainability drives.",
     href: "/services/csr",
-    ctaText: "Partner on CSR Greening",
+    ctaText: "Partner on CSR",
     icon: HeartHandshake,
   },
 ];
@@ -177,7 +177,7 @@ export default function CommercialStructuresStack() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                   {/* Left Column: Visual Lead */}
                   <div className="lg:col-span-5 flex flex-col justify-between space-y-3.5">
-                    <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-[#E5EBE6] shadow-sm group">
+                    <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-[#E5EBE6] shadow-sm group">
                       <Image
                         src={item.image}
                         alt={item.title}
@@ -188,7 +188,7 @@ export default function CommercialStructuresStack() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
                       
                       <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs font-mono">
-                        <span className="flex items-center gap-1.5 px-2.5 py-1 bg-[#121814]/80 backdrop-blur-xs rounded-xs">
+                        <span className="flex items-center gap-1.5 px-3 py-1 bg-[#121814]/80 backdrop-blur-xs rounded-full">
                           <Icon className="w-3.5 h-3.5 text-[#D9E7B0]" />
                           <span>Structure {item.number}</span>
                         </span>
@@ -196,7 +196,7 @@ export default function CommercialStructuresStack() {
                     </div>
 
                     {/* Best For Tagline */}
-                    <div className="p-3.5 bg-[#FAF8F5] border border-[#E5EBE6] rounded-xl text-xs space-y-1">
+                    <div className="p-3.5 bg-[#FAF8F5] border border-[#E5EBE6] rounded-2xl text-xs space-y-1">
                       <span className="font-mono text-[10px] text-[#718579] uppercase tracking-wider block">
                         Recommended For:
                       </span>
@@ -229,7 +229,7 @@ export default function CommercialStructuresStack() {
                         {item.highlights.map((h, hIdx) => (
                           <div
                             key={hIdx}
-                            className="flex items-center gap-2 p-2 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs text-xs text-[#334A3C]"
+                            className="flex items-center gap-2 p-2.5 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xl text-xs text-[#334A3C]"
                           >
                             <Check className="w-3.5 h-3.5 text-[#193D2B] shrink-0" />
                             <span className="truncate">{h}</span>
@@ -247,7 +247,7 @@ export default function CommercialStructuresStack() {
 
                       <Link
                         href={item.href}
-                        className="group/btn inline-flex items-center gap-2 px-5 py-2.5 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-wider rounded-xs hover:bg-[#286746] transition-all transform active:scale-95 shadow-sm"
+                        className="group/btn inline-flex items-center gap-2 px-6 py-2.5 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-wider rounded-full hover:bg-[#286746] transition-all transform active:scale-95 shadow-sm"
                       >
                         <span>{item.ctaText}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />

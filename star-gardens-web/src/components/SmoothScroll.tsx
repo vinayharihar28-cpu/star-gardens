@@ -115,7 +115,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       });
     };
 
+    const isIntroDismissed =
+      typeof document !== "undefined" &&
+      document.documentElement.classList.contains("sg-welcome-dismissed");
+
     const hasIntroScreen =
+      !isIntroDismissed &&
       typeof document !== "undefined" &&
       !!document.getElementById("sg-loading-screen");
 

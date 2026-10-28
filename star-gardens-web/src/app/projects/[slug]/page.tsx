@@ -73,19 +73,19 @@ export default async function ProjectDetailPage({ params }: Props) {
             {/* Metadata Bar */}
             <div className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-[#E5EBE6] text-xs font-mono">
               <div className="space-y-1">
-                <span className="text-[10px] text-[#718579] block uppercase">[ CLIENT ]</span>
+                <span className="text-[10px] text-[#718579] block uppercase">CLIENT</span>
                 <span className="text-sm font-serif text-[#121814] font-semibold">{project.client}</span>
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] text-[#718579] block uppercase">[ LOCATION ]</span>
+                <span className="text-[10px] text-[#718579] block uppercase">LOCATION</span>
                 <span className="text-sm font-serif text-[#121814] font-semibold">{project.location}</span>
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] text-[#718579] block uppercase">[ YEAR DELIVERED ]</span>
+                <span className="text-[10px] text-[#718579] block uppercase">YEAR DELIVERED</span>
                 <span className="text-sm font-serif text-[#121814] font-semibold">{project.year}</span>
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] text-[#718579] block uppercase">[ CULTIVATION SOURCE ]</span>
+                <span className="text-[10px] text-[#718579] block uppercase">CULTIVATION SOURCE</span>
                 <span className="text-sm font-serif text-[#193D2B] font-bold">Star Gardens 70ac Farms</span>
               </div>
             </div>
@@ -95,7 +95,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
       {/* Hero Featured Photography */}
       <section className="py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-sm overflow-hidden border border-[#E5EBE6] shadow-xl">
+        <div className="relative aspect-[16/10] sm:aspect-[16/9] rounded-3xl overflow-hidden border border-[#E5EBE6] shadow-xl">
           <Image
             src={project.featuredImage}
             alt={project.title}
@@ -115,7 +115,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             {project.metrics.map((m, idx) => (
               <div key={idx} className="space-y-1">
                 <span className="text-[11px] font-mono uppercase text-[#718579] tracking-wider">
-                  [ {m.label} ]
+                  {m.label}
                 </span>
                 <p className="font-serif text-2xl sm:text-4xl text-[#193D2B] font-bold">
                   {m.value}
@@ -133,7 +133,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="lg:col-span-7 space-y-10">
             <div className="space-y-4">
               <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B]">
-                [ ARCHITECTURAL INTENT ]
+                ARCHITECTURAL INTENT
               </span>
               <h2 className="font-serif text-3xl sm:text-5xl text-[#121814] font-normal">
                 Project Overview & Spatial Execution
@@ -152,7 +152,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               </h3>
               <div className="space-y-3">
                 {project.scope.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-[#475E50] p-3.5 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs shadow-2xs">
+                  <div key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-[#475E50] p-3.5 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xl shadow-2xs">
                     <Check className="w-4 h-4 text-[#193D2B] shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </div>
@@ -173,7 +173,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 {project.botanicalPalette.map((plant, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs text-xs font-mono text-[#193D2B] font-medium shadow-2xs"
+                    className="p-3.5 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xl text-xs font-mono text-[#193D2B] font-medium shadow-2xs"
                   >
                     {plant}
                   </div>
@@ -188,8 +188,8 @@ export default async function ProjectDetailPage({ params }: Props) {
               <EnquiryForm defaultCategory={project.sector} />
 
               {/* Next Project Teaser */}
-              <div className="p-6 bg-[#193D2B] border border-[#286746] rounded-sm space-y-3 shadow-xl text-white">
-                <span className="text-[10px] font-mono uppercase text-[#E8F5C4]">[ NEXT CASE STUDY ]</span>
+              <div className="p-6 bg-[#193D2B] border border-[#286746] rounded-2xl space-y-3 shadow-xl text-white">
+                <span className="text-[10px] font-mono uppercase text-[#E8F5C4]">NEXT CASE STUDY</span>
                 <h4 className="font-serif text-2xl text-white">
                   {nextProject.title}
                 </h4>
@@ -215,7 +215,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-2xl mb-14 space-y-3">
               <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B]">
-                [ ON-SITE DOCUMENTATION ]
+                ON-SITE DOCUMENTATION
               </span>
               <h2 className="font-serif text-3xl sm:text-5xl text-[#121814] font-normal">
                 Photographic Details & Installation Vistas
@@ -229,7 +229,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               {project.gallery.map((imgSrc, idx) => (
                 <div
                   key={idx}
-                  className="relative aspect-[4/3] rounded-xs overflow-hidden border border-[#E5EBE6] shadow-sm hover:shadow-xl transition-all duration-500 group"
+                  className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#E5EBE6] shadow-sm hover:shadow-xl transition-all duration-500 group"
                 >
                   <Image
                     src={imgSrc}

@@ -292,7 +292,7 @@ html.lenis {
               background-color 0.35s ease,
               opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, box-shadow;
-  border-radius: 4px;
+  border-radius: 1.25rem; /* Soft curved luxury architectural corners */
 }
 
 .interactive-card:hover {
@@ -344,7 +344,7 @@ html.lenis {
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               background-color 0.3s ease,
               border-color 0.3s ease;
-  border-radius: 4px;
+  border-radius: 1rem; /* Soft corners */
 }
 
 .stat-card-hover:hover {
@@ -353,6 +353,16 @@ html.lenis {
   box-shadow: 0 16px 32px -8px rgba(25, 61, 43, 0.12),
               0 0 0 1px rgba(40, 103, 70, 0.25);
   border-color: rgba(40, 103, 70, 0.3);
+}
+
+/* Universal Soft Corners Utilities & Defaults */
+button:not(.rounded-none):not([class*="rounded-"]),
+a.btn:not(.rounded-none):not([class*="rounded-"]) {
+  border-radius: 9999px;
+}
+
+img:not(.rounded-none) {
+  border-radius: inherit;
 }
 
 /* 3. Universal Scroll Reveal Motion System */
@@ -506,6 +516,14 @@ html.js-ready .interactive-card.scroll-reveal-right:not(.is-revealed):not([data-
   will-change: opacity;
   pointer-events: all;
   user-select: none;
+}
+
+html.sg-welcome-dismissed .sg-welcome-screen,
+html.sg-welcome-dismissed #sg-loading-screen {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 .sg-greeting-text {

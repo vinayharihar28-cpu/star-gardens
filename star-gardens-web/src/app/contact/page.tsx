@@ -60,7 +60,7 @@ export default function ContactPage() {
 
           {/* Rectangular Studio Hero Screen - Mobile-first rectangular image with details below */}
           <div className="mt-8 sm:mt-12 scroll-reveal">
-            <div className="relative aspect-[16/10] sm:aspect-[21/9] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-xl">
+            <div className="relative aspect-[16/10] sm:aspect-[21/9] rounded-3xl overflow-hidden border border-[#D4DFD7] shadow-xl">
               <Image
                 src="/images/pages/contact-hero.jpg"
                 alt="Star Gardens landscape architecture consultation studio and architectural planning desk"
@@ -71,7 +71,7 @@ export default function ContactPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 right-3 text-white">
-                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-2.5 py-1 rounded-xs backdrop-blur-xs shadow-2xs">
+                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-3 py-1.5 rounded-full backdrop-blur-xs shadow-2xs">
                   Bengaluru Studio Consultation Desk · Material & Spatial Planning
                 </span>
               </div>
@@ -87,21 +87,21 @@ export default function ContactPage() {
           <div className="lg:col-span-5 space-y-8 scroll-reveal-left">
             <div className="space-y-4">
               <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B]">
-                [ VERIFIED STUDIO COORDINATES ]
+                STUDIO COORDINATES
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl text-[#121814]">
                 Studio Leadership
               </h2>
-              <div className="interactive-card scroll-reveal delay-100 p-5 sm:p-8 bg-white border border-[#E5EBE6] rounded-sm space-y-6 shadow-md">
+              <div className="interactive-card scroll-reveal delay-100 p-5 sm:p-8 bg-white border border-[#E5EBE6] rounded-2xl space-y-6 shadow-md">
                 <div>
-                  <span className="text-[10px] font-mono uppercase text-[#718579] block">[ STUDIO DIRECTOR & FOUNDER ]</span>
+                  <span className="text-[10px] font-mono uppercase text-[#718579] block">STUDIO DIRECTOR & FOUNDER</span>
                   <p className="font-serif text-2xl sm:text-3xl text-[#121814] font-semibold mt-1">{studioFacts.contactPerson}</p>
                 </div>
 
                 <div className="space-y-3 pt-2 text-sm">
                   <a
                     href={`tel:${studioFacts.phone.replace(/[\s-]/g, "")}`}
-                    className="flex items-center gap-3 text-sm text-[#121814] hover:text-[#193D2B] transition-colors p-3 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs"
+                    className="flex items-center gap-3 text-sm text-[#121814] hover:text-[#193D2B] transition-colors p-3 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xl"
                   >
                     <div className="w-9 h-9 rounded-full bg-[#193D2B] text-white flex items-center justify-center shrink-0 shadow-2xs">
                       <Phone className="w-4 h-4" />
@@ -114,7 +114,7 @@ export default function ContactPage() {
 
                   <a
                     href={`mailto:${studioFacts.email}`}
-                    className="flex items-center gap-3 text-sm text-[#121814] hover:text-[#193D2B] transition-colors p-3 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs"
+                    className="flex items-center gap-3 text-sm text-[#121814] hover:text-[#193D2B] transition-colors p-3 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xl"
                   >
                     <div className="w-9 h-9 rounded-full bg-[#193D2B] text-white flex items-center justify-center shrink-0 shadow-2xs">
                       <Mail className="w-4 h-4" />
@@ -131,7 +131,7 @@ export default function ContactPage() {
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-sm text-[#128C7E] hover:text-[#075E54] transition-colors p-3 bg-[#25D366]/15 border border-[#25D366]/40 rounded-xs"
+                    className="flex items-center gap-3 text-sm text-[#128C7E] hover:text-[#075E54] transition-colors p-3 bg-[#25D366]/15 border border-[#25D366]/40 rounded-xl"
                   >
                     <div className="w-9 h-9 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-2xs">
                       <MessageCircle className="w-4 h-4" />
@@ -148,25 +148,25 @@ export default function ContactPage() {
             {/* City Response Desks */}
             <div className="space-y-4 scroll-reveal delay-200">
               <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B]">
-                [ REGIONAL COVERAGE ]
+                REGIONAL COVERAGE
               </span>
               <h3 className="font-serif text-2xl text-[#121814]">
                 Regional Service Locations
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs space-y-1 shadow-2xs">
+                <div className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-2xl space-y-1 shadow-2xs">
                   <span className="font-mono font-bold text-[#193D2B] block">BENGALURU (HQ)</span>
                   <p className="text-[#475E50] text-[11px] leading-relaxed">Same-day site audits, full dispatch & holding depot</p>
                 </div>
-                <div className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs space-y-1 shadow-2xs">
+                <div className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-2xl space-y-1 shadow-2xs">
                   <span className="font-mono font-bold text-[#193D2B] block">HYDERABAD</span>
                   <p className="text-[#475E50] text-[11px] leading-relaxed">Commercial IT campuses & corporate plant AMC</p>
                 </div>
-                <div className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs space-y-1 shadow-2xs">
+                <div className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-2xl space-y-1 shadow-2xs">
                   <span className="font-mono font-bold text-[#193D2B] block">CHENNAI</span>
                   <p className="text-[#475E50] text-[11px] leading-relaxed">Coastal landscaping & residential developments</p>
                 </div>
-                <div className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-xs space-y-1 shadow-2xs">
+                <div className="p-4 bg-[#F8FAF7] border border-[#E5EBE6] rounded-2xl space-y-1 shadow-2xs">
                   <span className="font-mono font-bold text-[#193D2B] block">PUNE</span>
                   <p className="text-[#475E50] text-[11px] leading-relaxed">Corporate tech parks & vertical bio-walls</p>
                 </div>
@@ -186,7 +186,7 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center space-y-3 scroll-reveal">
             <span className="text-xs font-mono uppercase tracking-widest text-[#193D2B]">
-              [ VERIFIED INFORMATION ]
+              FREQUENTLY ASKED QUESTIONS
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl text-[#121814] font-normal">
               Frequently Answered Questions
@@ -200,7 +200,7 @@ export default function ContactPage() {
             {faqs.map((f, idx) => (
               <details
                 key={idx}
-                className={`interactive-card scroll-reveal delay-${Math.min(500, (idx % 6) * 75 + 75)} group p-6 bg-white border border-[#E5EBE6] rounded-sm transition-colors open:border-[#193D2B] shadow-2xs`}
+                className={`interactive-card scroll-reveal delay-${Math.min(500, (idx % 6) * 75 + 75)} group p-6 bg-white border border-[#E5EBE6] rounded-2xl transition-colors open:border-[#193D2B] shadow-2xs`}
               >
                 <summary className="font-serif text-xl sm:text-2xl text-[#121814] cursor-pointer list-none flex items-center justify-between gap-4 font-normal">
                   <span>{f.q}</span>

@@ -27,13 +27,13 @@ export default function ProjectsPage() {
               Landscape case studies, <span className="italic text-[#193D2B]">designed</span> to endure.
             </h1>
             <p className="text-sm sm:text-xl text-[#475E50] font-light leading-relaxed">
-              Explore realized projects across corporate headquarters, co-working atriums, modular living walls, and acoustic water gardens. Every intervention is presented with verified specifications and architectural photography.
+              Realized interventions across corporate campuses, atriums, and living bio-walls.
             </p>
           </div>
 
           {/* Rectangular Projects Showcase Hero Screen */}
           <div className="mt-8 sm:mt-12 scroll-reveal">
-            <div className="relative aspect-[16/10] sm:aspect-[21/9] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-xl">
+            <div className="relative aspect-[16/10] sm:aspect-[21/9] rounded-3xl overflow-hidden border border-[#D4DFD7] shadow-xl">
               <Image
                 src="/images/pages/projects-hero.jpg"
                 alt="Star Gardens realized luxury landscape architecture case study with cantilevered bridge and reflection koi pond"
@@ -44,7 +44,7 @@ export default function ProjectsPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 right-3 text-white">
-                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-2.5 py-1 rounded-xs backdrop-blur-xs shadow-2xs">
+                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-3 py-1.5 rounded-full backdrop-blur-xs shadow-2xs">
                   Selected Architectural Works · Realized Case Studies & Site Interventions
                 </span>
               </div>
@@ -61,21 +61,21 @@ export default function ProjectsPage() {
       {/* Conversion Banner */}
       <section className="py-20 bg-[#F8FAF7] border-t border-[#E5EBE6] text-[#121814]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="interactive-card scroll-reveal p-8 sm:p-12 bg-[#193D2B] border border-[#286746] rounded-sm flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+          <div className="interactive-card scroll-reveal p-8 sm:p-12 bg-[#193D2B] border border-[#286746] rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
             <div className="space-y-3 text-center md:text-left">
               <span className="text-xs font-mono uppercase tracking-widest text-[#E8F5C4]">
-                [ SITE FEASIBILITY & ADVISORY ]
+                SITE FEASIBILITY & ADVISORY
               </span>
               <h3 className="font-serif text-3xl sm:text-4xl text-white">
                 Planning a similar landscape intervention?
               </h3>
               <p className="text-sm sm:text-base text-[#D4DFD7] max-w-xl leading-relaxed">
-                Our architects provide site studies, plant palette recommendations, and sub-irrigation specifications for residential, commercial, and hospitality developments.
+                Site studies, botanical palettes, and technical specifications for commercial and residential developments.
               </p>
             </div>
             <Link
               href="/contact"
-              className="px-8 py-4 bg-white text-[#193D2B] font-bold text-xs uppercase tracking-widest rounded-xs hover:bg-[#F8FAF7] transition-all transform active:scale-95 whitespace-nowrap shadow-md hover:scale-105 duration-300"
+              className="px-8 py-4 bg-white text-[#193D2B] font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#F8FAF7] transition-all transform active:scale-95 whitespace-nowrap shadow-md hover:scale-105 duration-300"
             >
               <span>Discuss Site Requirements</span>
             </Link>

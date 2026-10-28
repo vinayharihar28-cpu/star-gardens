@@ -123,14 +123,14 @@ export default function ArchitecturalSketchSection() {
           <div className="flex items-center gap-3 self-start md:self-end">
             <button
               onClick={() => setShowHotspots(!showHotspots)}
-              className="px-4 py-2 bg-white/90 border border-[#D4DFD7] hover:border-[#193D2B] text-xs font-mono text-[#193D2B] rounded-xs transition-colors flex items-center gap-2 shadow-2xs"
+              className="px-5 py-2 bg-white/90 border border-[#D4DFD7] hover:border-[#193D2B] text-xs font-mono text-[#193D2B] rounded-full transition-colors flex items-center gap-2 shadow-2xs"
             >
               <Info className="w-3.5 h-3.5 text-[#286746]" />
               <span>{showHotspots ? "Hide Coordinates" : "Inspect Coordinates"}</span>
             </button>
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-1.5 px-4 py-2 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-wider rounded-xs hover:bg-[#286746] transition-all shadow-2xs"
+              className="group inline-flex items-center gap-1.5 px-5 py-2 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-wider rounded-full hover:bg-[#286746] transition-all shadow-2xs"
             >
               <span>Commission A Study</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -139,11 +139,11 @@ export default function ArchitecturalSketchSection() {
         </div>
 
         {/* 2. PROGRESSIVE ARTWORK REVEAL (Clean Canvas, No Boxy Heavy Frame) */}
-        <div className="relative w-full overflow-hidden rounded-sm bg-[#FAF4E7]">
+        <div className="relative w-full overflow-hidden rounded-3xl bg-[#FAF4E7]">
           {/* Top Architectural Drawing Coordinate Strip */}
           <div className="pb-3 mb-2 flex flex-wrap items-center justify-between text-[11px] font-mono text-[#5A7E66] border-b border-[#E5EBE6]/80 gap-y-2">
             <div className="flex items-center gap-3">
-              <span className="text-[#193D2B] font-bold">[ DRAWING: SG-ARCH-01 ]</span>
+              <span className="text-[#193D2B] font-bold">DRAWING SG-ARCH-01</span>
               <span className="text-[#121814] font-medium">CONCEPTUAL ELEVATION & WATER PAVILION</span>
             </div>
             <div className="flex items-center gap-4 text-[10px]">
@@ -157,7 +157,7 @@ export default function ArchitecturalSketchSection() {
 
           {/* Rectangular Artwork Canvas with Smooth Mask Wipe */}
           <div 
-            className="relative aspect-[16/10] sm:aspect-[21/9] lg:aspect-[2.8/1] min-h-[260px] sm:min-h-[360px] w-full overflow-hidden select-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] bg-white/40 rounded-xs border border-[#E5EBE6]"
+            className="relative aspect-[16/10] sm:aspect-[21/9] lg:aspect-[2.8/1] min-h-[260px] sm:min-h-[360px] w-full overflow-hidden select-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] bg-white/40 rounded-2xl border border-[#E5EBE6]"
             style={{
               clipPath: isRevealed ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
               opacity: isRevealed ? 1 : 0.2,
@@ -225,7 +225,7 @@ export default function ArchitecturalSketchSection() {
                 <button
                   key={hotspot.id}
                   onClick={() => setActiveHotspotId(hotspot.id)}
-                  className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xs text-xs font-mono transition-all ${
+                  className={`shrink-0 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono transition-all ${
                     isSelected
                       ? "bg-[#193D2B] text-white font-bold shadow-2xs"
                       : "bg-white border border-[#D4DFD7] text-[#475E50]"
@@ -249,7 +249,7 @@ export default function ArchitecturalSketchSection() {
                   <h3 className="font-serif text-lg sm:text-2xl text-[#121814]">
                     {activeHotspot.title}
                   </h3>
-                  <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-white border border-[#D4DFD7] text-[#193D2B] rounded-xs font-semibold">
+                  <span className="text-[10px] font-mono uppercase tracking-wider px-3 py-1 bg-white border border-[#D4DFD7] text-[#193D2B] rounded-full font-semibold">
                     {activeHotspot.discipline}
                   </span>
                 </div>

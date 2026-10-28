@@ -38,13 +38,13 @@ export default function Footer() {
                 nurturing 70 acres of production nurseries across Karnataka and Andhra Pradesh.
               </p>
               <div className="pt-2 flex flex-wrap gap-2 text-xs font-mono text-[#193D2B]">
-                <span className="px-2.5 py-1 bg-white border border-[#D4DFD7] rounded-xs font-medium shadow-2xs">
+                <span className="px-3 py-1 bg-white border border-[#D4DFD7] rounded-full font-medium shadow-2xs">
                   Est. 2009
                 </span>
-                <span className="px-2.5 py-1 bg-white border border-[#D4DFD7] rounded-xs font-medium shadow-2xs">
+                <span className="px-3 py-1 bg-white border border-[#D4DFD7] rounded-full font-medium shadow-2xs">
                   70 Acres Farmland
                 </span>
-                <span className="px-2.5 py-1 bg-white border border-[#D4DFD7] rounded-xs font-medium shadow-2xs">
+                <span className="px-3 py-1 bg-white border border-[#D4DFD7] rounded-full font-medium shadow-2xs">
                   175+ Active AMCs
                 </span>
               </div>
@@ -162,7 +162,7 @@ export default function Footer() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#25D366]/15 border border-[#25D366]/40 text-[#128C7E] text-xs font-semibold rounded-xs hover:bg-[#25D366] hover:text-white transition-all mt-2"
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#25D366]/15 border border-[#25D366]/40 text-[#128C7E] text-xs font-semibold rounded-full hover:bg-[#25D366] hover:text-white transition-all mt-2"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
                   <span>WhatsApp Studio</span>

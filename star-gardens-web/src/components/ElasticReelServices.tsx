@@ -281,7 +281,7 @@ export default function ElasticReelServices() {
                 aria-label="Close details panel"
               >
                 <span className="font-mono text-xs uppercase tracking-wider font-semibold">
-                  Close [ESC]
+                  Close (Esc)
                 </span>
                 <X className="w-4 h-4 transition-transform group-hover:rotate-90" />
               </button>
@@ -355,14 +355,14 @@ export default function ElasticReelServices() {
             <div className="sticky bottom-0 z-30 p-5 sm:p-6 bg-[#FAF9F5]/95 backdrop-blur-md border-t border-[#E5EBE6] flex flex-col sm:flex-row items-center justify-between gap-3">
               <button
                 onClick={handleCloseScope}
-                className="w-full sm:w-auto px-5 py-3 rounded-xl border border-[#D4DFD7] text-[#475E50] hover:text-[#193D2B] hover:bg-white text-xs font-mono uppercase tracking-wider transition-colors text-center"
+                className="w-full sm:w-auto px-6 py-3 rounded-full border border-[#D4DFD7] text-[#475E50] hover:text-[#193D2B] hover:bg-white text-xs font-mono uppercase tracking-wider transition-colors text-center"
               >
                 ← Back to Reel
               </button>
 
               <Link
                 href={`/services/${selectedService.slug}`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#286746] transition-all transform active:scale-95 shadow-md shadow-[#193D2B]/15 text-center"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#286746] transition-all transform active:scale-95 shadow-md shadow-[#193D2B]/15 text-center"
               >
                 <span>Explore Full Service Page</span>
                 <ArrowUpRight className="w-4 h-4" />

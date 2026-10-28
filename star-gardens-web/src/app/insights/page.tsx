@@ -31,7 +31,7 @@ export default function InsightsPage() {
           </div>
           {/* Rectangular Insights Hero Screen */}
           <div className="mt-8 sm:mt-12 scroll-reveal">
-            <div className="relative aspect-[16/10] sm:aspect-[21/9] rounded-sm overflow-hidden border border-[#D4DFD7] shadow-xl">
+            <div className="relative aspect-[16/10] sm:aspect-[21/9] rounded-3xl overflow-hidden border border-[#D4DFD7] shadow-xl">
               <Image
                 src="/images/pages/insights-hero.jpg"
                 alt="Star Gardens botanical research and landscape architecture study library"
@@ -42,7 +42,7 @@ export default function InsightsPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 right-3 text-white">
-                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-2.5 py-1 rounded-xs backdrop-blur-xs shadow-2xs">
+                <span className="inline-block text-[10px] sm:text-xs font-mono uppercase tracking-wider bg-white/95 text-[#193D2B] font-bold px-3 py-1.5 rounded-full backdrop-blur-xs shadow-2xs">
                   Studio Research & Horticultural Insights · Soil Telemetry & Biophilic Guidelines
                 </span>
               </div>
@@ -57,7 +57,7 @@ export default function InsightsPage() {
           {insightsData.map((art, idx) => (
             <article
               key={art.slug}
-              className={`interactive-card scroll-reveal ${idx % 2 === 1 ? 'delay-150' : 'delay-75'} bg-white border border-[#E5EBE6] rounded-sm overflow-hidden flex flex-col justify-between group shadow-sm`}
+              className={`interactive-card scroll-reveal ${idx % 2 === 1 ? 'delay-150' : 'delay-75'} bg-white border border-[#E5EBE6] rounded-2xl overflow-hidden flex flex-col justify-between group shadow-sm`}
             >
               <div>
                 <Link href={`/insights/${art.slug}`} className="relative aspect-[16/10] block overflow-hidden">
@@ -69,7 +69,7 @@ export default function InsightsPage() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
-                  <div className="absolute top-3 left-3 bg-white/95 border border-[#D4DFD7] text-[#193D2B] text-[10px] font-mono uppercase px-2.5 py-1 rounded-xs backdrop-blur-xs font-semibold shadow-2xs">
+                  <div className="absolute top-3 left-3 bg-white/95 border border-[#D4DFD7] text-[#193D2B] text-[10px] font-mono uppercase px-3 py-1 rounded-full backdrop-blur-xs font-semibold shadow-2xs">
                     {art.category}
                   </div>
                 </Link>
@@ -103,7 +103,7 @@ export default function InsightsPage() {
               <div className="p-5 sm:p-8 pt-0 border-t border-[#E5EBE6] mt-4">
                 <Link
                   href={`/insights/${art.slug}`}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#193D2B] text-white text-xs font-bold uppercase tracking-wider rounded-xs hover:bg-[#286746] transition-colors shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-[#193D2B] text-white text-xs font-bold uppercase tracking-wider rounded-full hover:bg-[#286746] transition-colors shadow-2xs"
                 >
                   <span>Read In-Depth Guide</span>
                   <ArrowRight className="w-3.5 h-3.5" />

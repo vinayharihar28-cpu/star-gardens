@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, DM_Sans, Caveat } from "next/font/google";
+import { Instrument_Serif, DM_Sans, Caveat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -10,6 +10,13 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   variable: "--font-instrument",
   display: "swap",
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+  weight: ["700", "800", "900"],
 });
 
 const dmSans = DM_Sans({
@@ -66,13 +73,32 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${dmSans.variable} ${caveat.variable} min-h-full antialiased`}
+      suppressHydrationWarning
+      className={`${instrumentSerif.variable} ${playfairDisplay.variable} ${dmSans.variable} ${caveat.variable} min-h-full antialiased`}
     >
       <head>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var q = window.location.search || '';
+                  if (q.indexOf('replay=1') !== -1 || q.indexOf('intro=1') !== -1) return;
+                  var hasCookie = /(?:^|;\\s*)sg_welcome_seen=1/.test(document.cookie);
+                  var until = localStorage.getItem('sg_welcome_seen_until');
+                  var hasStorage = until && parseInt(until, 10) > Date.now();
+                  if (hasCookie || hasStorage) {
+                    document.documentElement.classList.add('sg-welcome-dismissed');
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col bg-white text-[#121814] font-sans selection:bg-[#286746] selection:text-white">
         <SmoothScroll>

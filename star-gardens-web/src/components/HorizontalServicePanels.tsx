@@ -115,7 +115,7 @@ export default function HorizontalServicePanels() {
                 handlePanelClick(svc.id);
               }
             }}
-            className={`group relative overflow-hidden rounded-xs transition-[background-color,border-color,box-shadow,color] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] border cursor-pointer select-none ${
+            className={`group relative overflow-hidden rounded-2xl transition-[background-color,border-color,box-shadow,color] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] border cursor-pointer select-none ${
               isExpanded
                 ? "bg-[#193D2B] border-[#193D2B] shadow-2xl text-white"
                 : "bg-white border-[#E5EBE6] hover:border-[#193D2B]/50 hover:bg-[#F8FAF7] text-[#121814]"
@@ -219,7 +219,7 @@ export default function HorizontalServicePanels() {
                   }`}
                 >
                   {/* Mobile-Only Rectangular Image Preview Screen */}
-                  <div className="w-full lg:hidden relative aspect-[16/10] rounded-xs overflow-hidden border border-white/25 shadow-md">
+                  <div className="w-full lg:hidden relative aspect-[16/10] rounded-xl overflow-hidden border border-white/25 shadow-md">
                     <Image
                       src={svc.heroImage}
                       alt={svc.title}
@@ -228,7 +228,7 @@ export default function HorizontalServicePanels() {
                       sizes="100vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                    <div className="absolute bottom-2.5 left-3 text-[11px] font-mono text-[#D9E7B0] bg-black/60 px-2 py-0.5 rounded-xs backdrop-blur-xs">
+                    <div className="absolute bottom-2.5 left-3 text-[11px] font-mono text-[#D9E7B0] bg-black/60 px-2.5 py-0.5 rounded-full backdrop-blur-xs">
                       {svc.sectorTag}
                     </div>
                   </div>
@@ -247,7 +247,7 @@ export default function HorizontalServicePanels() {
                       {svc.deliverables.slice(0, 4).map((d, dIdx) => (
                         <span
                           key={dIdx}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#132D20] border border-[#286746] text-[#D9E7B0] text-xs font-mono rounded-xs"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#132D20] border border-[#286746] text-[#D9E7B0] text-xs font-mono rounded-full"
                         >
                           <Check className="w-3 h-3 text-[#D9E7B0]" />
                           {d}
@@ -264,7 +264,7 @@ export default function HorizontalServicePanels() {
                   <div className="w-full lg:col-span-4 flex lg:justify-end pt-2 lg:pt-0">
                     <Link
                       href={`/services/${svc.slug}`}
-                      className="group/btn w-full sm:w-auto text-center inline-flex justify-center items-center gap-2 px-6 py-3 bg-[#D9E7B0] text-[#101210] font-bold text-xs uppercase tracking-widest rounded-xs hover:bg-[#E8F5C4] transition-all transform active:scale-95 shadow-md"
+                      className="group/btn w-full sm:w-auto text-center inline-flex justify-center items-center gap-2 px-6 py-3 bg-[#D9E7B0] text-[#101210] font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#E8F5C4] transition-all transform active:scale-95 shadow-md"
                     >
                       <span>Explore Service Details</span>
                       <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />

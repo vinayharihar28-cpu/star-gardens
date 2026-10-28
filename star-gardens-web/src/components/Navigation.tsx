@@ -26,6 +26,7 @@ export default function Navigation() {
   }, [pathname]);
 
   const navLinks = [
+    { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Services", href: "/services" },
     { label: "Projects", href: "/projects" },
@@ -49,13 +50,11 @@ export default function Navigation() {
             onClick={(e) => {
               if (pathname === "/") {
                 e.preventDefault();
-                sessionStorage.removeItem("sg_intro_completed");
-                sessionStorage.removeItem("sg_intro_played_tab");
-                window.location.href = "/";
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
             className="group flex items-center gap-3 tracking-tight"
-            title="Star Gardens — Home (Click to replay brand reveal)"
+            title="Star Gardens — Home"
           >
             <Image
               src="/images/logo/logo.png"
@@ -68,13 +67,19 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs font-mono uppercase tracking-widest">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => {
+                    if (link.href === "/" && pathname === "/") {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
                   className={`group relative py-1 transition-colors ${
                     isActive ? "text-[#193D2B] font-bold" : "text-[#475E50] hover:text-[#193D2B]"
                   }`}
@@ -94,7 +99,7 @@ export default function Navigation() {
           <div className="hidden lg:flex items-center gap-4">
             <button
               onClick={() => setCrmModalOpen(true)}
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest text-[#475E50] hover:text-[#193D2B] border border-[#D4DFD7] hover:border-[#193D2B] rounded-xs transition-all bg-white/80 hover:bg-[#F8FAF7]"
+              className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 text-[11px] font-mono uppercase tracking-widest text-[#475E50] hover:text-[#193D2B] border border-[#D4DFD7] hover:border-[#193D2B] rounded-full transition-all bg-white/80 hover:bg-[#F8FAF7]"
               aria-label="Open client login modal"
             >
               <Lock className="w-3 h-3 text-[#286746] transition-transform group-hover:scale-110" />
@@ -103,7 +108,7 @@ export default function Navigation() {
 
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-1.5 px-4 py-2 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-widest rounded-xs hover:bg-[#286746] transition-all transform active:scale-95 shadow-md shadow-[#193D2B]/15"
+              className="group inline-flex items-center gap-1.5 px-4.5 py-2 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#286746] transition-all transform active:scale-95 shadow-md shadow-[#193D2B]/15"
             >
               <span>Discuss Project</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -113,7 +118,7 @@ export default function Navigation() {
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#121814] hover:text-[#193D2B] focus:outline-none"
+            className="md:hidden p-2 rounded-full hover:bg-[#F0F5F1] text-[#121814] hover:text-[#193D2B] transition-colors focus:outline-none"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -142,6 +147,13 @@ export default function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => {
+                    setMobileMenuOpen(false);
+                    if (link.href === "/" && pathname === "/") {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
                   className={`flex items-center justify-between py-2 border-b border-[#E5EBE6] transition-colors ${
                     isActive ? "text-[#193D2B] font-bold" : "text-[#121814] hover:text-[#193D2B]"
                   }`}
@@ -169,7 +181,7 @@ export default function Navigation() {
                   setMobileMenuOpen(false);
                   setCrmModalOpen(true);
                 }}
-                className="flex items-center justify-center gap-2 py-3 border border-[#D4DFD7] text-[#121814] text-xs font-mono uppercase tracking-wider rounded-xs hover:bg-[#F8FAF7]"
+                className="flex items-center justify-center gap-2 py-3 border border-[#D4DFD7] text-[#121814] text-xs font-mono uppercase tracking-wider rounded-full hover:bg-[#F8FAF7] transition-colors"
               >
                 <Lock className="w-3.5 h-3.5 text-[#286746]" />
                 Client Portal
@@ -177,7 +189,7 @@ export default function Navigation() {
 
               <Link
                 href="/contact"
-                className="flex items-center justify-center gap-1 py-3 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-wider rounded-xs text-center hover:bg-[#286746]"
+                className="flex items-center justify-center gap-1 py-3 bg-[#193D2B] text-white font-bold text-xs uppercase tracking-wider rounded-full text-center hover:bg-[#286746] transition-colors shadow-sm"
               >
                 Enquire
               </Link>

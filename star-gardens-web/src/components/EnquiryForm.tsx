@@ -1,12 +1,53 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, CheckCircle2, AlertCircle, MessageCircle, Phone, Loader2, ArrowRight } from "lucide-react";
+import { 
+  CheckCircle2, 
+  AlertCircle, 
+  MessageCircle, 
+  Phone, 
+  Loader2, 
+  Copy, 
+  Check, 
+  ExternalLink,
+  Send
+} from "lucide-react";
 import { studioFacts } from "@/data/nurseries";
 
 interface EnquiryFormProps {
   defaultCategory?: string;
   className?: string;
+}
+
+export function formatWhatsAppMessage(data: {
+  name: string;
+  phone: string;
+  email?: string;
+  location: string;
+  category: string;
+  service: string;
+  description?: string;
+}): string {
+  const lines: (string | null)[] = [
+    "🌿 *STAR GARDENS — PROJECT ENQUIRY*",
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    `👤 *Client Name:* ${data.name.trim()}`,
+    `📞 *Phone / WhatsApp:* ${data.phone.trim()}`,
+    data.email?.trim() ? `✉️ *Email:* ${data.email.trim()}` : `✉️ *Email:* (Not provided)`,
+    `📍 *Location:* ${data.location.trim()}`,
+    "",
+    "📋 *PROJECT SPECIFICATIONS*",
+    `• *Sector:* ${data.category}`,
+    `• *Engagement Model:* ${data.service}`,
+    "",
+    data.description?.trim()
+      ? `📝 *Site Details & Scope:*\n${data.description.trim()}`
+      : "📝 *Site Details & Scope:* Ready to discuss during site survey.",
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    "_Sent via Star Gardens Website (stargardens.in)_",
+  ];
+
+  return lines.filter((line) => line !== null).join("\n");
 }
 
 export default function EnquiryForm({ defaultCategory = "", className = "" }: EnquiryFormProps) {
@@ -22,9 +63,12 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [feedbackMessage, setFeedbackMessage] = useState("");
-  const [submittedId, setSubmittedId] = useState("");
+  const [copied, setCopied] = useState(false);
+  const [activeWhatsAppUrl, setActiveWhatsAppUrl] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (status === "error") setStatus("idle");
   };
@@ -34,58 +78,115 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
     setStatus("loading");
     setFeedbackMessage("");
 
+    // Validate name
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      setStatus("error");
+      setFeedbackMessage("Please enter your full name (minimum 2 characters).");
+      return;
+    }
+
+    // Validate phone
+    if (!formData.phone.trim() || formData.phone.trim().length < 7) {
+      setStatus("error");
+      setFeedbackMessage("Please enter a valid phone or WhatsApp number.");
+      return;
+    }
+
+    // Format WhatsApp message
+    const message = formatWhatsAppMessage(formData);
+    const whatsappUrl = `https://wa.me/919743030555?text=${encodeURIComponent(message)}`;
+    setActiveWhatsAppUrl(whatsappUrl);
+
+    // Also persist inquiry in background to local /api/enquiry without blocking WhatsApp
     try {
-      const res = await fetch("/api/enquiry", {
+      fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
+      }).catch(() => {
+        // Silent catch: WhatsApp is the primary delivery channel
       });
+    } catch {
+      // Ignore background persistence errors
+    }
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setStatus("error");
-        setFeedbackMessage(data.error || "Failed to submit. Please check your inputs.");
-        return;
+    // Directly open WhatsApp with the formatted brief
+    if (typeof window !== "undefined") {
+      const newTab = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      if (!newTab || newTab.closed || typeof newTab.closed === "undefined") {
+        // If popup blocker intervened, window.location provides seamless fallback
+        window.location.href = whatsappUrl;
       }
+    }
 
-      setStatus("success");
-      setFeedbackMessage(data.message);
-      setSubmittedId(data.enquiryId);
-    } catch (err: any) {
-      setStatus("error");
-      setFeedbackMessage("Unable to reach the server. Please connect directly via WhatsApp or phone.");
+    setStatus("success");
+    setFeedbackMessage("Your enquiry brief has been formatted and opened in WhatsApp.");
+  };
+
+  const handleCopyBrief = () => {
+    const text = formatWhatsAppMessage(formData);
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      });
     }
   };
 
-  const whatsappText = `Hi Abhishek, I would like to enquire about Star Gardens services for a ${formData.category} project in ${formData.location}.`;
-
   return (
-    <div className={`interactive-card scroll-reveal bg-white border border-[#D4DFD7] rounded-sm p-6 sm:p-10 shadow-xl text-[#121814] ${className}`}>
+    <div className={`interactive-card scroll-reveal bg-white border border-[#D4DFD7] rounded-3xl p-6 sm:p-10 shadow-xl text-[#121814] ${className}`}>
       {status === "success" ? (
-        <div className="py-8 text-center space-y-4">
-          <div className="w-14 h-14 rounded-full bg-[#193D2B] border border-[#286746] text-white flex items-center justify-center mx-auto shadow-md">
-            <CheckCircle2 className="w-8 h-8" />
+        <div className="py-8 text-center space-y-5">
+          <div className="w-16 h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center mx-auto shadow-md">
+            <MessageCircle className="w-9 h-9" />
           </div>
-          <h3 className="font-serif text-3xl text-[#121814]">Project Brief Received</h3>
-          <p className="text-sm text-[#475E50] max-w-md mx-auto leading-relaxed">
-            {feedbackMessage}
-          </p>
-          <div className="p-3 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xs inline-block text-xs font-mono text-[#193D2B] font-bold">
-            Reference: {submittedId}
+
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#25D366]/15 text-[#128C7E] rounded-full text-xs font-mono font-bold uppercase tracking-wider">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              Direct WhatsApp Brief Ready
+            </div>
+            <h3 className="font-serif text-3xl text-[#121814]">Connecting to WhatsApp</h3>
+            <p className="text-xs sm:text-sm text-[#475E50] max-w-md mx-auto leading-relaxed">
+              We have generated your formal enquiry brief and opened WhatsApp to connect directly with 
+              Studio Director <strong>Abhishek Suhas (+91 97430 30555)</strong>.
+            </p>
           </div>
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a
-              href={`https://wa.me/919743030555?text=${encodeURIComponent(
-                `Hi Abhishek, I just submitted brief #${submittedId} on the Star Gardens website.`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] text-white text-xs font-bold uppercase tracking-wider rounded-xs hover:bg-[#1fb355] transition-colors shadow-sm"
+
+          {/* Action Buttons */}
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            {activeWhatsAppUrl && (
+              <a
+                href={activeWhatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366] text-white text-xs font-bold uppercase tracking-wider rounded-full hover:bg-[#1fb355] transition-all shadow-md active:scale-95"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Open WhatsApp Chat</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
+
+            <button
+              onClick={handleCopyBrief}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 border border-[#D4DFD7] text-[#193D2B] text-xs font-mono font-bold uppercase tracking-wider rounded-full hover:bg-[#F8FAF7] transition-colors"
             >
-              <MessageCircle className="w-4 h-4" />
-              Follow up on WhatsApp
-            </a>
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-[#25D366]" />
+                  <span>Brief Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5" />
+                  <span>Copy Formatted Brief</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          <div className="pt-3">
             <button
               onClick={() => {
                 setStatus("idle");
@@ -93,15 +194,16 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
                   name: "",
                   email: "",
                   phone: "",
-                  category: "Corporate Office / Tech Park",
+                  category: defaultCategory || "Corporate Office / Tech Park",
                   location: "Bengaluru",
                   service: "Turnkey Design & Build",
                   description: "",
                 });
+                setActiveWhatsAppUrl("");
               }}
-              className="px-5 py-2.5 border border-[#D4DFD7] text-[#121814] text-xs font-bold uppercase tracking-wider rounded-xs hover:bg-[#F8FAF7] transition-colors"
+              className="text-xs font-mono text-[#718579] hover:text-[#193D2B] underline transition-colors"
             >
-              Submit Another Brief
+              ← Submit Another Enquiry
             </button>
           </div>
         </div>
@@ -109,18 +211,18 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="border-b border-[#E5EBE6] pb-4 mb-2">
             <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-[#193D2B] font-bold mb-1">
-              [ SITE CONSULTATION & ARCHITECTURAL BRIEF ]
+              DIRECT WHATSAPP CONSULTATION BRIEF
             </div>
             <h3 className="font-serif text-2xl sm:text-3xl text-[#121814]">
               Discuss Your Project
             </h3>
             <p className="text-xs sm:text-sm text-[#475E50] mt-1">
-              Share site dimensions or schedule an on-site consultation with our studio architects in Bengaluru.
+              Send a formatted project brief directly to Studio Director Abhishek Suhas on WhatsApp.
             </p>
           </div>
 
           {status === "error" && (
-            <div className="flex items-start gap-2.5 p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xs">
+            <div className="flex items-start gap-2.5 p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl">
               <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-red-600" />
               <span>{feedbackMessage}</span>
             </div>
@@ -140,7 +242,7 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="e.g. Vikramaditya Rao"
-                className="w-full px-3.5 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xs text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
+                className="w-full px-4 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xl text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
               />
             </div>
 
@@ -156,12 +258,12 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="+91 98765 43210"
-                className="w-full px-3.5 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xs text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
+                className="w-full px-4 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xl text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
               />
             </div>
           </div>
 
-          {/* Business Email & Location Row */}
+          {/* Work Email & Location Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="email" className="block text-[11px] font-mono uppercase tracking-wider text-[#334A3C] font-semibold mb-1.5">
@@ -174,7 +276,7 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="vikram@company.com"
-                className="w-full px-3.5 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xs text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
+                className="w-full px-4 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xl text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
               />
             </div>
 
@@ -187,7 +289,7 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xs text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
+                className="w-full px-4 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xl text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
               >
                 <option value="Bengaluru">Bengaluru (HQ / Rapid Response)</option>
                 <option value="Hyderabad">Hyderabad</option>
@@ -209,7 +311,7 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xs text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
+                className="w-full px-4 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xl text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
               >
                 <option value="Corporate Office / Tech Park">Corporate Office / Tech Park</option>
                 <option value="Residential Villa / Private Estate">Residential Villa / Private Estate</option>
@@ -230,7 +332,7 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xs text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
+                className="w-full px-4 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xl text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
               >
                 <option value="Turnkey Design & Build">Turnkey Design & Build</option>
                 <option value="Design Consultation Only">Design Consultation Only</option>
@@ -254,40 +356,38 @@ export default function EnquiryForm({ defaultCategory = "", className = "" }: En
               value={formData.description}
               onChange={handleChange}
               placeholder="e.g. 15,000 sq.ft co-working floorplate requiring desk planter runs, reception living wall, and ongoing weekly maintenance."
-              className="w-full px-3.5 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xs text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
+              className="w-full px-4 py-2.5 bg-[#F8FAF7] border border-[#D4DFD7] rounded-xl text-sm text-[#121814] focus:bg-white focus:outline-none focus:border-[#193D2B] transition-colors"
             />
           </div>
 
-          {/* Submit Actions */}
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Direct WhatsApp Submit Action */}
+          <div className="pt-2 space-y-3">
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#193D2B] text-white text-xs font-bold uppercase tracking-widest rounded-xs hover:bg-[#286746] active:scale-95 transition-all shadow-md shadow-[#193D2B]/15 disabled:opacity-50"
+              className="w-full inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#25D366] hover:bg-[#1fb355] text-white text-xs font-bold uppercase tracking-widest rounded-full active:scale-98 transition-all shadow-md shadow-[#25D366]/20 disabled:opacity-50 group"
             >
               {status === "loading" ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Submitting Brief...</span>
+                  <span>Formatting WhatsApp Brief...</span>
                 </>
               ) : (
                 <>
-                  <span>Send Project Brief</span>
+                  <MessageCircle className="w-4 h-4 transition-transform group-hover:scale-110" />
+                  <span>Send Project Brief Directly to WhatsApp</span>
                   <Send className="w-3.5 h-3.5" />
                 </>
               )}
             </button>
 
-            <a
-              href={`https://wa.me/919743030555?text=${encodeURIComponent(whatsappText)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs font-mono text-[#193D2B] hover:text-[#286746] font-bold transition-colors py-1"
-            >
-              <MessageCircle className="w-4 h-4 text-[#25D366]" />
-              <span>Or connect instantly via WhatsApp</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            <div className="flex items-center justify-between text-[11px] font-mono text-[#718579] px-2">
+              <span className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#25D366] inline-block animate-pulse" />
+                Direct to Studio Director (+91 97430 30555)
+              </span>
+              <span>Fast response within 2 hours</span>
+            </div>
           </div>
         </form>
       )}

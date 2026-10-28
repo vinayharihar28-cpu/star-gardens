@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { hasViewedIntroInLast6Hours, setIntroCookie } from "@/utils/introCookie";
 
 interface GreetingItem {
   script: string;
@@ -35,22 +36,33 @@ export default function BrandIntro({ onComplete }: BrandIntroProps) {
   }, [onComplete]);
 
   useEffect(() => {
-    // 1. Reduced motion check & session cleanup (allow intro on every refresh)
+    // 1. Check if user already viewed intro in the last 6 hours via cookie
+    if (hasViewedIntroInLast6Hours()) {
+      setShowIntro(false);
+      setUnmounted(true);
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("sg:intro-complete"));
+      }
+      if (onCompleteRef.current) onCompleteRef.current();
+      return;
+    }
+
+    // 2. Reduced motion check
     try {
-      sessionStorage.removeItem("sg_welcome_viewed");
-      sessionStorage.removeItem("sg_intro_completed");
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setIntroCookie();
         setShowIntro(false);
         setUnmounted(true);
-        if (typeof window !== "undefined") {
-          window.dispatchEvent(new CustomEvent("sg:intro-complete"));
-        }
+        window.dispatchEvent(new CustomEvent("sg:intro-complete"));
         if (onCompleteRef.current) onCompleteRef.current();
         return;
       }
     } catch {
       // Fallback
     }
+
+    // 3. Mark intro as viewed with 6-hour expiration cookie
+    setIntroCookie();
 
     // 2. Fast, rhythmic greeting progression with smooth cross-fade
     // 340ms per greeting = rapid, elegant editorial pacing

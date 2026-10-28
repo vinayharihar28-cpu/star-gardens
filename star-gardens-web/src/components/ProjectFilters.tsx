@@ -34,7 +34,7 @@ export default function ProjectFilters({ projects }: ProjectFiltersProps) {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               aria-pressed={isSelected}
-              className={`px-4 py-2 text-xs font-mono tracking-wider whitespace-nowrap rounded-xs transition-all ${
+              className={`px-5 py-2 text-xs font-mono tracking-wider whitespace-nowrap rounded-full transition-all ${
                 isSelected
                   ? "bg-[#193D2B] text-white font-bold shadow-sm"
                   : "bg-white text-[#475E50] hover:bg-[#F8FAF7] hover:text-[#193D2B] border border-[#D4DFD7]"
@@ -54,7 +54,7 @@ export default function ProjectFilters({ projects }: ProjectFiltersProps) {
           return (
             <article
               key={proj.slug}
-              className={`interactive-card scroll-reveal ${delays[idx % delays.length]} flex flex-col bg-white border border-[#E5EBE6] rounded-sm overflow-hidden shadow-sm`}
+              className={`interactive-card scroll-reveal ${delays[idx % delays.length]} flex flex-col bg-white border border-[#E5EBE6] rounded-2xl overflow-hidden shadow-sm`}
             >
             {/* Image Container with Editorial Aspect Ratio */}
             <Link href={`/projects/${proj.slug}`} className="relative aspect-[16/10] overflow-hidden block">
@@ -69,7 +69,7 @@ export default function ProjectFilters({ projects }: ProjectFiltersProps) {
               
               {/* Sector Tag Badge */}
               <div className="absolute top-3 left-3">
-                <span className="px-2.5 py-1 bg-white/95 border border-[#D4DFD7] backdrop-blur-xs text-[#193D2B] text-[10px] font-mono uppercase tracking-wider rounded-xs font-semibold shadow-2xs">
+                <span className="px-3 py-1 bg-white/95 border border-[#D4DFD7] backdrop-blur-xs text-[#193D2B] text-[10px] font-mono uppercase tracking-wider rounded-full font-semibold shadow-2xs">
                   {proj.sector}
                 </span>
               </div>
@@ -108,7 +108,7 @@ export default function ProjectFilters({ projects }: ProjectFiltersProps) {
                 </span>
                 <Link
                   href={`/projects/${proj.slug}`}
-                  className="inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#193D2B] border border-[#D4DFD7] group-hover:text-white group-hover:bg-[#193D2B] px-2.5 py-1 rounded-xs transition-all font-semibold"
+                  className="inline-flex items-center gap-1 text-xs font-mono uppercase tracking-wider text-[#193D2B] border border-[#D4DFD7] group-hover:text-white group-hover:bg-[#193D2B] px-3 py-1 rounded-full transition-all font-semibold"
                   aria-label={`View case study: ${proj.title}`}
                 >
                   <span>Intervention</span>

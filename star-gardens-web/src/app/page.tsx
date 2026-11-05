@@ -27,6 +27,7 @@ import HeroSection from "@/components/HeroSection";
 import GradientCarousel3D from "@/components/GradientCarousel3D";
 import ArchitecturalSketchSection from "@/components/ArchitecturalSketchSection";
 import ImageSlideReveal from "@/components/ImageSlideReveal";
+import EsteemedClientsSection from "@/components/EsteemedClientsSection";
 import { projectsData } from "@/data/projects";
 import { nurseriesData, studioFacts } from "@/data/nurseries";
 import { insightsData } from "@/data/insights";
@@ -112,8 +113,10 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 5. OUR ESTEEMED CLIENTS */}
+      <EsteemedClientsSection />
 
-      {/* 5. ARCHITECTURAL LINE ART TRANSITION (UNBOXED PARCHMENT BLEND) */}
+      {/* 6. ARCHITECTURAL LINE ART TRANSITION (UNBOXED PARCHMENT BLEND) */}
       <ArchitecturalSketchSection />
 
       {/* 6. SELECTED WORK (EDITORIAL ARCHITECTURAL PORTFOLIO) */}

@@ -88,6 +88,12 @@ export default function RootLayout({
                 try {
                   var q = window.location.search || '';
                   if (q.indexOf('replay=1') !== -1 || q.indexOf('intro=1') !== -1) return;
+                  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    if (sessionStorage.getItem('sg_welcome_session_seen')) {
+                      document.documentElement.classList.add('sg-welcome-dismissed');
+                    }
+                    return;
+                  }
                   var hasCookie = /(?:^|;\\s*)sg_welcome_seen=1/.test(document.cookie);
                   var until = localStorage.getItem('sg_welcome_seen_until');
                   var hasStorage = until && parseInt(until, 10) > Date.now();

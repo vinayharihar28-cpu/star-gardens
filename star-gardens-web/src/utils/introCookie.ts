@@ -1,6 +1,5 @@
 /**
- * Utility to manage the 6-hour viewing cookie & localStorage state
- * for Star Gardens multilingual brand introduction / loading screen.
+ * Utility to manage viewing state for Star Gardens multilingual brand introduction / loading screen.
  */
 
 export const INTRO_COOKIE_NAME = "sg_welcome_seen";
@@ -9,8 +8,8 @@ export const SIX_HOURS_SECONDS = 6 * 60 * 60; // 21,600 seconds = 6 hours
 export const SIX_HOURS_MS = SIX_HOURS_SECONDS * 1000; // 21,600,000 milliseconds
 
 /**
- * Checks if the user has seen the welcome screen within the last 6 hours.
- * Supports '?replay=1' or '?intro=1' query parameter to force replay for testing.
+ * Checks if the user has seen the welcome screen.
+ * Supports '?replay=1' or '?intro=1' query parameter to force replay.
  */
 export function hasViewedIntroInLast6Hours(): boolean {
   if (typeof window === "undefined" || typeof document === "undefined") {
@@ -18,11 +17,16 @@ export function hasViewedIntroInLast6Hours(): boolean {
   }
 
   try {
-    // If explicit query parameter to replay is present, allow replay and clear cookie
-    const search = window.location.search;
+    const search = window.location.search || "";
     if (search.includes("replay=1") || search.includes("intro=1")) {
       clearIntroCookie();
       return false;
+    }
+
+    // In local development, check sessionStorage so navigation doesn't replay endlessly,
+    // but a fresh reload/tab allows proper testing.
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return !!sessionStorage.getItem("sg_welcome_session_seen");
     }
 
     // 1. Check document.cookie
@@ -33,16 +37,13 @@ export function hasViewedIntroInLast6Hours(): boolean {
       return true;
     }
 
-    // 2. Check localStorage fallback (in case cookies are restricted or partitioned)
+    // 2. Check localStorage fallback
     const storedUntil = localStorage.getItem(INTRO_STORAGE_KEY);
     if (storedUntil) {
       const expiry = parseInt(storedUntil, 10);
       if (!isNaN(expiry) && Date.now() < expiry) {
-        // Synchronize back to document.cookie as well
-        setIntroCookie();
         return true;
       } else {
-        // Expired
         localStorage.removeItem(INTRO_STORAGE_KEY);
       }
     }
@@ -54,7 +55,7 @@ export function hasViewedIntroInLast6Hours(): boolean {
 }
 
 /**
- * Marks the intro as viewed for 6 hours across both document.cookie and localStorage.
+ * Marks the intro as viewed. Call this ONLY after the welcome sequence finishes fading out!
  */
 export function setIntroCookie(): void {
   if (typeof window === "undefined" || typeof document === "undefined") {
@@ -62,15 +63,13 @@ export function setIntroCookie(): void {
   }
 
   try {
+    sessionStorage.setItem("sg_welcome_session_seen", "1");
+
     const expiresDate = new Date(Date.now() + SIX_HOURS_MS).toUTCString();
-
-    // Set cookie valid for 6 hours (21,600 seconds)
     document.cookie = `${INTRO_COOKIE_NAME}=1; max-age=${SIX_HOURS_SECONDS}; expires=${expiresDate}; path=/; SameSite=Lax`;
-
-    // Also persist expiry timestamp in localStorage
     localStorage.setItem(INTRO_STORAGE_KEY, (Date.now() + SIX_HOURS_MS).toString());
 
-    // Mark the document root so CSS immediately hides the loading screen on subsequent views
+    // Mark root so subsequent page navigations bypass the intro
     document.documentElement.classList.add("sg-welcome-dismissed");
   } catch (err) {
     console.warn("Error setting intro cookie:", err);
@@ -78,7 +77,7 @@ export function setIntroCookie(): void {
 }
 
 /**
- * Clears the intro cookie and localStorage (useful for development or replay).
+ * Clears the intro cookie and storage state.
  */
 export function clearIntroCookie(): void {
   if (typeof window === "undefined" || typeof document === "undefined") {
@@ -86,6 +85,7 @@ export function clearIntroCookie(): void {
   }
 
   try {
+    sessionStorage.removeItem("sg_welcome_session_seen");
     document.cookie = `${INTRO_COOKIE_NAME}=; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax`;
     localStorage.removeItem(INTRO_STORAGE_KEY);
     document.documentElement.classList.remove("sg-welcome-dismissed");
